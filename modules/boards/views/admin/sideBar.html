@@ -1,0 +1,13 @@
+<script type="text/javascript">
+    $(function(){
+        var html = '<li class="paypalMenu"><a href="/admin/boardcostPaypal">Paypal</a></li>'
+        $('.boardlist').append(html);
+        console.log(window.location.href.indexOf('/admin/boardcostPaypal') );
+        if(window.location.href.indexOf('/admin/boardcostPaypal') != -1){
+            $('.boardlist').parents('li').addClass('open');
+            $('.boardlist').show();
+            $('.paypalMenu').addClass('active');
+        }
+    });
+    
+</script>
