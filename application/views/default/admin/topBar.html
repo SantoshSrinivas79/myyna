@@ -1,0 +1,59 @@
+<div class="topbar">
+	<div class="container-fluid">
+		<a href="dashboard" class='company'>CubetBoard Admin</a>
+		<form action="#">
+			<input type="text" value="Search here...">
+		</form>
+		<ul class='mini'>
+                        <li>
+				<a href="/">
+					<img src="/default/images/admin/icons/fugue/arrow-curve.png" alt="">
+					View Site
+				</a>
+			</li>
+                        <li>
+                            <a href="/admin/editadmin/{{loggedUser._id}}">
+                                    <img src="/default/images/admin/icons/fugue/user-business-boss.png" alt="">
+                                    {{loggedUser.name}}
+                            </a>
+			</li>
+			<li>
+				<a href="/admin/general-settings">
+					<img src="/default/images/admin/icons/fugue/gear.png" alt="">
+					Site Settings
+				</a>
+			</li>
+			<li>
+				<a href="/admin/logout">
+					<img src="/default/images/admin/icons/fugue/control-power.png" alt="">
+					Logout
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="breadcrumbs">
+	<div class="container-fluid">
+		<ul class="bread pull-left">
+			<li>
+				<a href="dashboard"><i class="icon-home icon-white"></i></a>
+			</li>
+                        {{#if BreadcrumbLink}}
+                        <li>
+				<a href="{{BreadcrumbLink}}">
+					{{Breadcrumb}}
+				</a>
+			</li>
+                        {{/if}}
+                        {{#if subBreadcrumb}}
+			<li>
+				<a href="javascript:void(0)">
+					{{subBreadcrumb}}
+				</a>
+			</li>
+                        {{/if}}
+                        
+		</ul>
+
+	</div>
+</div>

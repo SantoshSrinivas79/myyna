@@ -1,0 +1,43 @@
+{{#ifCond pin_type 'web_page'}}
+<img src="/pins/images/{{image_name}}" width="100%" >
+{{/ifCond}}
+{{#ifCond pin_type 'image'}}
+<img src="/pins/images/{{image_name}}" width="100%" >
+{{/ifCond}}
+{{#ifCond pin_type 'url_image'}}
+<img src="/pins/images/{{image_name.[0]}}" width="100%" >
+{{/ifCond}}
+{{#ifCond pin_type 'video'}}
+{{#ifCond video_type 'local_video'}}
+<video  id="pin_video_{{_id}}"  height="{{getVideoHeight}}" class="video-js vjs-default-skin" controls
+        preload="none"  width="100%" poster="{{videoPath}}thumb/{{thumb}}"
+        data-setup="{}">
+
+    <source src="{{videoPath}}{{video_id}}"  type="{{video_version}}" />
+</video>
+<script type="text/javascript">
+                  
+    videojs("pin_video_{{_id}}").ready(function() {});
+                        
+</script>
+{{/ifCond}}
+{{/ifCond}}
+{{#ifCond pin_type 'video'}}
+{{#ifCond video_type 'youtube'}}
+<iframe src="http://www.youtube.com/embed/{{video_id}}?wmode=transparent" frameborder="0"></iframe>	
+{{/ifCond}}
+{{/ifCond}}
+
+{{#ifCond pin_type 'webaudio'}}
+<object  width="100%" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+    <embed class="scloud" height="100"
+           src="http://player.soundcloud.com/player.swf?url={{audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false&auto_play=false" 
+           type="application/x-shockwave-flash" width="100%" wmode="transparent"/>
+</object>
+
+{{/ifCond}}
+{{#ifCond pin_type 'audio'}}
+<audio id="player_{{_id}}" src="{{audioPath}}{{audio_file}}" type="audio/mp3" controls="controls" style="width:100%;" preload="none">		
+</audio> 
+{{/ifCond}}
+

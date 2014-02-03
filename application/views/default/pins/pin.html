@@ -1,0 +1,168 @@
+{{> pinheader this}}
+   {{!display board details}} 
+    {{#if board_detail}}
+
+    <div id="board_container" class="leftmenu_adjst">
+	<div class="row row_min" style="visibility:  hidden;">
+    	<div class="col-md-12 board_small"><span class="glyphicon glyphicon-th-list board_small_m"></span>{{board_detail}}</div>
+    </div>
+	<div class="row row_lrg">
+		<div class="col-md-3 board">
+        	<img {{#if board_image}} src="/boards/{{board_image}}" {{else}} src="/default/images/board.jpg" {{/if}}>
+        </div>
+    	<div class="col-md-5 board">
+        	<h2>{{board_detail}}</h2>
+            <h3></h3>
+            <p>{{description}}</p>
+        </div>
+
+        <div class="col-md-2  col-md-offset-2 board_right">
+        	<img width="68px" height="68px" {{#if creator_image}} src="/user_images/{{creator_image}}" {{else}} src="/default/images/profile-pic2.png" {{/if}}>
+            
+            <div class="follower">
+                    <h2>{{#if creator_name}} {{creator_name}} {{else}} Admin User {{/if}}</h2>
+                    <span class="icon-users"></span>
+                    <span class="icon_board_text boardfollowecount">{{followercount}}</span>
+                    <span class="glyphicon glyphicon-tags icon_board"></span>
+                    <span class="icon_board_text">{{pincount}}</span>
+                    {{!display follow button only for logged users}} 
+                    
+                    {{#if loggeduser_id}}
+{{#ifCond boardfollow '0'}}
+        <a href="javascript:void(0)" class="cubt_folw" id="follow_{{board_id}}" onclick="boardFollow('{{board_id}}','{{creator}}')">Follow</a>
+       {{/ifCond}}
+       {{#ifCond boardfollow '1'}}
+        <a href="javascript:void(0)" class="cubt_folw cubt_un_folw" id="unfollow_{{board_id}}" onclick="boardUnfollow('{{board_id}}','{{creator}}')">Unfollow</a>
+       {{/ifCond}}
+{{/if}}
+            </div>
+        </div>
+	</div>
+
+</div>
+    
+    {{/if}}
+    {{!display user details}} 
+    {{#if user_detail}}
+
+  
+    <div id="user_container" class="leftmenu_adjst">
+	<div class="row row_min user_dis" style="visibility:  hidden;">
+    	<div class="col-md-12 board_small"><span class="glyphicon glyphicon-th-list board_small_m"></span>{{creator_name}}</div>
+    </div>
+	<div class="row row_lrg user_margin">
+		<div class="col-md-8 col-md-offset-2 user_bg">
+        	<div class="img">
+                <img width="68px" maxheight="68px" {{#if creator_image}} src="/user_images/{{creator_image}}" {{else}} src="/default/images/user.png" {{/if}}></div>
+        
+    	
+        	<h2>{{creator_name}}</h2>
+             <h2><span class="icon-users" style="font-size: 14px"></span><span class="icon_board_text userfollowercount">{{followcount}}</span>
+            <span class="glyphicon glyphicon-tags icon_board"></span><span class="icon_board_text">{{pincount}}</span>
+            {{!display follow button only for logged users and user can't follow himself}} 
+            {{#notifCond loggeduser_id listuser}}
+                   {{#ifCond userfollow '0'}}
+                    <a href="javascript:void(0)" class="cubt_folw" id="user_follow_{{listuser}}" onclick="userFollow('{{listuser}}','{{loggeduser_id}}')">Follow</a>
+                   {{/ifCond}}
+                   {{#ifCond userfollow '1'}}
+                    <a href="javascript:void(0)" class="cubt_folw cubt_un_folw" id="user_unfollow_{{listuser}}" onclick="userUnfollow('{{listuser}}','{{loggeduser_id}}')">Unfollow</a>
+                   {{/ifCond}}
+            {{/notifCond}}
+                </h2>
+                <div class="clear"></div>
+        </div>
+<!--        <div class="col-md-2 user_pro_bg">
+        <h2>Pins from: </h2>
+        	<ul class="user_pro">
+            	<li>
+                	<img src="images/profile-pic.png"> Sam Alex
+                </li>
+                <li>
+                	<img src="images/profile-pic.png"> Sam Alex
+                </li>
+            </ul>
+        </div>-->
+    	
+	</div>
+   
+
+</div>
+
+    
+    {{/if}}
+
+
+
+<div id="container" {{#ifCond siteLayout 'fixed'}}class="cont-fixed"{{/ifCond}} >
+{{#if data}}
+{{#each data}} 
+      {{!check the type of pins to select the view page}}  
+      
+    {{#ifCond pin_type 'web_page'}}
+        {{> pinvieweb this }}
+    {{/ifCond}} 
+
+    {{#ifCond pin_type 'video'}}
+        {{> pinviewvideo this}}
+    {{/ifCond}}
+
+    {{#ifCond pin_type 'image'}}
+        {{> pinviewimage this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'url_image'}}
+        {{> pinviewimage this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'audio'}}
+        {{> pinviewaudio this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'webaudio'}}
+        {{> pinviewwebaudio this}}
+    {{/ifCond}}   
+
+{{/each}}
+{{else}}
+<p style="text-align: center;">Sorry! No pins here.</p>
+{{/if}}
+
+    <div id="loadmoreajaxloader" style="display:none;">
+        <center><img src="/default/images/loader.jpeg" /></center>
+    </div>
+</div>
+    
+    <!-- end id container -->
+<div class="h_c" style="display:none">
+    
+</div>
+<form method="get" class="searchform">
+    <input type="hidden" name="endlimit" id="endlimit" value="20"/>
+    <input type="hidden" name="listtype" id="listtype" value="{{type}}"/>
+     <input type="hidden" name="list_id" id="list_id" value="{{type_id}}"/>
+</form>
+
+<!-- this part for iframe pop up -->
+{{!set modal ids of pop up pages}} 
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<!-- this part for iframe pop up for add pins-->
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<!-- board -->
+<div class="modal fade" id="myModal4" tabindex="2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<!-- repin -->
+<div class="modal fade" id="myModal5" tabindex="3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="myModal6" tabindex="4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+  
+   

@@ -1,0 +1,50 @@
+
+<h1>Pin video file from your computer</h1>
+
+<form id="videoUploadFromComputer" name="pinform" method="post" action="/pinpage" enctype="multipart/form-data" >  
+   
+     <input type="hidden" value="video" name="pin_cat"/>
+
+    <p>&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Pin From : &nbsp;
+    <input type="radio" name="sub" value="local" checked/>&nbsp; Local &nbsp;
+    <input type="radio" name="sub" value="web" />&nbsp; Youtube &nbsp;
+    <p>&nbsp;</p> 
+  
+    <select name="board_id" id="board_id" required  class="inputText">
+    <option value="" selected="selected">Select Board</option>
+    {{#each boards}}
+    <option value="{{this._id}}">{{this.board_name}}</option>
+    {{/each}}
+    </select>
+    
+     <p>&nbsp;</p>
+    
+    <input type="file" name="video_upld" id="video_upld" required  class="inputText" accept="video/*"/>
+    
+    <p>&nbsp;</p>
+
+    <textarea name="description" id="description" placeholder="Description" required  class="inputText"></textarea>
+
+    <p>&nbsp;</p>
+    
+<!--    <input type="submit" name="upload_audio" id="upload_audio" value="Upload" />-->
+
+</form>
+
+
+<script>
+$("input[type=radio][name=sub]").unbind('click').bind('click',function(){
+var sub = $("input[type=radio][name=sub]:checked").val();
+    if(sub=='web'){
+        $("#pop_cont").load('/youtube_upload',function(){
+            $('#get_img').html('Pin Video');
+            $('#get_img').unbind('click').bind('click',function(){
+               $("#videoUploadFromYoutube").validate({rules: {url: "url"}}); 
+               $('#videoUploadFromYoutube').submit(); 
+            });
+        });
+    }
+});    
+</script>    

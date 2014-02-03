@@ -1,0 +1,17 @@
+
+                                           
+                                                <a href="/admin/deletepin/{{_id}}" onclick="return confirm('Are you sure?')" class='btn btn-mini tip deleteAdmin' title="Delete">
+                                                    <img src="/default/images/admin/icons/fugue/cross.png" alt="">
+                                                </a>
+                                                {{#ifCond blocked 1}}
+                                                    <a href="/admin/blockpin/0/{{_id}}" class='btn btn-mini tip blockAdmin' title="UnBlock">
+                                                        <img src="/default/images/admin/icons/fugue/flag-green.png" alt="">
+                                                    </a>
+                                                {{else}}
+                                                    <a href="/admin/blockpin/1/{{_id}}" class='btn btn-mini tip blockAdmin' title="Block">
+                                                        <img src="/default/images/admin/icons/fugue/flag-black.png" alt="">
+                                                    </a>
+                                                {{/ifCond}}
+                                                
+                                           
+                                     

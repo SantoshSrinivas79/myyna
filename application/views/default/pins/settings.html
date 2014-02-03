@@ -1,0 +1,118 @@
+<div  class="modal_pou_up profile_set">
+  <div class="modal-dialog custom-model">
+       <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">x</button>
+          </div>
+       
+        <div class="profile_setting">
+            <form name="settingsform" id="settingsform" method="post" enctype="multipart/form-data" action="/changesettings">
+               <div class="row">
+                <div class="col-md-10 col-xs-offset-1">
+                   {{#each userdetail}}
+                    <div class="input-group margin form">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn profile_btn cursor"><span class="glyphicon glyphicon-user"></span></button>
+                        </span>
+                        <input type="text" class="form-control" name="name" id="name" value="{{name}}" placeholder="Name" required>
+                    </div>
+                   
+                        <a class="pwdOpen" href="javascript:void()" onclick="$('.pwdsfld').removeAttr('disabled', 'false'); $('.pwdClose, .pwdOpen').toggle();">Change password</a>
+                                    <a class="pwdClose" href="javascript:void()" onclick="$('.pwdsfld').attr('disabled', 'disabled'); $('.pwdClose, .pwdOpen').toggle();" style="display:none">Close password</a>
+                   
+                    <div class="input-group margin form">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn profile_btn cursor"><span class="glyphicon glyphicon-lock"></span></button>
+                        </span>
+                        <!--<input type="password" class="form-control" name="pword" value="" id="pword" placeholder="Password" required>-->
+                    <input type="password" name="pword" id="pword" class='form-control pwdsfld' placeholder="Password" disabled >
+                    </div>
+                           <div class="input-group margin form">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn profile_btn cursor"><span class="glyphicon glyphicon-lock"></span></button>
+                        </span>
+                        <input type="password" name="password_r" id="password_r" class='form-control pwdsfld' disabled>
+                    </div>
+                   
+                    <div class="input-group margin form">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn profile_btn cursor"><span class="glyphicon glyphicon-envelope"></span></button>
+                        </span>
+                        <input type="text" class="form-control" name="email" id="email" value="{{email}}" placeholder="Email" disabled required>
+                    </div>
+                    {{#if image }}
+                    <image src="/user_images/{{image}}">
+                    {{else}}
+                    <image src="/default/images/profile-pic.png">
+                    {{/if}}
+                    <div class="input-group margin">
+                       <b  class="b">Select your photo</b>
+                       <div class="container_image">
+                       <img id="img" src="/default/images/camera.png" onclick="upload()" alt=""/>
+                       <label class="file_label"></label>
+                       <input type="file" name="image_src" id="image_src" accept="image/*"/>
+                       </div>
+                    </div>
+                    
+                   {{/each}}
+                   
+                    <div class="margin">
+                        {{#each settings}}
+                     <b>Select check box for Notifications</b>
+                     <div class="ck_bx">
+                     <input type="checkbox" id = "comment"
+                 name="comment" {{#ifCond comment 1}} checked {{/ifCond}}/>
+                        <label for="comment"><span></span>Comments</label>
+                    </div>
+                     <div class="ck_bx">
+                    <input type="checkbox" id = "like"
+                  name="like" {{#ifCond like 1}} checked {{/ifCond}}/>
+                        <label for="like"><span></span>Like</label>
+                    </div>
+                    <div class="ck_bx">
+                    <input type="checkbox" id = "follow"
+                  name="follow"  {{#ifCond follow 1}} checked {{/ifCond}}/>
+                        <label for="follow"><span></span>Follow</label>
+                    </div>
+                     {{/each}}
+                    </div>
+                   
+                    <input type="submit" class="submit" value="submit">
+                   
+                   
+
+                   
+                </div>
+            </div>
+            </form>
+        </div>
+                
+       
+       
+     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+function upload(){
+  document.getElementById("image_src").click();
+ }
+ 
+ $(function(){
+     $('#image_src').on('change',function(){//alert($('input[type=file]').val());
+        var filename = $('input[type=file]').val() ;
+        if(filename.length>25){
+            filename = filename.substr(0, 12)+ '...'+ filename.substr(filename.length - 8);
+        }
+        //alert(filename);
+        $('.file_label').html(filename);
+    });
+ });
+ </script>

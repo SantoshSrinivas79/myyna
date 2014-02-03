@@ -1,0 +1,11 @@
+{
+  "css": [
+      "profile_setting",
+      "add_pin"
+],
+  "js": [
+      "jquery-validation",
+      "showplayer",
+      "jqueryform"
+  ]
+}

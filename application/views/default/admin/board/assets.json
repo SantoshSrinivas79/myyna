@@ -1,0 +1,12 @@
+{
+  "css": [
+    "admin/tableTools/css/TableTools"
+  ],
+  "js": [
+    "admin/jquery.dataTables.min",
+    "admin/jquery.dataTables.bootstrap",
+    "admin/tableTools/js/TableTools.min",
+    "admin/jquery.validate.min"
+  ]
+  
+}

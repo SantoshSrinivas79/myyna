@@ -1,0 +1,75 @@
+
+<h1>Pin video from youtube</h1>
+
+<form id="videoUploadFromYoutube" name="pinform" method="post" action="/pinpage" enctype="multipart/form-data" >  
+    <p>&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Pin From : &nbsp;
+    <input type="radio" name="sub" value="local" />&nbsp; Local &nbsp;
+    <input type="radio" name="sub" value="web" checked/>&nbsp; Youtube &nbsp;
+    <p>&nbsp;</p> 
+    
+    <input type="hidden" value="video" name="pin_cat"/>
+    
+  
+    <select name="board_id" id="board_id" required  class="inputText">
+    <option value="" selected="selected">Select Board</option>
+    {{#each boards}}
+    <option value="{{this._id}}">{{this.board_name}}</option>
+    {{/each}}
+    </select>
+    
+    <p>&nbsp;</p>
+     
+    <input type="url" id="url" name="url" class="inputText" value="" placeholder="Youtube URL" required/>
+
+    <iframe id="preview_id" src="" width="680" height="300" frameborder="0" style="display: none; margin-left: 20px;"></iframe>
+       
+    <p>&nbsp;</p>
+
+    <textarea name="description" id="description" placeholder="Description" required  class="inputText"></textarea>
+
+    <p>&nbsp;</p>
+    
+<!--    <input type="submit" name="upload_audio" id="upload_audio" value="Upload" />-->
+
+</form>
+
+
+<script>
+$("input[type=radio][name=sub]").unbind('click').bind('click',function(){
+var sub = $("input[type=radio][name=sub]:checked").val();
+    if(sub=='local'){
+         $("#pop_cont").load('/video_upload',function(){
+            $('#get_img').html('Upload');
+            $('#get_img').unbind('click').bind('click',function(){
+               $("#videoUploadFromComputer").validate(); 
+               $('#videoUploadFromComputer').submit(); 
+            });
+        });
+    }
+});
+$(function(){
+    $("#videoUploadFromYoutube #url").on('change',function(){
+        var url = $('#url').val();
+        if (url != '') {
+            var matches = url.match(/^http:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=\w+)(?:\S+)?$/);
+            if (matches) {
+                var split_url = url.split("v=");
+                var videoId = split_url[1];
+                var embedCode = 'http://www.youtube.com/embed/' + videoId ; 
+                $('#url').css({'border':'1px solid #ccc'}); 
+                $("#preview_id").attr('src',embedCode).css({'display':'block'});
+            } else {
+                $('#url').css({'border':'1px solid red'}); 
+            }
+            
+        } else {
+           $('#url').css({'border':'1px solid red'}); 
+        }
+    return false;
+    });
+});
+</script>   
+
+

@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+
+.log_in{list-style:none;padding:0; position:absolute; width:100%; background:url(../default/images/log_in_bg1.jpg); height:100%;}
+.log_in_bg{background:#FFF; width:100%; position:absolute;height:100%; opacity:.6;}
+.log_in_top{width:100%; position:absolute; background:#fcfcfc; text-align:center; box-shadow:0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 5px rgba(0, 0, 0, 0.075)}
+.log_in_top img{width:180px; padding:12px 0;}
+.sign_in .top{width:100%; background:rgb(41,41,41); color:#FFF; padding:3px 0; }
+.sign_in .top a{text-decoration:none; color:rgb(252,182,59);}
+.sign_in .center{width:100%; padding:40px 0; margin:0 auto; font-size:12px;}
+.sign_in .center .btn-default{}
+.sign_in .center .form_bg{width:100%; border-radius:4px; border:solid 1px Rgb(41,41,41);}
+.sign_in .center .form_bg_er{width:100%; border-radius:4px; border:solid 1px Rgb(220,0,0);}
+.sign_in .center .margin{margin:0 0 30px;}
+.sign_in .center .input-group-btn{margin:0; padding:0;}
+.sign_in .center .form-control{border:0;}
+.sign_in .center .sign_up{border:0; border-radius:5px;}
+.sign_in .center .form-control:focus{outline:none; box-shadow:none;}
+.sign_in .center .btn{background:rgb(222,222,222); border:solid 1px rgb(222,222,222); border-radius-left:4px;}
+.sign_in .center .cursor{cursor:default;}
+.sign_in .center .enter{background:rgb(252,182,59); border:solid 1px rgb(252,182,59);} 
+
+.sign_in .center .fb .input-group-btn{width:auto;}
+.sign_in .center .close_sign{float:right; color:rgb(254,170,54); padding:5px;}
+.sign_in .center .fb .fb_btn{background: #334d7f; /* Old browsers */
+background: -moz-linear-gradient(top, #5273b5 0%, #334d7f 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5273b5), color-stop(99%,#334d7f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #5273b5 0%, #334d7f 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #5273b5 0%, #334d7f 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #5273b5 0%, #334d7f 99%); /* IE10+ */
+background: linear-gradient(to bottom, #5273b5 0%,#334d7f 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5273b5', endColorstr='#334d7f',GradientType=0 ); /* IE6-9*/ width:45%; border:none; text-shadow:none; color:#FFF; margin-right:5%; }
+.sign_in .center .fb .fb_btn em{background:url(../images/fb.png); width:20px; height:20px; float:left;}
+.sign_in .center .fb .tw_btn em{background:url(../images/tw.png); width:20px; height:20px; float:left;}
+.sign_in .center .fb .tw_btn{background: #00bdeb; /* Old browsers */
+background: -moz-linear-gradient(top, #500c3f2 0%, #00bdeb 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#500c3f2), color-stop(99%,#00bdeb)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #500c3f2 0%, #00bdeb 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #500c3f2 0%, #00bdeb 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #500c3f2 0%, #00bdeb 99%); /* IE10+ */
+background: linear-gradient(to bottom, #500c3f2 0%, #00bdeb 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#500c3f2', endColorstr='#00bdeb',GradientType=0 ); /* IE6-9*/ width:45%; border:none; text-shadow:none; color:#FFF; }
+
+
+@media only screen and (min-width : 1301px) {
+	.sign_in{width:680px; background:#FFF; font-size:36px; text-align:center; margin:150px auto 0; font-family:"Myriad Pro"; box-shadow:0 0 5px rgb(20,20,20);}
+	.sign_in .center .sign{width:40%; margin:0 auto;}
+	.sign_in .center .fb{width:60%; margin:0 auto;}
+	body{overflow:hidden;}
+	.sign_up_block{margin:80px auto 0;}
+}
+@media only screen and (min-width : 780px) and (max-width : 1300px) {
+.sign_in{width:580px; background:#FFF; font-size:36px; text-align:center; margin:185px auto 0; font-family:"Myriad Pro"; box-shadow:0 0 5px rgb(20,20,20);}	
+.sign_in .center .sign{width:40%; margin:0 auto;}
+.sign_in .center .fb{width:70%; margin:0 auto;}
+body{overflow:hidden;}
+.sign_up_block{margin:100px auto 0;}
+
+}
+@media only screen and (min-width : 481px) and (max-width : 779px) {
+.sign_in{width:90%; background:#FFF; font-size:36px; text-align:center; margin:80px auto 0; font-family:"Myriad Pro"; box-shadow:0 0 5px rgb(20,20,20);}	
+.sign_in .center .sign{width:60%; margin:0 auto;}
+.sign_in .center .fb{width:80%; margin:0 auto;}
+body{overflow-x:hidden;}
+.sign_up_block{margin:60px auto 0;}
+
+}
+@media only screen and (max-width : 650px) {
+	
+.log_in{background:#FFF;}
+.log_in_bg{opacity:.2;}
+body{overflow-x:hidden;}
+}
+@media only screen and (max-width : 480px) {
+	
+	.sign_in{width:90%; background:#FFF; font-size:36px; text-align:center; margin:60px auto 0; font-family:"Myriad Pro"; box-shadow:0 0 5px rgb(20,20,20);}	
+	.sign_in .center .sign{width:90%; margin:0 auto;}
+	.sign_in .center .fb{width:100%; margin:0 auto;}
+	.sign_in .center .fb .fb_btn{width:60%; margin:0 auto 20px;}
+	.sign_in .center .fb .tw_btn{width:60%;}
+	.sign_up_block{margin:60px auto 0;}
+}
+

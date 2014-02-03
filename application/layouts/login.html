@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="{{getDefine 'meta_desc'}}">
+<meta name="keywords" content="{{getDefine 'meta_keys'}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{getDefine 'site_title'}}</title>
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="default/css/login/ie8-and-down.css" />
+<![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+{{> getSleekScripts}}
+</head>
+<body>
+{{{body}}}
+
+<script src="/default/js/login/jquery.jscrollpane.min.js"></script>
+<script src="/default/js/login/jquerypp.custom.js"></script>
+<script src="/default/js/login/jquery.bookblock.js"></script>
+<script src="/default/js/login/page.js"></script>
+<script>
+$(function() {
+   Page.init();
+   
+   $('#referer_url').val(window.localStorage.getItem('cubetSharepinId'));
+   window.localStorage.removeItem('cubetSharepinId');
+   
+   $('.socialSignUps').click(function(){
+       window.localStorage.setItem('cubetSharepinId', $('#referer_url').val());
+       window.open($(this).attr('data-link'), 'Signup', 'width=600,height=350')
+   })
+   
+    $('#loginform input').on('focus keyup', function(e){
+        $('div.error_message').html('');
+        $('div.error_message').removeClass('error-true alert-danger');
+    });
+   
+   //Handle arrow keys
+   $(document).keydown(function(e) {
+        var key = e.which;
+         if(e.target.tagName != 'INPUT' && (key == 37 || key == 39)) {
+                e.preventDefault();
+                return false;
+         }
+         return true;
+    });
+    
+    $('#loginform').keyup(function(e){
+       if(e.which == 13) {
+           $('#loginButton').click();
+       }   
+    });
+    
+    /* to clear pop up contents on each close */
+    $("#myModal,#Forgot").on('hidden.bs.modal', function () {
+        $("#signupform").get(0).reset();
+        $("#forgotform").get(0).reset();
+        $("#signupform input,#forgotform input").removeAttr('style').removeClass('error');
+        $(".errmsg,.msg,#user_valid,#email_valid").html('');
+    });
+});
+
+$(window).scroll(function(){
+    if($(document).width() > 900) { 
+        $(".frozen_top").css("top",Math.max(130,$(this).scrollTop()));
+        if($(this).scrollTop() > 135) {
+            $(".frozen_top").css("margin-top","-95px");
+            $("#nothingt").css("top","53px");    
+        } else {
+            $(".frozen_top").css("margin-top","-5px");
+            $("#nothing").css("top","33px");    
+        }
+    }
+});
+</script>
+<!--[if lt IE 10]>
+    <script type="text/javascript" src="/default/js/jquery.placeholder.js"></script>	
+<![endif]-->
+</body>
+</html>

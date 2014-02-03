@@ -1,0 +1,24 @@
+{{> pinheader this}}
+<body>
+    <form name="pinform" method="post" action="/pinpage">
+       
+       <input type="file" id="video_upld" name="video_upld" />
+       
+        <select name="pin_cat" id="pin_cat">
+            <option value="1">Web Page</option>
+            <option value="2">Video</option>
+        </select>
+        
+            <iframe id="preview_id" src="" width="430" height="340" frameborder="0">
+            
+            </iframe>
+        
+        <select name="board" id="board">
+            <option value="1">Test1</option>
+            <option value="2">Test2</option>
+        </select>
+        <textarea id="description" name="description"></textarea>
+        <input type="submit" name="pin" value="Pin"/>
+    </form>
+</body>
+   

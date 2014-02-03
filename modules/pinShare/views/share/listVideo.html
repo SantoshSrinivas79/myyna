@@ -1,0 +1,17 @@
+{{#if home}}
+    <div class="pin_video">
+    {{#each home}}
+        <div class="youtubeClass" >
+            <iframe src="http://www.youtube.com/embed/{{this}}"></iframe>
+            <input type="button" data-target="{{this}}" id="video{{@index}}" class="sharepin videoshare button_yellow pin_btn" name ="Pin It" value="Pin It"/>
+        </div>
+    {{/each}}
+     </div>
+{{else}}
+    No Videos found.
+    <script>
+    $('.common-share').hide();
+    </script>
+{{/if}}
+                
+                

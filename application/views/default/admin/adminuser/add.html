@@ -1,0 +1,96 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-head tabs">
+                {{#ifCond edit 1}}
+                <h3>Edit Admin user</h3>
+                {{else}}
+                <h3>Add Admin user</h3>
+                {{/ifCond}}
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="box-content">
+                        <form action="{{#ifCond edit 1}}/admin/updateadminuser{{else}}/admin/addadminpost{{/ifCond}}" method="post" class='validate form-horizontal'>
+                            <div class="control-group">
+                                <label for="req" class="control-label">Name</label>
+                                <div class="controls">
+                                    <input type="text" name="name" id="name" class='required' value="{{#if user.name}}{{user.name}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="email3" class="control-label">Email</label>
+                                <div class="controls">
+                                    <input type="text" name="email" id="email" class='required email' value="{{#if user.email}}{{user.email}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="req" class="control-label">Username</label>
+                                <div class="controls">
+                                    <input type="text" name="username" id="username" class='required' {{#ifCond edit 1}}disabled{{/ifCond}} value="{{#if user.username}}{{user.username}}{{/if}}">
+                                </div>
+                            </div>
+                            {{#ifCond edit 1}}
+                                {{#ifCond loggedUser._id user._id}}
+                                    <a class="pwdOpen" href="javascript:void()" onclick="$('.pwdsfld').removeAttr('disabled', 'false'); $('.pwdClose, .pwdOpen').toggle();">Change password</a>
+                                    <a class="pwdClose" href="javascript:void()" onclick="$('.pwdsfld').attr('disabled', 'disabled'); $('.pwdClose, .pwdOpen').toggle();" style="display:none">Close password</a>
+                                {{/ifCond}}
+                            {{/ifCond}}
+                            <div class="control-group">
+                                <label for="pw3" class="control-label">Password</label>
+                                <div class="controls">
+                                    <input type="password" name="password" id="password" class='required pwdsfld' {{#ifCond edit 1}}disabled{{/ifCond}} >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="pw4" class="control-label">Repeat password</label>
+                                <div class="controls">
+                                    <input type="password" name="password_r" id="password_r" class='required pwdsfld' equalTo="#password" {{#ifCond edit 1}}disabled{{/ifCond}}>
+                                </div>
+                            </div>
+                            
+                            {{#ifCond edit 1}}
+                                <input type="hidden" value="{{user._id}}" name="id" id="id">
+                            {{/ifCond}}
+                            <div class="form-actions">
+                                <input type="submit" class='btn btn-primary addAdminBtn' value="{{#ifCond edit 1}}Update Info{{else}}Add User{{/ifCond}}">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .disabled {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+</style>
+<script type="text/javascript">
+    $(function(){
+        $('#username').blur(function(){
+            $('.addAdminBtn').addClass('disabled');
+            $.ajax({
+                type: 'get',
+                url: '/admin/checkusername/' + $(this).val(),
+                dataType: 'json',
+                success : function(response){
+                    if(response.status == 0){
+                        $('#username').parents('div.control-group').removeClass('success');
+                        $('#username').parents('div.control-group').addClass('error');
+                    } else {
+                        $('#username').parents('div.control-group').removeClass('error');
+                        $('#username').parents('div.control-group').addClass('valid');
+                        $('.addAdminBtn').removeClass('disabled');
+                    }
+                },
+                error: function(a,s,e){
+                    console.log(e+6);
+                }
+            });
+        })
+    })
+    
+</script>

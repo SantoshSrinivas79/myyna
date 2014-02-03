@@ -1,0 +1,105 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>{{title}}</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic">
+                        <table class='table table-striped dataTable table-bordered' >
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">Pin</th>
+                                    <th style="width: 23%">Reported by</th>
+                                    <th style="width: 23%">Reason</th>
+                                    <th style="width: 25%">Pinned by</th>
+                                    <th style="width: 12%" class="sorting_disabled">Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                <tr>
+                                    <td>
+                                        {{#ifCond pin_type 'web_page'}}
+                                        <img src="/pins/images/{{image_name}}" width="100%" >
+                                        {{/ifCond}}
+                                        {{#ifCond pin_type 'image'}}
+                                        <img src="/pins/images/{{image_name}}" width="100%" >
+                                        {{/ifCond}}
+                                        {{#ifCond pin_type 'url_image'}}
+                                        <img src="/pins/images/{{image_name.[0]}}" width="100%" >
+                                        {{/ifCond}}
+                                        {{#ifCond pin_type 'video'}}
+                                        {{#ifCond video_type 'local_video'}}
+                                        <video id="pin_video_{{_id}}" class="video-js vjs-default-skin" controls
+                                               preload="auto" width="300" height="150" poster="my_video_poster.png"
+                                               data-setup="{}">
+                                          <source src="{{videoPath}}{{video_id}}"  type="{{video_version}}" />
+                                        </video>
+                                        <script type="text/javascript">
+                  
+                                            videojs("pin_video_{{_id}}").ready(function() {});
+                        
+                                        </script>
+                                        {{/ifCond}}
+                                        {{/ifCond}}
+                                        {{#ifCond pin_type 'video'}}
+                                        {{#ifCond video_type 'youtube'}}
+                                        <iframe src="http://www.youtube.com/embed/{{video_id}}?wmode=transparent" frameborder="0"></iframe>	
+                                        {{/ifCond}}
+                                        {{/ifCond}}
+
+                                        {{#ifCond pin_type 'webaudio'}}
+                                        <object  width="100%" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+                                            <embed class="scloud" height="100"
+                                                   src="http://player.soundcloud.com/player.swf?url={{audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false&auto_play=false" 
+                                                   type="application/x-shockwave-flash" width="100%" wmode="transparent"/>
+                                        </object>
+
+                                        {{/ifCond}}
+                                        {{#ifCond pin_type 'audio'}}
+                                        <audio id="player_{{_id}}" src="{{audioPath}}{{audio_file}}" type="audio/mp3" controls="controls" style="width:100%;" preload="none">		
+                                        </audio> 
+                                        {{/ifCond}}
+
+                                    </td>
+                                    <td>{{reported_user.name}}</td>
+                                    <td>{{report_reason}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td class='actions'>
+                                        <div class="btn-group">
+                                            <a href="/admin/cleanpin/{{_id}}" class='btn btn-mini tip editCustomer' title="Restore">
+                                                <img src="/default/images/admin/icons/fugue/arrow-circle-135-left.png" alt="">
+                                            </a>
+                                            <a href="/admin/deletepin/{{_id}}" class='btn btn-mini tip deleteAdmin' title="Delete">
+                                                <img src="/default/images/admin/icons/fugue/cross.png" alt="">
+                                            </a>
+                                            {{#ifCond blocked 1}}
+                                            <a href="/admin/blockpin/0/{{_id}}" class='btn btn-mini tip blockAdmin' title="UnBlock">
+                                                <img src="/default/images/admin/icons/fugue/flag-green.png" alt="">
+                                            </a>
+                                            {{else}}
+                                            <a href="/admin/blockpin/1/{{_id}}" class='btn btn-mini tip blockAdmin' title="Block">
+                                                <img src="/default/images/admin/icons/fugue/flag-black.png" alt="">
+                                            </a>
+                                            {{/ifCond}}
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

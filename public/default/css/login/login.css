@@ -1,0 +1,141 @@
+@charset "utf-8";
+/* CSS Document */
+#log_in_container header{text-align:right; color:#000; top:0; width:100%; position:absolute; z-index:999;}
+#log_in_container header .form{opacity:.8; margin:20px 0 0;}
+#log_in_container header .form input{width:40%; margin-left:10px; padding:8px 10px; color:rgb(113,113,113); border:solid 1px #ccc; background:rgb(253, 253, 253); box-shadow:0 0 2px rgba(0, 0, 0, 0.07) inset;}
+#log_in_container header .form .submit{background:rgb(254,189,59) !important; border-radius:0; color:#FFF; margin:-2px 0 0; padding:9px 10px; border:0;}
+#log_in_container footer{text-align:center; color:#000; bottom:0; width:100%; position:absolute; z-index:999;}
+#log_in_container footer h1{padding:10px 0;font-family: 'Open Sans', sans-serif !important; font-size:20px; width:50%; float:left;  margin:0 10px 0; text-align:right;}
+#log_in_container footer h2{padding:12px 0;font-family: 'Open Sans', sans-serif !important; font-size:16px; font-weight:600; width:30%; float:left;  margin:0 0 0 10px; text-align:left;}
+#log_in_container footer h1 strong a{color:rgb(204,91,91);}
+#log_in_container footer .fb{background:url(../../images/social_03.png) 0 0 no-repeat; width:40px; height:40px; float:left; margin:0; padding:0; background-size:200% 90%;}
+#log_in_container footer .tw{background:url(../../images/social_03.png) -40px 0 no-repeat; width:40px; height:40px; float:left; margin:0; padding:0; background-size:200% 90%;}
+#log_in_container header img{width:40%; margin-top:20px;}
+#log_in_container .image{position:absolute; z-index:1000; top:50px; width:100%;}
+#log_in_container .image1{width:100%; height:auto;}
+
+
+input.error{
+    border: 1px solid #d43f3a !important; 
+}
+
+label.error {
+    display:none !important;
+}
+
+#log_in_container .image1_quote,#log_in_container .image2_quote,#log_in_container .image3_quote,#log_in_container .image4_quote,#log_in_container .image5_quote{font-family: 'Open Sans', sans-serif !important; font-size:30px;  text-align:center; line-height:50px; margin:50px 0 0;}
+#log_in_container .pin1 img, #log_in_container .pin2 img{width:80%;}
+
+#log_in_container .image1_quote{color:rgb(78,52,36); }
+#log_in_container .image2_quote{color:rgb(255,255,255);}
+#log_in_container .image3_quote{color:rgb(255,255,255);}
+#log_in_container .image3_quote strong{color:rgb(252,159,59);}
+#log_in_container .image4_quote{color:rgb(17,12,48); }
+#log_in_container .image5_quote{color:rgb(56,66,67); }
+#log_in_container .image5_quote strong{color:rgb(204,91,91);}
+.signup .search-new{margin:10px 0;}
+.signup .form-control{border-radius:0; box-shadow:none; outline:0;}
+.signup .form-error{border-color:rgb(255,0,0);}
+.signup .form-error_msg{color:rgb(255, 100, 150)}
+.signup .form-control:focus{ box-shadow:none; outline:o; border:solid 1px #999;}
+.login{width:80% !important; top:60px;}
+.login h4{text-align:center; font-size:28px;}
+.enter{ background:rgb(252, 182, 59) !important;}
+.modal-footer .submit{border:solid 1px #333; background:#333 !important; color:rgb(254,189,59);}
+.modal-footer .submit:hover, .modal-footer .submit:focus{color:rgb(254,254,254);}
+.modal-footer .submit:active{color:rgb(204, 91, 91);}
+.social{position:absolute;  top:10px; left: 0 !important;}
+.social .fb{background:url(../../images/social_02.png) 0 0 no-repeat; width:37px; height:37px; float:left; padding:0; margin-top:5px; margin-right:5px;}
+.social .tw{background:url(../../images/social_02.png) -50px 0 no-repeat; width:37px; height:37px; float:left;  padding:0; margin-top:5px;}
+/*Arya*/
+.modal-footer .button_disable{
+    opacity:.76;
+    pointer-events: none;
+}
+
+
+@media only screen and  (max-width : 1280px) {
+    #log_in_container header img{width:70%; margin-top:20px;}
+    .social{position:absolute; right:.1% !important; padding:0 !important;}
+
+}
+.social{position:absolute;  top:14px;}
+
+@media only screen and (min-width : 768px) and (max-width : 1023px) {
+        .error_message{top:120px !important;}
+	.content{top:180px !important;}
+/*	.ipad_shadow { position:relative;
+			width: 100%;
+	height: 20px;
+	z-index: 100;
+	top: auto;
+	bottom: 35% !important;
+	background: -webkit-linear-gradient(bottom, rgba(0,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+	background: linear-gradient(to top, rgba(0,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}*/
+/*	.js .content:after{bottom:480px; }*/
+	.ipad{position:relative !important; top:50px !important; }
+	.ipad .col-sm-4{ color:rgb(78,52,36)!important; font-size:22px !important; top:-50px;}
+	#log_in_container header .form{clear:both; width:90%; text-align:left; left:10%; top:10px;}
+	footer{ bottom:50px !important ; }
+	#log_in_container footer h1{width:40% !important;}
+	.social{position:absolute; top:-30px;}
+       .social .fb{width:25px !important; height:25px !important; background-size:200% 90%; }
+       .social .tw{width:25px; height:25px; background-position:-30px 0 !important; background-size:200% 90%;}
+       
+	
+}
+@media only screen and (min-width : 360px) and (max-width : 640px) {
+		#log_in_container .image1_quote,#log_in_container .image2_quote,#log_in_container .image3_quote,#log_in_container .image4_quote,#log_in_container .image5_quote{ position:absolute; left:0; top:130px !important; font-size:20px; width:100%; }
+		footer{top:80% !important;}
+	}
+
+@media only screen and  (max-width : 767px) {
+	#log_in_container .pin1, #log_in_container .pin2{visibility:hidden;}
+	#log_in_container .image1_quote,#log_in_container .image2_quote,#log_in_container .image3_quote,#log_in_container .image4_quote,#log_in_container .image5_quote{ position:absolute; left:0; top:80px; font-size:20px; width:100%; }
+	#log_in_container .image4_quote{color:rgb(255,255,255); }
+	#log_in_container header .form{clear:both; width:90%; text-align:left;}
+	#log_in_container header .form .submit{margin:1px 0 0; float:right;}
+	.login{width:90% !important; top:50px;}
+	#log_in_container footer h2{text-align:center; width:90%;}
+	#log_in_container header img{width:100%; margin-top:20px;}
+	.social{position:absolute; left:80% !important; width:30% !important;top:-90px;}
+       .social .fb{width:20px; height:20px; background-size:200% 90%;}
+       .social .tw{width:20px; height:20px; background-position:-21px 0 !important;background-size:200% 90%;}
+       .error_message{top:110px !important;}
+ 
+}
+
+@media only screen and  (max-width : 639px) {
+#log_in_container .image1_quote,#log_in_container .image2_quote,#log_in_container .image3_quote,#log_in_container .image4_quote,#log_in_container .image5_quote{	color:rgb(204,91,120);
+}
+
+
+
+.bb-item {
+    -webkit-backface-visibility: hidden;
+}
+body {
+  -webkit-transform: translate3d(0, 0, 0);}
+  
+  #log_in_container header .form input{width:39% !important;padding:10px 5px;}
+
+}
+
+
+.error_message{
+    background:rgba(255,255,255,.6) !important; 
+    font-size:14px !important; 
+    padding:10px 15px; 
+    position:absolute ; 
+    right:9%; 
+    top:63px ;
+    z-index:9999;
+    box-shadow:0 0 2px #fcb53b;
+    color:#930808; 
+    border:none !important;
+    display: none;
+}
+.error_message.error-true{display:block;  z-index: 200;}

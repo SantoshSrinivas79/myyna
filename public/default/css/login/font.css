@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'AGENCYB';
+	src: url('fonts/AGENCYB.eot');
+	src: local('fonts/AGENCYB'), url('fonts/AGENCYB.woff') format('woff'), url('fonts/AGENCYB.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_5118">Text with this font applied</p> */
+.fontsforweb_fontid_5118 {
+	font-family: 'AGENCYB' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */

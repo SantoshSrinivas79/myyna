@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+.cubet_search_main{width:25% !important; float:left;}
+.cubet_search_main .cubet_search{margin-left:50px; width:60%;}
+.cubet_board{width:45% !important; float:left;}
+.cubet_pin_main{width:20% !important; float:right !important;}
+.cubet_pin_main .cubet_commment{width:9% !important; float:right !important;}
+.cubet_pin_main .cubet_name{width:78% !important; float:left !important; margin-left:4%;}
+.cubet_pin_main .dropdown-menu{top:35px;}
+.cubet_comment_sub{margin:0 0 0 -150px;}

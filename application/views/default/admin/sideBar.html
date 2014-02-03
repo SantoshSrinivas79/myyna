@@ -1,0 +1,157 @@
+<div class="navi">
+    <ul class='main-nav'>
+        <li {{#ifCond sideMenu '/admin/dashboard'}}class="active"{{/ifCond}}>
+            <a href="/admin/dashboard" class='light'>
+                <div class="ico"><i class="icon-home icon-white"></i></div>
+                Dashboard
+            </a>
+        </li>
+        
+        <li {{#ifOr sideMenu '/admin/viewadmins,/admin/addadmin,/admin/editadmin'}}class="open"{{/ifOr}}>
+            <a href="javascript:void(0);" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-user icon-white"></i></div>
+                Admin Users
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed' {{#ifOr sideMenu '/admin/viewadmins,/admin/addadmin,/admin/editadmin'}}style="display: block;"{{/ifOr}}>
+                <li {{#ifCond sideMenu '/admin/addadmin'}}class="active"{{/ifCond}}>
+                    <a href="/admin/addadmin">Add User</a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/viewadmins'}}class="active"{{/ifCond}}>
+                    <a href="/admin/viewadmins">View Users</a>
+                </li>
+            </ul>
+        </li>
+        
+        <li {{#ifOr sideMenu '/admin/viewusers,/admin/adduser,/admin/edituser,/admin/blockedusers'}}class="open"{{/ifOr}}>
+            <a href="javascript:void(0);" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-user icon-white"></i></div>
+                Users
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed' {{#ifOr sideMenu '/admin/viewusers,/admin/adduser,/admin/edituser,/admin/blockedusers'}}style="display: block;"{{/ifOr}}>
+                <li {{#ifCond sideMenu '/admin/adduser'}}class="active"{{/ifCond}}>
+                    <a href="/admin/adduser">
+                        Add User
+                    </a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/viewusers'}}class="active"{{/ifCond}}>
+                    <a href="/admin/viewusers">View Users</a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/blockedusers'}}class="active"{{/ifCond}}>
+                    <a href="/admin/blockedusers">Blocked Users</a>
+                </li>
+            </ul>
+        </li>
+        
+        <li {{#ifOr sideMenu '/admin/viewpins,/admin/blockedpins,/admin/reportedpins'}}class="open"{{/ifOr}}>
+            <a href="javascript:void(0);" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-picture icon-white"></i></div>
+                Pin Management
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed' {{#ifOr sideMenu '/admin/viewpins,/admin/blockedpins,/admin/reportedpins'}}style="display: block;"{{/ifOr}}>
+                <li {{#ifCond sideMenu '/admin/viewpins'}}class="active"{{/ifCond}}>
+                    <a href="/admin/viewpins">
+                        View pins
+                    </a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/blockedpins'}}class="active"{{/ifCond}}>
+                    <a href="/admin/blockedpins">
+                        Blocked pins
+                    </a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/reportedpins'}}class="active"{{/ifCond}}>
+                    <a href="/admin/reportedpins">
+                        Reported pins
+                    </a>
+                </li>
+                
+            </ul>
+        </li>
+        <li {{#ifOr sideMenu '/admin/addboard,/admin/editboard,/admin/viewboards,/admin/addcategory,/admin/editcategory,/admin/viewcategories'}}class="open"{{/ifOr}}>
+            <a href="javascript:void(0);" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-fullscreen icon-white"></i></div>
+                Board Management
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed boardlist' {{#ifOr sideMenu '/admin/addboard,/admin/editboard,/admin/viewboards,/admin/addcategory,/admin/editcategory,/admin/viewcategories'}}style="display: block;"{{/ifOr}}>
+                <li {{#ifCond sideMenu '/admin/addboard'}}class="active"{{/ifCond}}>
+                    <a href="/admin/addboard">
+                        Add board
+                    </a>
+                </li>
+                <li {{#ifOr sideMenu '/admin/viewboards,/admin/editboard'}}class="active"{{/ifOr}}>
+                    <a href="/admin/viewboards">
+                        View/Edit boards
+                    </a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/addcategory'}}class="active"{{/ifCond}}>
+                    <a href="/admin/addcategory">
+                        Add Category
+                    </a>
+                </li>
+                <li {{#ifOr sideMenu '/admin/viewcategories,/admin/editcategory'}}class="active"{{/ifOr}}>
+                    <a href="/admin/viewcategories">
+                        View/Edit Categories
+                    </a>
+                </li>
+                
+            </ul>
+        </li>
+        
+        <li {{#ifOr sideMenu '/admin/general-settings,/admin/social-settings'}}class="open"{{/ifOr}}>
+            <a href="javascript:void(0);" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-wrench icon-white"></i></div>
+                Site Settings
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed' {{#ifOr sideMenu '/admin/general-settings,/admin/social-settings'}}style="display: block;"{{/ifOr}}>
+                <li {{#ifCond sideMenu '/admin/general-settings'}}class="active"{{/ifCond}}>
+                    <a href="/admin/general-settings">
+                        General
+                    </a>
+                </li>
+                <li {{#ifCond sideMenu '/admin/social-settings'}}class="active"{{/ifCond}}>
+                    <a href="/admin/social-settings">
+                        Social Sign-up
+                    </a>
+                </li>
+                
+            </ul>
+        </li>
+        <!--
+        <li>
+            <a href="forms.html" class='light'>
+                <div class="ico"><i class="icon-list icon-white"></i></div>
+                Forms
+                <span class="label label-info">1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class='light toggle-collapsed'>
+                <div class="ico"><i class="icon-th-large icon-white"></i></div>
+                Tables
+                <img src="/default/images/admin/toggle-subnav-down.png" alt="">
+            </a>
+            <ul class='collapsed-nav closed'>
+                <li>
+                    <a href="datatables.html">
+                        Data Tables
+                    </a>
+                </li>
+                <li>
+                    <a href="plaintables.html">
+                        Plain Tables
+                    </a>
+                </li>
+                <li>
+                    <a href="mediatables.html">
+                        Media Tables
+                    </a>
+                </li>
+            </ul>
+        </li>-->
+        
+    </ul>
+</div>

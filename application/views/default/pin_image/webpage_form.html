@@ -1,0 +1,48 @@
+
+<h1>Add Webpage</h1>
+
+<form id="webpageUpload" name="pinform" method="post" action="/pinpage" enctype="multipart/form-data" >  
+   
+    <input type="hidden" value="webpage" name="pin_cat"/>
+
+    <p>&nbsp;</p>
+  
+    <select name="board_id" id="board_id" required  class="inputText">
+    <option value="" selected="selected">Select Board</option>
+    {{#each boards}}
+    <option value="{{this._id}}">{{this.board_name}}</option>
+    {{/each}}
+    </select>
+    
+    <p>&nbsp;</p>
+     
+    <input type="url" id="url" name="url" class="inputText" value="" placeholder="Web URL" required/>
+    
+    <img src="/default/images/ajax-loader.gif" id="loading2" style="display:none; margin-left: 20px;"/>
+    <img id="webpage" src="" style="display:none; margin-left: 20px;"/>       
+    
+    <p>&nbsp;</p>
+
+    <textarea name="description" id="description" placeholder="Description" required  class="inputText"></textarea>
+
+    <p>&nbsp;</p>
+    
+<!--    <input type="submit" name="upload_audio" id="upload_audio" value="Upload" />-->
+
+</form>
+
+<script>
+$(function(){
+    $("#webpageUpload #url").change(function(){
+        $('#loading2').css({'display':'block'});
+        var url = $(this).val();
+        $.post('/screenshot',{'pageurl' : url},function(data,status){
+            $("#webpage").attr("src", "/pins/images/temp/" + data.image).css({'display':'block','max-width':'680px'});
+            $('#loading2').css({'display':'none'});
+        });
+        return false;
+    });
+});    
+</script>    
+
+

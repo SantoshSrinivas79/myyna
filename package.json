@@ -1,0 +1,44 @@
+{
+  "name": "cubetboard",
+  "title": "Cubet bode v2 using sleek.js",
+  "keywords": [
+    "Sleek.js",
+    "Node.js",
+    "CubetBoard"
+  ],
+  "author": "Cubet Techno Labs, Cochin <info@cubettech.com>",
+  "description": "Pinterest clone script using node.js",
+  "contributors": [ 
+    {
+      "name": "Robin C Samuel",
+      "email": "robin@cubettech.com"
+    } 
+  ],
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "handlebars": "latest",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "consolidate": "latest",
+    "express3-handlebars": "latest",
+    "webshot": "latest",
+    "imagemagick": "latest",
+    "socket.io": "0.9.16",
+    "formidable": "1.0.14",
+    "fluent-ffmpeg": "1.5.2",
+    "nodemailer": "0.5.7",
+    "youtube-feeds":"2.2.1",
+    "gm":"1.13.3",
+    "facebook-js":"1.0.1",
+    "facebook-node-sdk":"0.2.0",
+    "node-twitter-api":"1.1.1",    
+    "social-share":"latest",
+    "helmet":"0.1.1"
+  },
+  "license": "MIT"
+}

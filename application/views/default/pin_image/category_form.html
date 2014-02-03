@@ -1,0 +1,11 @@
+<h1>Add Category</h1>
+<span style="color:red;">{{msg}}</span>
+<form name="category_form" method="post" action="/category_action" enctype="multipart/form-data">
+    <input type="text" name="category" value="{{posted_data.category}}" required/>
+    <br /><br />
+    Select Image : 
+    <input type="file" name="cat_img" id="cat_img" required accept="image/*"/>
+    <br /><br />
+    <input type="submit" name="add_category" value="Add" />
+</form>
+

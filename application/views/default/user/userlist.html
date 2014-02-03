@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Follow</td>
+    </tr>
+    {{#each data}} 
+    <tr>
+        <td>{{name}}</td>
+        <td><a href="#" onclick="follow_user('{{_id}}')">Follow</a></td>
+    </tr>
+    {{/each}}
+</table>

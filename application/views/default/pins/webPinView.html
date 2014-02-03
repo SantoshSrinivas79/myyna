@@ -1,0 +1,105 @@
+<div class="{{pinBlockClass ''}}">
+
+    <div id="myCarousel2_{{_id}}" class="carousel slide custom">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <img src="{{imagepathSmall}}{{image_name}}"/>
+            </div>
+            <div style="display: none;" data-toggle="modal" data-target="#myModal"> </div>
+            <a href="/pin/{{_id}}" class="time_1" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}> <i></i> </a>
+
+            {{#if source_url}}
+            <a class="time_2" href="{{source_url}}" target="_blank"> <i></i> </a>
+            {{else}}
+            <a class="time_2" href="#" > <i></i> </a>
+            {{/if}} 
+        </div>
+        <!-- Carousel nav --> 
+        <div class="post-content">  
+            {{#if loggeduser_id}}
+            <a href="/repinload/{{_id}}" data-toggle="modal" data-target="#myModal5" id="repin_{{_id}}" style="padding-left:5px"> <span class="re-pin">Pin it</span></a>
+            {{/if}}
+            <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}>
+
+                <p>{{substr description 50}}</p> 
+            </a>
+
+        </div>
+        <div class="post-info-inner clearfix"> 
+
+            <span class="glyphicon glyphicon-dashboard date"></span>
+
+            <span class="text" ><a href="#">{{timeAgo time}}</a></span>
+
+            <!--<span class="glyphicon glyphicon-heart date"></span>-->
+
+            {{#ifCond pinlike '1'}}
+             <a href="javascript:void(0)" class="glyphicon glyphicon-heart date " {{#unless loggeduser_id}}style="pointer-events:none;"{{/unless}} id="like_{{_id}}" onclick="pinlike('{{_id}}', this)"></a>
+            {{/ifCond}}
+            {{#ifCond pinlike '0'}}
+             <a href="javascript:void(0)" class="glyphicon glyphicon-heart date active" {{#unless loggeduser_id}}style="pointer-events:none;"{{/unless}} id="like_{{_id}}" onclick="pinUnlike('{{_id}}', this)"></a>
+            {{/ifCond}}
+
+            <span class="text" ><a class="pincount" id="pincount_{{_id}}" style="pointer-events:none;" href="#">{{pinlikecount}}</a></span>
+
+            {{#if source_url}}
+
+            <a href="{{source_url}}" target="_blank"> 
+                <span class="glyphicon glyphicon-link date"></span>
+            </a>
+            {{/if}}
+            <!--<span class="glyphicon glyphicon-flag date">-->
+            {{#if loggeduser_id}}
+            <a href="/reportload/{{_id}}" class="glyphicon glyphicon-flag date" data-toggle="modal" data-target="#myModal6" id="repin_{{_id}}" ></a>
+            {{/if}}   
+            <!--</span>-->
+            <div class="clear"></div>
+            <!--        <span class="glyphicon glyphicon-comment date"></span> -->
+            <!--        <span class="text" ><a href="javascript:void(0)" id="comment_{{_id}}" onclick="createComment('{{_id}}')">Comments</a> </span>-->
+
+
+            <!--<div class="tags">
+            <span class="glyphicon glyphicon-tags date"></span>
+            <a href="#">premium</a> <a href="#">theme</a> <a href="#">endless</a> <a href="#">scrolling,</a> <a href="#">responsive</a>
+            </div>-->
+            <a class="flag" href="#"> </a> 
+        </div>    
+
+        <div class="persnl_details clearfix"> 
+  <a href="{{siteURL}}/user/{{user_id}}" class="subtle">
+  {{#if creator_image}}   
+  <img src="{{siteURL}}/user_images/thumb/{{creator_image}}">
+  {{else}}
+  <image src="/default/images/profile-pic.png">
+  {{/if}}
+   </a>
+            <div class="contns">
+                <p>Pinned by</p>
+                <!--      <a href="{{siteURL}}/user/{{user_id}}" class="subtle">{{creator_name}}</a> -->
+                <a href="{{siteURL}}/user/{{user_id}}" class="subtle">{{creator_name}}</a> 
+            </div>
+        </div>   
+
+        <div class="persnl_details clearfix board_show"> 
+
+    <a {{#if board_id}} href="{{siteURL}}/board/{{board_id}}"{{else}} href="javascript:void(0)" {{/if}}>
+    <img {{#if board_image}} src="{{siteURL}}/boards/thumb/{{board_image}} {{else}} src="/default/images/board.jpg" {{/if}}">
+    </a>
+            <div class="contns">
+                {{#if domain}}
+                <a href="http://{{domain}}" target="_blank" class="name">{{domain}}</a> 
+                {{/if}}
+                <p>Pinned onto</p>
+               <a {{#if board_id}} href="{{siteURL}}/board/{{board_id}}"{{else}} href="javascript:void(0)" {{/if}} class="subtle">{{board_name}}</a> 
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+

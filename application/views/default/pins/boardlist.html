@@ -1,0 +1,85 @@
+{{> pinheader this}}
+<div id="container" class="cont-fixed">
+     
+
+
+{{#each data}} 
+   
+    <div class="element clearfix">
+<div id="myCarousel2_{{_id}}" class="carousel slide custom">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+     <div class="active item">
+         <a href="/board/{{_id}}">
+             <img src="/boards/{{image}}"/>
+         </a>
+     </div>
+      
+  </div>
+  <!-- Carousel nav --> 
+<div class="post-content">
+<a href="/board/{{_id}}" class="desc"> 
+    <div>{{board_name}}</div> 
+</a>
+</div>
+<div class="post-info-inner clearfix"> 
+    
+<!--<span class="glyphicon glyphicon-dashboard date"></span>-->
+
+
+
+<!--<span class="glyphicon glyphicon-heart date"></span>-->
+{{#if loggeduser_id}}
+{{#ifCond boardfollow '0'}}
+        <a href="javascript:void(0)" class="cubt_folw" id="follow_{{_id}}" onclick="boardFollow('{{_id}}','{{creator}}')">Follow</a>
+       {{/ifCond}}
+       {{#ifCond boardfollow '1'}}
+        <a href="javascript:void(0)" class="cubt_folw cubt_un_folw" id="unfollow_{{_id}}" onclick="boardUnfollow('{{_id}}','{{creator}}')">Unfollow</a>
+       {{/ifCond}}
+{{/if}}
+
+
+<div class="clear"></div>
+<!--<span class="glyphicon glyphicon-comment date"></span> 
+        
+<div class="tags">
+<span class="glyphicon glyphicon-tags date"></span>
+<a href="#">premium</a> <a href="#">theme</a> <a href="#">endless</a> <a href="#">scrolling,</a> <a href="#">responsive</a>
+</div>
+<a class="flag" href="#"> </a> -->
+</div>    
+    
+    
+    
+
+  
+</div>
+    
+</div>
+ 
+
+{{/each}}
+
+   
+</div><!-- end id container -->
+
+
+<!-- this part for iframe pop up -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<!-- this part for iframe pop up for add pins-->
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="myModal4" tabindex="2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<!-- repin -->
+<div class="modal fade" id="myModal5" tabindex="2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="myModal6" tabindex="2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>

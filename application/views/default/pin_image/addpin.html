@@ -1,0 +1,481 @@
+<div class="modal_pou_up">
+    <div class="add_pin_top_ab3 custom-model add_pin_top">
+        <div class="modal-content">
+            <div class="modal-header gap">
+                <button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            
+
+            <!--  Head  -->
+            <div class="add_pin">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="add_pin_web_site">
+
+                            <div id="pop_cont"> 
+                                <img src="/default/images/ajax-loader.gif" id="loading2" style="display:none;"/>
+                                <!-- addpin forms here -->
+                                
+                                <!-- common upload from computer -->
+                                <div id="local">
+                                    <h1>Pin from your computer</h1>
+                                    <form id="localForm" name="localForm" method="post" action="/upload_action" enctype="multipart/form-data">
+                                        <p>&nbsp;</p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        Pin From : &nbsp;
+                                        <input type="radio" name="sub" value="local" checked="checked" />&nbsp; Local &nbsp;
+                                        <input type="radio" name="sub" value="web" />&nbsp; Web &nbsp;
+                                        <p>&nbsp;</p> 
+                                        <!-- messages here -->    
+                                        <div class="msg"></div>
+                                        <div class="errmsg">
+                                            {{#if error}}
+                                                {{error}}
+                                            {{/if}}
+                                        </div>
+                                        <p>&nbsp;</p> 
+                                        <select name="board_id" id="board_id" required class="inputText" >
+                                            <option value="" selected="selected">Select Board</option>
+                                            {{#each boards}}
+                                            <option value="{{this._id}}">{{this.board_name}}</option>
+                                            {{/each}}
+                                        </select>
+                                        <p>&nbsp;</p>
+                                        <input type="file" name="upload" id="upload" required class="inputText" accept="image/*,audio/*,video/*"/>
+                                        <p>&nbsp;</p>
+                                        <textarea name="description" id="description" required class="inputText" placeholder="Description"></textarea>
+                                        <p>&nbsp;</p>
+                                    </form>
+                                </div> 
+                                
+                                <!-- web form -->
+                                <div id="web" style="display:none;">
+                                    <h1>Pin from web</h1>
+                                    <form id="webForm" name="webForm" method="post" action="/pinpage" >
+                                        <input type="hidden" value="webpage" id="pin_cat" name="pin_cat"/>
+                                        <p>&nbsp;</p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        Pin From : &nbsp;
+                                        <input type="radio" name="sub" value="local"/>&nbsp; Local &nbsp;
+                                        <input type="radio" name="sub" value="web" checked/>&nbsp; Web &nbsp;
+                                        <p>&nbsp;</p> 
+                                        <!-- messages here -->    
+                                        <div class="msg"></div>
+                                        <div class="errmsg"></div>
+                                        <p>&nbsp;</p> 
+                                        <select name="board_id" id="board_id" class="inputText required ">
+                                            <option value="" selected="selected">Select Board</option>
+                                            {{#each boards}}
+                                            <option value="{{this._id}}">{{this.board_name}}</option>
+                                            {{/each}}
+                                        </select>
+                                        <p>&nbsp;</p>
+                                        <input type="text" class="inputText required url" name="url" id="url" value="" placeholder="Web Link" />
+                                        <div id="show_song" style="width:80%; margin:15px auto 0 15px; display: none; "></div>
+                                        <iframe id="preview_id" src="" width="80%" height="250" frameborder="0" style="display: none; margin-left: 20px;"></iframe>
+                                        <img src="/default/images/ajax-loader.gif" id="loading" style="display:none; margin-left: 20px;"/>
+                                        <img id="webpageshot" src="" style="display:none; margin-left: 20px; width: 80%; height: 220px;"/>
+                                        <div id="selImages"></div>
+                                        <p>&nbsp;</p>
+                                        <textarea name="description" id="description" placeholder="Description" class="inputText required youtube_description" ></textarea>
+                                        <p>&nbsp;</p>
+                                    </form>
+                                </div>
+
+                                <!-- end addpin forms -->
+
+                            </div>
+                            <div class="btn-group nav_pin">
+                                <a id="get_img" class="btn nav_pin nav_pin_drop"  data-toggle="modal" data-target="#myModal2">Upload<a/>
+                                    <button type="button" class="btn dropdown-toggle nav_pin_icon" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu nav_pin_drop_d" role="menu" id="dropdown_ul" >
+                                        <li><a href="javascript:;" id="image">Image</a></li>
+                                        <li><a href="javascript:;" id="audio">Audio</a></li>
+                                        <li><a href="javascript:;" id="video">Video</a></li>
+                                        <li><a href="javascript:;" id="webpage">Webpage</a></li>
+                                        <!--<li class="divider"></li>
+                                        <li><a href="javascript:;">Separated link</a></li>-->
+                                    </ul>    
+                            </div>
+                            <!--</form>-->
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ajax form to validate files
+   $('#localForm').ajaxForm({
+        success:function(data) { 
+            if(data.error==1){
+                $(".errmsg").html(data.msg);
+            } else {
+                $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
+                setTimeout(function(){
+                    $('#myModal2').modal('hide')
+                },1000);
+            }
+        },
+        error: function(e){
+            $(".errmsg").html(e);
+        }
+    }); 
+            
+    var req ;
+    /* to clear pop up contents on each close */
+    $("#myModal2").on('hidden.bs.modal', function () {
+        $(this).data('bs.modal', null);
+    });
+    
+    $(function(){
+        //disable dropdown
+        $(".btn.dropdown-toggle.nav_pin_icon").attr('disabled','disabled');
+        
+        //initial form show
+        $("#local").show();
+        $(".btn-group.nav_pin").addClass('add_pin_btn');
+        $('#get_img').unbind('click').bind('click',function(){
+            $("#localForm").validate();
+            $('#localForm').submit(); 
+        });
+        
+        $("input[type=radio][name=sub]").on('click',function(){
+            var type = $("input[type=radio][name=sub]:checked").val();
+            $("input[type=radio][name=sub]").removeAttr('checked');
+            $('input,select,textarea').removeClass('error').removeAttr('style');
+            $('.errmsg,.msg').text('');
+            $('#url').val('');
+            $("#preview_id").attr('src','').hide();
+            $("#show_song,#selImages").html('').hide();
+            $("#webpageshot").attr("src",'').hide();
+            if(type=='web'){
+                $("#local").hide();
+                $(".btn-group.nav_pin").removeClass('add_pin_btn');
+                $("#board_id option:selected").val('');
+                $(".btn.dropdown-toggle.nav_pin_icon").removeAttr('disabled');
+                $("#web input[type=radio][name=sub][value=web]").attr('checked','checked');
+                $('#get_img').html('Pin');
+                $("#web").show();
+                $('#get_img').unbind('click').bind('click',function(){
+                        var url = $("#url").val();
+                        //if(is_valid_url(url)) {
+                            $("#webForm").validate();
+                            $('#webForm').submit(); 
+                            return false;
+                        //}
+                });
+                $(document).keypress(function(e) {
+                    if(e.keyCode == 13) {
+                        var url = $("#url").val();
+                        //if(is_valid_url(url)) {
+                            $("#webForm").validate();
+                            $('#webForm').submit(); 
+                        //} else {
+                        //    e.preventDefault(); // set default event to false
+                        //}
+                    }
+                });
+            } else if(type=='local'){
+                $("#web").hide();
+                $(".btn-group.nav_pin").addClass('add_pin_btn');
+                $(".btn.dropdown-toggle.nav_pin_icon").attr('disabled','disabled');
+                $("#local input[type=radio][name=sub][value=local]").attr('checked','checked');
+                $('#get_img').html('Upload');
+                $("#local").show();
+                $('#get_img').unbind('click').bind('click',function(){
+                    $("#localForm").validate();
+                    $('#localForm').submit(); 
+                });
+            }
+        });
+
+        $("#url").change(function(){
+        
+            $("#show_song,#preview_id,#selImages").hide();
+            $("#preview_id,#webpageshot").attr("src","").hide();
+            $("#loading").css({'display':'none'});
+            var url = $("#url").val();
+            if(is_valid_url(url)) {
+               $('#url').removeClass('error');
+               $(".errmsg").text('');
+               var website = url.split('/')[2];
+               if(website.substr(0,3)=='www'){
+                    website = website.substr(4);
+               }
+               
+               if(validYoutube(url)) {
+                    $.ajax({
+                url: '/videodescription',
+                data: {
+                    "url": url
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.res == 1)
+                    {
+                        $('.youtube_description').val(response.desc)
+                    }
+                    if (response.res == 0)
+                    {
+                        $('.youtube_description').val('')
+                    }
+                   
+                },
+                error: function(jqxhr, status, error) {
+                //                        alert('e' + error);
+                }
+            });
+                   videoFunctions(url);
+               } else if(website=='soundcloud.com') {
+                   audioFunctions(url);
+               } else {
+                   webpageFunctions(url);
+               }
+           }
+        });
+        
+        $("#dropdown_ul li a").click(function(){
+            if(req){
+                req.abort();
+            }
+            //clearing form fields,checkboxes and error messages
+            $('input,select,textarea').removeClass('error').removeAttr('style');
+            $('.errmsg,.msg').text('');
+            $("#show_song,#loading,#selImages").hide();
+            $("#preview_id,#webpageshot").attr("src","").hide();
+            var type = $(this).attr("id") ;
+            var url = $("#url").val();
+            if(is_valid_url(url)) {
+                switch(type){
+                    case 'image': imageFunctions(url);break ;
+                    case 'audio': audioFunctions(url);break ;
+                    case 'video': videoFunctions(url);break ;
+                    case 'webpage': webpageFunctions(url);break ;
+                    default : webpageFunctions(url);
+                }
+            } else {
+                //$('#url').css({'border':'1px solid red'}); 
+                $('#url').addClass('error');
+            }
+        });
+    });    
+    function audioFunctions(url){
+        $('#get_img').html('Pin Audio');
+        var url = $("#url").val();
+        var website = url.split('/')[2];
+        if(website.substr(0,3)=='www'){
+            website = website.substr(4);
+        }
+        if(website=='soundcloud.com') {
+            var str = '<object height="100" width="100%" id="scloudId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">'
+            +'<embed allowscriptaccess="always" src="http://player.soundcloud.com/player.swf?url='+$("#url").val()
+            +'&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false" type="application/x-shockwave-flash" height="100" width="100%" name="scloud_id"></embed>'
+            +'</object>';
+            $("#show_song").html(str).show();
+            $('form#webForm').attr('action','/webaudio_action');
+            $('#get_img').unbind('click').bind('click',function(){
+               // var formData = $("#webForm").serialize();
+                //val(formData);
+                $("#webForm").validate(); 
+                $('#webForm').submit(); 
+            });
+            $(document).keypress(function(e) {
+                if(e.keyCode == 13) {
+                    var url = $("#url").val();
+                    //if(is_valid_url(url)) {
+                        $("#webForm").validate();
+                        $('#webForm').submit(); 
+                    //} else {
+                     //   e.preventDefault(); // set default event to false
+                   // }
+                }
+             });
+        } else {
+            $(".errmsg").text('Invalid audio url.');
+        }
+    }
+    function videoFunctions(url){
+        $('#get_img').html('Pin video');
+                var videoId = youtubeId(url);
+                //alert(videoId);
+                
+                var embedCode = 'http://www.youtube.com/embed/' + videoId ; 
+                $("#preview_id").attr('src',embedCode).show();
+                $('form#webForm').attr('action','/pinpage');
+                $('#pin_cat').val('video');
+                $('#get_img').unbind('click').bind('click',function(){
+                    $("#webForm").validate(); 
+                    $('#webForm').submit(); 
+                });
+                $(document).keypress(function(e) {
+                    if(e.keyCode == 13) {
+                        var url = $("#url").val();
+                            $("#webForm").validate();
+                            $('#webForm').submit(); 
+                    }
+                 });
+
+    }
+    function webpageFunctions(url){
+        $('#get_img').html('Pin Webpage');
+        $('#loading').css({'display':'block'});
+        req = $.post('/screenshot',{'pageurl' : url},function(data,status){
+            if(data.image){
+                $("#webpageshot").attr("src", "/pins/images/temp/" + data.image + '?t=' + new Date()).css({'display':'block','max-width':'680px'});
+                $('#loading').css({'display':'none'});
+                $('form#webForm').attr('action','/pinpage');
+                $('#pin_cat').val('webpage');
+                $('#get_img').unbind('click').bind('click',function(){
+                    $("#webForm").validate({rules: {url: "url"}}); 
+                    $('#webForm').submit(); 
+                });
+                $(document).keypress(function(e) {
+                   if(e.keyCode == 13) {
+                       $('form#webForm').attr('action','/pinpage');
+                       //alert($('form#webForm').attr('action'));
+                       var url = $("#url").val();
+                       //if(is_valid_url(url)) {
+                           $("#webForm").validate();
+                           $('#webForm').submit(); 
+                       //} else {
+                       //    e.preventDefault(); // set default event to false
+                       //}
+                   }
+                });
+            } else {
+                 $(".errmsg").text(data.error);
+                 $('#loading').hide();
+                 return false;
+            }
+        });
+    }
+    function imageFunctions(url){
+        $('#get_img').html('Pin Image');
+        actionFunction(url);
+    }
+    function actionFunction(url){
+        //if(is_valid_url(url)) {
+        
+            $("#show_song").hide();
+            $("#preview_id,#webpageshot").attr("src","").hide();
+            $("#loading").css({'display':'block'});
+            req = $.post('/post_url',{'url' : url },
+            function(data){
+                $("#loading").css({'display':'none'});
+                $("#selImages").html(data).show();
+                $('form#webForm').attr('action','/select_action');
+                $('#get_img').unbind('click').bind('click',function(){
+                   //alert($("input.img_chkbox:checkbox:checked").length);
+                    //if atleast one checkbox exist
+                    if($("input.img_chkbox:checkbox:checked").length!=0){
+                        //alert($("input.img_chkbox:checkbox:checked").length);
+                        if ($("input.img_chkbox:checkbox:checked").length > 0){
+                            // if any image is checked
+                            if ($("input.img_chkbox:checkbox:checked").length > 4){
+                                //alert('Maximum 4 images.');
+                                $(".errmsg").text("Maximum 4 images.");
+                                return false;
+                            }
+                            else{
+                                $(document).keypress(function(e) {
+                                    if(e.keyCode == 13) {
+                                        var url = $("#url").val();
+                                       // if(is_valid_url(url)) {
+                                            $("#webForm").validate();
+                                            $('#webForm').submit(); 
+                                        //} else {
+                                        //    e.preventDefault(); // set default event to false
+                                        //}
+                                    }
+                                 });
+                                $("#webForm").validate(); 
+                                $('#webForm').submit(); 
+                            }
+                        }
+                    } else {
+                        // nothing checked
+                        $(".errmsg").text("You must select atleast one image.");
+                        return false;
+                    }
+                });
+                
+            });
+        //}
+    }
+    //this function is only for id="url"
+    function is_valid_url(url)
+    {
+        if(url!=''){
+            if(url.length<12) {
+                $('#url').addClass('error');
+                $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+                return false;
+            } else if(url.length>=12){
+                if(url.substr(0,5)=='http:' || url.substr(0,6)=='https:'){ 
+                    return true;
+                } else {
+                    $('#url').addClass('error');
+                    $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+                    return false;
+                }
+            }
+        } else {
+            $('#url').addClass('error');
+            return false;
+        }
+    }
+    /*function is_valid_url2(url)
+    {
+        if(url!=''){
+            if(url.length<12) {
+                $('#url').addClass('error');
+                $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+                return false;
+            } else if(url.length>=12){
+                if(url.substr(0,5)=='http:' || url.substr(0,6)=='https:'){ 
+                    if((url.substr(0,5)=='http:' && url.substr(0,11)!='http://www.') ||
+                    (url.substr(0,6)=='https:' && url.substr(0,12)!='https://www.')){
+                        $('#url').addClass('error');
+                        $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+                        return false;
+                    } else {
+                        $('#url').removeClass('error');
+                        $(".errmsg").text('');
+                        return true;
+                    }
+                } else {
+                    $('#url').addClass('error');
+                    $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+                    return false;
+                }
+            }
+        } else {
+            $('#url').addClass('error');
+            return false;
+        }
+    }*/
+    function youtubeId(url){
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match && match[7].length==11){
+            return match[7];
+        }else{
+            return false;
+        }
+    }
+    function validYoutube(url){
+        return url.match(/^(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/)
+                ? true 
+                : false ;
+    }
+
+
+</script>

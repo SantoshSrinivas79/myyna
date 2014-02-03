@@ -1,0 +1,25 @@
+<a href="/add_board">Add Board</a>
+
+<br /><br />
+
+<table border="0" cellpadding="7" cellspacing="2" width="50%">
+    <tr style="font-weight: bold;">
+        <td>Board</td>
+<!--        <td>Category</td>-->
+        <td>Cost</td>
+<!--        <td>Edit</td>-->
+        <td>Delete</td>
+    </tr>
+    
+    {{#each boards}}
+    <tr>
+        <td>{{this.board_name}}</td>
+<!--        <td>{{this.category_id.category_name}}</td>-->
+        <td>{{this.cost}}</td>
+<!--        <td><a href="#" id="b_edit">Edit</a></td>-->
+        <td><a href="/delete_board/{{this._id}}" id="b_delete"  onclick="return confirm('Are you sure?');">Delete</a></td>
+    </tr>
+    {{/each}}
+    
+</table>
+

@@ -1,0 +1,57 @@
+//var domLoaded = function (callback) {
+    //alert('hello');
+    
+    /* Internet Explorer */
+    /*@cc_on
+    @if (@_win32 || @_win64)
+        document.write('<script id="ieScriptLoad" defer src="//:"><\/script>');
+        document.getElementById('ieScriptLoad').onreadystatechange = function() {
+            if (this.readyState == 'complete') {
+                appenddata();
+            }
+        };
+    @end @*/
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = 'a.cbt-pin-it{font-style:normal !important; border:0 !important; background:rgb(50,50,50) !important; color:rgb(252,181,57) !important; padding:5px 8px !important; font-family:"Open Sans", sans-serif !important; font-size:11px !important; border-radius:3px !important; font-weight:600 !important; cursor:pointer !important;}a.cbt-pin-it:active{background:rgb(180,50,50) !important;}a.cbt-pin-it:focus{outline:none !important;}';
+    document.body.appendChild(css);
+    
+    /* Mozilla, Chrome, Opera */
+    if (document.addEventListener) {
+        
+        document.addEventListener('DOMContentLoaded', appenddata, false);
+    }
+    /* Safari, iCab, Konqueror */
+    if (/KHTML|WebKit|iCab/i.test(navigator.userAgent)) {
+        var DOMLoadTimer = setInterval(function () {
+            if (/loaded|complete/i.test(document.readyState)) {
+                appenddata();
+                clearInterval(DOMLoadTimer);
+            }
+        }, 10);
+    }
+    /* Other web browsers */
+    //window.onload = callback;
+    
+//};
+
+ function appenddata(){
+    var divs = document.getElementsByClassName('cubet-share');
+    var append_data ='<a class="cbt-pin-it">PIN IT</a>';
+    for(var i=0; i<divs.length; i++) { 
+        divs[i].innerHTML =  append_data;
+    }
+    
+    var buttons = document.getElementsByClassName("cbt-pin-it");
+    for(var i=0; i<buttons.length; i++) { 
+        buttons[i].onclick = function() { 
+            var par = this.parentNode;
+            url = par.getAttribute("data-url");
+            var openurl = "{{url}}/sharepinload"
+            if(url) {
+                openurl += '?u='+url;
+            }
+            window.open(openurl,"","width=450,height=415,toolbar=no,location=no,scrollbars=1");
+        }
+    }
+}

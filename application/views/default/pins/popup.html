@@ -1,0 +1,578 @@
+{{#ifCond popup 0}}
+{{> pinheader this}}
+{{/ifCond}}    
+
+<div class="modal_pou_up_1 topmargin" id="pop_container" >
+    {{#ifCond popup 1}}
+    <button type="button" class="close_yellow fix" data-dismiss="modal" aria-hidden="true">x</button>
+    {{/ifCond}}
+    <div class="{{#ifCond popup 1}}modal-dialog{{/ifCond}} custom-model {{#ifCond popup 0}}nopopup{{/ifCond}}" >
+        <div class="modal-content pin-detail">
+            <div class="modal-body {{#ifCond popup 0}}mdl_r{{/ifCond}}">
+                <div class="outr_row">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="sep_brdr">
+                            <div class="replinks">
+                                <div class="btn-group"> <a {{#if loggeduser_id}} href="/repinload/{{pin._id}}" data-toggle="modal" data-target="#myModal5" id="repin_{{pin._id}}" {{else}} href="/login" {{/if}}  class="btn btn-inverse btn-large"> Pin IT</a> 
+                                    <!--               <a href="#"  class="btn btn-inverse btn-large dropdown-toggle"></a> -->
+                                </div>
+                                <!-- <button class="btn btn-large like" type="button"><em></em>Like</button>-->
+
+                                {{#ifCond pin.liked '1'}}
+                                <a href="javascript:void(0)" class="a-btn active" id="like_pop{{pin._id}}" {{#unless loggeduser_id}}style="pointer-events:none;"{{/unless}} onclick="pinUnlike('{{pin._id}}',this,'pop')">
+                                   <span class="a-btn-slide-text" id="pincount_pop{{pin._id}}">{{pin.likes}}</span>
+                                </a>
+                                {{else}}
+                                <a href="javascript:void(0)" class="a-btn" id="like_pop{{pin._id}}" {{#unless loggeduser_id}}style="pointer-events:none;"{{/unless}} onclick="pinlike('{{pin._id}}',this,'pop')">
+                                   <span class="a-btn-slide-text" id="pincount_pop{{pin._id}}">{{pin.likes}}</span>
+                                </a>
+                                {{/ifCond}}
+
+
+                                {{#if pin.source_url}}
+                                <a href="{{pin.source_url}}" target="_blank">  <div class="web_site"></div> </a>
+                                {{/if}}
+                            </div>
+                            <div class="sharegr">
+                                <button type="button" class="share_popup btn btn-large share "><em></em></button>
+                                <div  class="popup_share" style="display:none">
+                                    <a href="#"  class="social_image" onclick="socialShare('facebook',$(location).attr('href'))"><img src="/default/images/fb1.png"></a>
+                                    <a href="#" class="social_image" onclick="socialShare('twitter',$(location).attr('href'))"><img src="/default/images/tw1.png"></a>
+                                </div>
+                                <!--  <a href="#" onclick="socialShare('facebook',$(location).attr('href'))"> <button type="button" class="btn btn-large share"><em></em></button></a>
+                                  <a href="#" onclick="socialShare('twitter',$(location).attr('href'))"> <button type="button" class="btn btn-large share"><em></em></button></a>-->
+
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sep_brdr">
+
+
+
+
+
+                            <div id="cubet_flex_container"  style="min-height: 300px; ">
+                                <!--        <img src="{{siteURL}}/default/images/ajax-loader.gif" border="0" id="ajax-loader"/>-->
+                                <!-- type of pins -->  
+
+
+                                {{#ifCond pin.pin_type 'image'}}         
+
+                                <div id="main" role="main">
+                                    <section class="slider">
+                                        <div id="slider" class="flexslider" >
+                                            <ul class="slides">
+                                                {{#each pin.image_name}}
+                                                <li>
+                                                    <img src="{{imagepathOriginal}}{{this}}"> 
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                    </section>
+                                    <aside>
+                                        <div id="view-html" class="code"></div>
+                                    </aside>
+                                </div>
+                                {{/ifCond}}
+
+                                {{#ifCond pin.pin_type 'url_image'}}
+                                <div id="main" role="main">
+                                    <section class="slider">
+                                        <div id="slider" class="flexslider">
+                                            <ul class="slides">
+                                                {{#each pin.image_name}}
+                                                <li>
+                                                    <img src="{{imagepathOriginal}}{{this}}" /> 
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                        {{#arrlenGtOne pin.tmb_image_name}}
+                                        <div id="carousel" class="flexslider thumb">
+                                            <ul class="slides">
+                                                {{#each pin.tmb_image_name}}
+                                                <li>
+                                                    <img src="{{imagepathSmall}}{{this}}" > 
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                        {{/arrlenGtOne}}
+                                    </section>
+                                    <aside>
+                                        <div id="view-html" class="code"></div>
+                                    </aside>
+                                </div>
+                                {{/ifCond}}
+
+
+                                {{#ifCond pin.pin_type 'audio'}}
+                                <div id="main" role="main">
+                                    <audio id="player_{{_id}}" src="{{audioPath}}{{pin.audio_file}}" type="audio/mp3" controls="controls" style="width:100%;">		
+                                    </audio> 
+                                </div>
+                                {{/ifCond}}
+
+
+                                {{#ifCond pin.pin_type 'webaudio'}}
+                                <div id="main" role="main">
+                                    <object width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+                                        <embed height="100" src="http://player.soundcloud.com/player.swf?url={{pin.audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false" type="application/x-shockwave-flash" width="100%" name="yourPlayerId" wmode="transparent"/>
+                                    </object>
+                                </div>
+                                {{/ifCond}}
+
+
+                                {{#ifCond pin.pin_type 'web_page'}}
+                                <div id="main" role="main">
+                                    <section class="slider">
+                                        <div id="slider" class="flexslider">
+                                            <ul class="slides">
+                                                <li>
+                                                    <img src="{{imagepathOriginal}}{{pin.image_name}}"> 
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </section>
+                                    <aside>
+                                        <div id="view-html" class="code"></div>
+                                    </aside>
+                                </div>
+                                {{/ifCond}}
+
+
+                                {{#ifCond pin.pin_type 'video'}}
+                                <div id="main" role="main">
+                                    <div class="player">
+
+                                        {{#ifCond pin.video_type 'youtube'}}
+                                        <div class="youtubeContainer">
+                                            <iframe src="http://www.youtube.com/embed/{{pin.video_id}}?wmode=transparent" frameborder="0" ></iframe>					
+                                        </div>
+                                        {{/ifCond}}
+                                        {{#ifCond pin.video_type 'local_video'}}    
+                                        <video id="example_video_p{{pin._id}}" class="video-js vjs-default-skin" controls
+                                               preload="auto" width="100%" height="280" poster="my_video_poster.png" data-setup="{}">
+                                            <source src="{{videoPath}}{{pin.video_id}}" type="{{pin.video_version}}" />
+                                        </video>
+                                        <script>
+                                            videojs("example_video_p{{pin._id}}").ready(function() {});
+                                        </script>
+                                        {{/ifCond}}    
+
+                                    </div>
+                                </div>
+                                {{/ifCond}}
+
+
+                                <!-- end type of pins --> 
+
+                            </div> <!-- end cubet_flex_container -->
+
+
+
+                            <div>  {{pin.description}}  </div> 
+                        </div>
+                        <div class="new_bg">
+
+
+                            <div class="row prfl_dtls">
+                                <div class="col-md-6" style="min-height: 62px">
+                                    <div class="prfl_img"> 
+                                           <a href="/user/{{user_id}}" class="subtle">
+                                            {{#if pin.profile_image}}   
+                                            <img src="/user_images/thumb/{{pin.profile_image}}">
+                                            {{else}}
+                                            <image src="/default/images/profile-pic.png">
+                                            {{/if}}
+                                           </a>
+                                    </div>
+                                    <div class="prfl_cntnts">
+                                        <div class="coment_wraper"> <span class="commentDescriptionTimeAgo"> Pinned By</span> </div>
+                                        <a class="commentDescription" href="/user/{{pin.user_id}}">{{pin.user}}</a>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 resp">
+                                    <div class="prfl_img" > <a href="/board/{{pin.board_id}}"> <img src="{{siteURL}}/boards/thumb/{{pin.board_image}}"> </a> </div>
+                                    <div class="prfl_cntnts" >
+                                        <div class="coment_wraper" > 
+                                            <!--                                        <a class="commentDescription" href="#">{{pin.user}}</a> -->
+                                            <span class="commentDescriptionTimeAgo"> Pinned on : {{timeAgo pin.time}} </span> </div>
+                                        <a {{#if pin.board_id}} href="/board/{{pin.board_id}}" else { href="javascript:void(0)" } {{/if}} class="commentDescriptionContent">
+                                            {{pin.board_name}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>          
+
+
+
+
+                    </div>
+
+
+
+                    <div class=" col-md-4">
+                        {{#ifCond pin.board_locked 0}}
+                        <div class="new_bg top">
+
+                            <div class="rght_top_sectn">
+                                <div class="prfl_img"> <a href="/board/{{pin.board_id}}"> <img src="{{siteURL}}/boards/thumb/{{pin.board_image}}"></a> </div>
+                                <div class="prfl_cntnts">
+                                    <a href="/board/{{pin.board_id}}"><h5>{{pin.board_name}}</h5></a>
+                                    <!--<h6>Pinned onto</h6>-->
+                                </div>
+
+                                <div class="clear"></div>
+                                
+                                <div class="overflw_sectn">
+                                    <div class="boardMasonry" style="margin: 0 auto;"> 
+                                        {{#arrlenGtZero pin.board_pins}}
+                                        <ul>
+                                            {{#each pin.board_pins}}
+                                            {{#ifCond this.pin_type 'image'}}
+                                            <li class="brd_itm">
+                                                <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} > 
+                                                   <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}">
+                                                </a> 
+                                            </li>
+                                            {{/ifCond}}
+                                            {{#ifCond this.pin_type 'url_image'}}
+                                            <li class="brd_itm">
+                                                <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}> 
+                                                   <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}">
+                                                </a> 
+                                            </li>
+                                            {{/ifCond}}
+                                            {{#ifCond this.pin_type 'web_page'}}
+                                            <li class="brd_itm">
+                                                <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}> 
+                                                   <img src="{{imagepathSmall}}{{image_name}}">
+                                                </a> 
+                                            </li>
+                                            {{/ifCond}}
+                                            {{#ifCond this.pin_type 'webaudio'}}
+                                            <li class="brd_itm">
+                                                <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}> 
+                                                   <img src="/default/images/soundcloud.jpg">
+                                                </a> 
+                                            </li>
+                                            {{/ifCond}}
+                                            {{#ifCond this.pin_type 'video'}}
+                                            <li class="brd_itm">
+                                                <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}}> 
+                                                   {{#ifCond this.video_type 'youtube'}}
+                                                   <img src="/pins/images/{{image_name.[0]}}">
+                                                    {{/ifCond}}
+                                                    {{#ifCond this.video_type 'local_video'}} 
+                                                    <img src="/pins/videos/thumb/{{thumb}}">
+                                                    {{/ifCond}}  
+                                                </a> 
+                                            </li>
+                                            {{/ifCond}}
+                                            {{/each}}
+                                        </ul>
+                                        {{else}}
+                                        <p style="text-align: center; padding-top: 30px;">No more pins</p>
+                                        {{/arrlenGtZero}}
+                                    </div>
+                                </div>
+                                
+                                <div class="wells">
+<!--                                       <button type="button" class="btn btn-inverse btn-large btn-block">Follow Board</button>-->
+                                {{#if loggeduser_id}}
+                                        {{#ifCond pin.boardfollow '0'}}
+                                        <a href="javascript:void(0)" class="btn btn-inverse btn-large btn-block" id="follow_{{pin.board_id}}" onclick="boardFollow('{{pin.board_id}}','{{pin.board_creator}}')">Follow</a>
+                                       {{/ifCond}}
+                                       {{#ifCond pin.boardfollow '1'}}
+                                        <a href="javascript:void(0)" class="btn btn-inverse btn-large btn-block" id="unfollow_{{pin.board_id}}" onclick="boardUnfollow('{{pin.board_id}}','{{pin.board_creator}}')">Unfollow</a>
+                                       {{/ifCond}}
+                                {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/ifCond}}
+
+                        
+                        {{#if pin.domain}}
+                        {{#arrlenGtOne pin.domainPins}}
+                        <div class="new_bg">
+                            <div class="head_sectn">
+                                <h4 class="domainSubtitle">Other pins from {{pin.domain}}</h4>
+                            </div>
+
+                            <div class="domainContainer" >   
+                                <ul class="other_pns" >
+                                    {{#each pin.domainPins}}
+                                    {{#ifCond this.pin_type 'image'}}
+                                    <li>
+                                        <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm2"> 
+                                           <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}">
+                                        </a> 
+                                    </li>
+                                    {{/ifCond}}
+                                    {{#ifCond this.pin_type 'url_image'}}
+                                    <li>
+                                        <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm2"> 
+                                           <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}">
+                                        </a> 
+                                    </li>
+                                    {{/ifCond}}
+                                    {{#ifCond this.pin_type 'web_page'}}
+                                    <li>
+                                        <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm2"> 
+                                           <img src="{{imagepathSmall}}{{image_name}}">
+                                        </a> 
+                                    </li>
+                                    {{/ifCond}}
+                                    {{#ifCond this.pin_type 'webaudio'}}
+                                    <li>
+                                        <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm2"> 
+                                           <img src="/default/images/soundcloud.jpg">
+                                        </a> 
+                                    </li>
+                                    {{/ifCond}}
+                                    {{#ifCond this.pin_type 'video'}}
+                                    <li>
+                                        <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm2"> 
+                                           {{#ifCond this.video_type 'youtube'}}
+                                           <img src="/pins/images/{{image_name.[0]}}">
+                                            {{/ifCond}}
+                                            {{#ifCond this.video_type 'local_video'}} 
+                                            <img src="/pins/videos/thumb/{{thumb}}">
+                                            {{/ifCond}}  
+                                        </a> 
+                                    </li>
+                                    {{/ifCond}}
+                                    {{/each}}   
+                                </ul>
+                            </div>
+                        </div>
+                        {{/arrlenGtOne}}
+                        {{/if}}    
+
+
+
+
+
+                    </div>
+                </div>
+                
+                {{#ifCond pin.userpinCount 1}} 
+                    <h4 class="new_bg">No more pins from {{pin.user}}</h4>
+                {{else}}
+                    <h4 class="new_bg">Other pins from {{pin.user}}</h4>
+                {{/ifCond}}
+                </div><!-- end outr_row -->    
+                <div {{#ifCond siteLayout 'fixed'}}class="cont-fixed"{{/ifCond}} id="pop_up_container">
+                    <!-- DETAILS HERE -->
+                </div>
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<input type="hidden" name="endlimit2" id="endlimit2" value="0"/>
+<input type="hidden" name="popup" id="popup" value="{{popup}}"/>
+<!--<input type="hidden" name="user_id" id="user_id" value="{{pin.user_id}}"/>-->
+<input type="hidden" name="cur_pin_id" id="cur_pin_id" value="{{pin._id}}"/>
+
+
+<input type="hidden" name="boardendlimit" id="boardendlimit" value="15"/>
+<input type="hidden" name="domainendlimit" id="domainendlimit" value="9"/>
+
+
+<!-- this part for iframe pop up -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000;">
+</div>
+{{#ifCond popup 0}}
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+</div>
+
+<div class="modal fade" id="myModal3" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+</div>
+
+<div class="modal fade" id="myModal4" tabindex="2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+</div>
+
+<!-- repin -->
+<div class="modal fade" id="myModal5" tabindex="3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+</div>
+
+<div class="modal fade" id="myModal6" tabindex="4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+</div>
+{{/ifCond}}
+
+<script>
+    $(function(){ 
+        // $("#ajax-loader").css({'display':'none'});
+        $('#carousel').flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: false,
+            itemWidth: 100,
+            itemMargin: 5,
+            asNavFor: '#slider'
+        });
+        $('#slider').flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: false,
+            sync: "#carousel",
+            start: function(slider){
+                $('body').removeClass('loading');
+            }
+        });
+        var mOpts = {
+            itemSelector : '.brd_itm',
+            isFitWidth: true,
+            isResizable: true,
+            gutterWidth: 1,
+            isAnimated: false,
+            columnWidth : 80,
+            animationOptions: {
+                duration: 300,
+                easing: 'linear',
+                queue: false
+            }
+        }
+    });
+    var mOpts = {
+        itemSelector : '.brd_itm',
+        isFitWidth: true,
+        isResizable: true,
+        gutterWidth: 1,
+        isAnimated: false,
+        //columnWidth : 80,
+        animationOptions: {
+            duration: 300,
+            easing: 'linear',
+            queue: false
+        }
+    }
+    $('.boardMasonry').masonry(mOpts);
+    $(".boardMasonry").masonry('reload');
+    
+    
+    var mOptsd = {
+        itemSelector : '.brd_itm2',
+        isFitWidth: true,
+        isResizable: true,
+        gutterWidth: 1,
+        isAnimated: false,
+        //columnWidth : 50,
+        animationOptions: {
+            duration: 300,
+            easing: 'linear',
+            queue: false
+        }
+    }
+    $('.domainContainer').masonry(mOptsd);
+    $('.domainContainer').masonry('reload');
+
+    
+    var next_scroll = true;
+
+    $(".overflw_sectn").scroll(function() {
+        //alert(2);
+        //console.log($('.overflw_sectn').height()+'::'+$('.overflw_sectn').scrollTop()+'::'+($('.overflw_sectn').get(0).scrollHeight - 5));
+        var cond = ($('.overflw_sectn').height() + $('.overflw_sectn').scrollTop()) > ($('.overflw_sectn').get(0).scrollHeight - 5);
+        if (cond) {
+            if (next_scroll) {
+                next_scroll = false;
+                //urlChange();
+                var start = $('#boardendlimit').val();
+                var end = parseInt(start) + parseInt(3);
+                var cur_pin_id =  $('#cur_pin_id').val();
+                $('#boardendlimit').val(end);
+                $.ajax({
+                    url: "/nextboardpins",
+                    data: { "startlimit"    : start,
+                        "endlimit"      : end,
+                        "currentPinId"  : cur_pin_id,
+                        "popup"     : $("#popup").val()
+                    },
+                    type: 'post',
+                    success: function(html)
+                    {
+                        //console.log(html);
+                        //alert('success');
+                        if (html){
+                            $(".overflw_sectn ul").append(html);
+                            imagesLoaded( document.querySelector('.overflw_sectn'), function( instance ) {
+                                next_scroll = true;
+                                $('.boardMasonry').masonry('reload');
+                               //modalInit();
+                            });
+                        } else {
+                            //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                        }
+                    },
+                    error: function(jqxhr, status, error) {
+                        // alert('e' + error);
+                        //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                    }
+                });
+            }
+        }
+    });
+    
+    var dnext_scroll = true ;
+    $(".other_pns").scroll(function() {
+        //alert(2);
+        //console.log($('.other_pns').height()+'::'+$('.other_pns').scrollTop()+'::'+($('.other_pns').get(0).scrollHeight - 5));
+        var cond = ($('.domainContainer').height() + $('.domainContainer').scrollTop()) > ($('.domainContainer').get(0).scrollHeight - 5);
+        if (cond) {
+            if (dnext_scroll) {
+                
+                dnext_scroll = false;
+                //urlChange();
+                var start = $('#domainendlimit').val();
+                var end = parseInt(start) + parseInt(4);
+                var cur_pin_id =  $('#cur_pin_id').val();
+                $('#domainendlimit').val(end);
+                $.ajax({
+                    url: "/nextdomainpins",
+                    data: { "startlimit"    : start,
+                        "endlimit"      : end,
+                        "currentPinId"  : cur_pin_id,
+                        "popup"     : $("#popup").val()
+                    },
+                    type: 'post',
+                    success: function(html)
+                    {
+                        //console.log(html);
+                        //alert('success');
+                        if (html){
+                            $(".domainContainer ul").append(html);
+                            imagesLoaded( document.querySelector('.domainContainer'), function( instance ) {
+                                dnext_scroll = true;
+                                $('.domainContainer').masonry('reload');
+                                //modalInit();
+                            });
+                        } else {
+                            //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                        }
+                    },
+                    error: function(jqxhr, status, error) {
+                        //alert('e' + error);
+                        //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                    }
+                });
+            }
+        }
+    });
+
+
+</script>

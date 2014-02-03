@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+
+.profile_setting{width:80%; margin:10px auto;}
+.profile_set{width:60% !important; margin:0 auto;}
+.profile_set .form{border:1px solid #ccc; width:100%;}
+.profile_set .margin{margin:10px 0;}
+.profile_set .text_ar{width:100%; }
+.profile_set .form-control{width:100%; border:none; border-radius:0; padding-top:12px;}
+.profile_set .form-control:active, .profile_set .form-control:focus{border:none; outline:none; box-shadow:none;}
+.profile_set .profile_btn{border-right:1px solid #aaa !important; border-left:none; border-top:none; border-bottom:none; padding:10px 15px; background:none; border-radius:0; color:#999; }
+.profile_set .cursor{cursor:default;}
+.profile_set .b{padding:10px 10px 0 0;}
+.profile_set .ck_bx{margin:0 0 0 20%; clear:both; min-height: 29px;}
+.profile_set b{float:left; padding-bottom:20px;}
+.profile_set input[type="checkbox"] {display:none;}
+.profile_set .submit{border:solid 1px #444; background:#333; color:#f2b33d; padding:5px 15px; float:right; font-weight:bold; margin:0 0 20px 10px;}
+.profile_set .submit:active{background:#000;}
+
+.profile_set input[type="checkbox"] + label {color:#333; font-size:14px; font-weight:normal;}
+.profile_set input[type="checkbox"] + label span {
+    display:inline-block;
+    width:18px;
+    height:18px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../images/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+.profile_set input[type="checkbox"]:checked + label span { background:url(../images/check_radio_sheet.png) -19px top no-repeat;}
+.container_image{
+text-align:center;
+padding:4px; float:left;}
+.container_image .file_label{ color:#999; padding-top:5px;}
+.container_image #image_src {
+position:absolute;
+left:-9999px;
+}
+/****radio********/
+
+.profile_set input[type="radio"] {
+    display:none;
+}
+
+.profile_set input[type="radio"] + label {color:#333; font-size:14px; font-weight:normal; padding:1px 0 0;}
+
+.profile_set input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../images/check_radio_sheet.png) -38px top no-repeat;
+    cursor:pointer;
+}
+
+.profile_set input[type="radio"]:checked + label span {
+    background:url(../images/check_radio_sheet.png) -57px top no-repeat;}
+.falg_set{margin-top:100px !important;}
+
+
+@media only screen and (min-width : 1000px) and (max-width : 1500px){
+.falg_set{margin-top:50px !important;}	
+}
+
+.container_image #img{cursor:pointer;}
+@media only screen and (min-width : 481px) and (max-width : 1500px){
+	.profile_setting{width:98%; margin:10px auto;}
+	.profile_set{width:100% !important; margin:0 auto;}
+	.profile_set .form{border:1px solid #ccc; width:94%;}
+	.container_image{text-align:left;}
+	.container_image{float:left;}
+	.profile_set .submit{margin-right:30px;}
+}
+
+@media only screen and (max-width : 480px) {
+	.profile_setting{width:98%; margin:10px auto;}
+	.profile_set{width:100% !important; margin:0 auto;}
+	.profile_set .form{border:1px solid #ccc; width:94%;}
+	.container_image{clear:both; text-align:left;}
+	.container_image .file_label{overflow:scroll; position:relative; top:10px;}
+	.container_image{float:none;}
+	.profile_set .submit{margin-right:30px;}
+	.profile_set .submit{ margin:10px 10px 20px 10px !important;}
+	
+}
+/*Arya*/
+.profile_set.install .form-control{
+   padding-top: 5px;
+}
+
+.profile_set.install input[type="checkbox"]{
+    display: inline-block;
+}
+
+.profile_set.install span .agreement{
+    margin-right: 5px;
+}
+
+.profile_set.install h2 {
+    color: #000;
+    font-weight: 300;
+    padding-left: 15px;
+    text-align: center;
+}
+
+.terms {
+    height: 200px;
+    overflow: auto;
+    padding: 20px;
+    text-align: justify;
+}
+
+.profile_set.install .tab-pane > h3 {
+    color: #000000;
+    padding-left: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#Agreement .input-group { 
+    border: medium none;
+    padding-left: 28px;
+    padding-top: 20px;
+}
+
+#Agreement .submit {
+    margin-right: 0;
+}
+
+.terms > h4 {
+    text-align: center;
+}
+
+.terms > p {
+    
+    font-size: 14px;
+}
+
+#Config .input-checkbox { 
+   border: medium none;
+}
+
+#Config .submit {
+    margin-right: 0;
+   
+}
+#Settings .input-checkbox { 
+   border: medium none;
+}
+
+#Settings .submit {
+    margin-right: 0;
+   
+}
+

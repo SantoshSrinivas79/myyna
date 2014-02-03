@@ -1,0 +1,52 @@
+<h1>Pin audio file from SoundCloud</h1>
+
+<form id="webaudioUploadFromComputer" name="webaudio_form" method="post" action="/webaudio_action" >
+    
+    <p>&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Pin From : &nbsp;
+    <input type="radio" name="sub" value="local"/>&nbsp; Local &nbsp;
+    <input type="radio" name="sub" value="web" checked/>&nbsp; SoundCloud &nbsp;
+    <p>&nbsp;</p> 
+    
+
+    <select name="board_id" id="board_id" required class="inputText">
+    <option value="" selected="selected">Select Board</option>
+    {{#each boards}}
+    <option value="{{this._id}}">{{this.board_name}}</option>
+    {{/each}}
+    </select>
+    
+     <p>&nbsp;</p>
+   
+    <input type="text"  class="inputText" name="audio_link" id="audio_link" value="" placeholder="Audio File Link" required/>
+<!--    <input type="button" id="get_song" value="Find Song">-->
+   
+    <div id="show_song" style="width:65%; margin:15px auto 0 15px;"></div>
+    
+    <br />
+
+    <textarea name="description" id="description" placeholder="Description"  required  class="inputText" ></textarea>
+
+     <p>&nbsp;</p>
+    
+<!--    <input type="submit" name="upload_webaudio" id="upload_webaudio" value="Upload" />-->
+
+</form>
+
+
+<script>
+$("input[type=radio][name=sub]").unbind('click').bind('click',function(){
+    var sub = $("input[type=radio][name=sub]:checked").val();
+        if(sub=='local'){
+             $("#pop_cont").load('/audio_upload',function(){
+                $('#get_img').html('Upload');
+                $('#get_img').unbind('click').bind('click',function(){
+                    
+                   $("#audioUploadFromComputer").validate();
+                   $('#audioUploadFromComputer').submit(); 
+                });
+            });
+        }
+});
+</script>    

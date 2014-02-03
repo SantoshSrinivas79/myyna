@@ -1,0 +1,225 @@
+
+
+
+<!-- saved from url=(0059)http://192.168.1.65:3000/sharepinload?u=http://mclaren.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="/default/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="/default/js/pinShare.js"></script>
+       <script type="text/javascript" src="/default/js/jquery.masonry.min.js"></script>
+        <script type="text/javascript" src="/default/js/imagesloaded.pkgd.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/style.css" ><script type="text/javascript" charset="utf-8" src="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/js/page_context.js"></script><style type="text/css">.crossrider-nofity-34345-body-theme-white-black a,
+
+    /*----------new--------*/
+    .button_yellow{
+		background:#f2b33d;
+		border-radius:5px;
+		padding:8px 10px;
+		color:#333;
+		border:none;
+		font-weight: bold;
+	}
+	.button_yellow:hover{
+		color:#f2b33d;
+		background:#333;
+		cursor:pointer;
+	}
+	.inputText_popup {
+		border: 1px solid #ccc;
+		padding: 8px 1%;
+		margin: 15px 0 0 15px;
+		width:92%;
+	}
+	.wrapper_popup{
+		width:400px;
+		margin:0 auto;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.44);
+	}
+    .heading_popup{
+		border-bottom: 1px solid #e7e7e7;
+		color: #333333;
+		font-size: 12px;
+		margin: 0;
+		min-height: 20px;
+		padding: 17px 18px 13px 18px;
+	}
+	.rmng_popup{
+		border-bottom: 1px solid #e7e7e7;
+		color: #333333;
+		font-size: 14px;
+		margin: 0;
+		min-height: 20px;
+		padding: 0px 0px 13px 0px;
+	}
+	.conts_popup{
+		height:215px;
+		overflow-y:auto;
+		overflow-x:hidden;
+	}
+	.heading_popup h1{
+		margin:0;
+	}
+	.formFooter {
+		background: #f0f0f0;
+		clear: both;
+		padding: 6px 15px;
+	}
+	.multi-imgs{
+		width:100%;
+		height:200px;
+		padding:0 15px;
+		margin:0;
+	}
+	.multi-imgs li{
+		list-style:none;
+		float:left;
+		margin-right:5px;
+		margin-top:5px;
+		border:1px solid #e7e7e7;
+	}
+	.multi-imgs li:last-child{
+		margin-right:0;
+	}
+        .pin_video{
+            height: 167px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        .pin_btn{
+            position: relative;
+            top:-12px !important;
+        }
+    </style></head>
+    <body screen_capture_injected="true" crossrider_data_store_temp="{}"><div>
+    
+    <div class="wrapper_popup">
+        <form name="initialform" id="initialform" method="post">
+        <div class="heading_popup">
+        	<h1>Pin It</h1>
+        </div> 
+        <div class="rmng_popup">
+            <select name="pin_type" id="pin_type" class="inputText_popup" style="border-bottom: 1px solid #e7e7e7;">
+                <option name="web_page" value="web_page">Web Page</option>
+                <option name="video" value="video">Video</option>
+                <option name="video" value="audio">Audio</option>
+                <option name="image" value="image">Images</option>
+            </select>
+        </div>  
+        
+<!--        <div class="rmng_popup">
+        	<div class="conts_popup">
+            	<img src="file:///D|/newtestdesigns/dealscreen.png" width="450" height="800">
+                
+                <object width="100%" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+                <embed class="scloud" height="100"
+                src="http://player.soundcloud.com/player.swf?url={{audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false&auto_play=false"
+                type="application/x-shockwave-flash" width="100%" wmode="transparent"/>
+                </object>
+                
+                <div class="youtubeClass" >
+                <img class="youtube" src="{{imagepathOriginal}}{{image_name.[0]}}" data-src="http://www.youtube.com/embed/{{video_id}}?wmode=transparent&autoplay=1" height="200" width="100%" border="0"/>
+                <iframe width="100%" height="200" src="" frameborder="0" style="display: none;"></iframe>
+                </div>
+                
+                <ul class="multi-imgs">
+                	<li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>
+                    <li><img src="file:///D|/newtestdesigns/dealscreen.png" width="80" height="100"></li>	
+                </ul>
+
+            </div>
+        </div>  -->
+            <div class="msg"></div>
+            <div class="errmsg"></div>
+<!--            <img src="./sharepinload_files/ajax-loader.gif" id="loading_web" style="margin-left: 20px; display: none;">-->
+             <img src="/default/images/ajax-loader.gif" id="loading_web" style="display:none; margin-left: 20px;"/>
+            <div id="sharepin_screenshot">
+
+                <img src="" id="webpage" width="250" height="250" >
+            </div>
+            <div class="cubet_share_image" style="display: none;">
+
+              
+            </div>
+            <div class="ytVideos cubet_share_video" style="display: none;"> 
+                   
+                
+                </div>
+            <div class="ytVideos cubet_share_audio" style="display: none;">
+				
+            </div>
+		
+        <div class="formFooter">
+			<input type="button" name="Pinit" class="sharepin common-share button_yellow" value="Pin It" style="display: inline-block;">
+        </div>    
+        </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <style type="text/css">
+.image-checkbox-container input[type="checkbox"]{
+    display: none;
+
+}
+
+.image-checkbox-container img{
+    border: 0;
+    margin: 4px;
+   max-width: 200px;
+}
+</style>
+
+
+<div class="crossrider-nofity-43628" index="0"></div><div class="crossrider-nofity-43628-top-left"></div><div class="crossrider-nofity-43628-top-right"></div><div class="crossrider-nofity-43628-bottom-left"></div><div class="crossrider-nofity-43628-bottom-right"></div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

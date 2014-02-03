@@ -1,0 +1,190 @@
+<div class="modal_pou_up">
+  <div class="add_pin_top_ab3 custom-model add_pin_top">
+  	<div class="modal-content">
+     	<div class="modal-header gap">
+        	<button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">x</button>
+      	</div>
+        
+        <!--  Head  -->
+      	<div class="add_pin">
+       		<div class="row">
+        		<div class="col-md-12">
+                	<div class="add_pin_web_site">
+                        <div id="pop_cont">  
+<h1 style="text-align: left">Repin</h1>
+
+<form id="repinform" name="repinform" method="post" action="/repin" >
+<!--  <p>&nbsp;</p>
+  <div style="margin-left:20px;">
+  <input type="radio" name="type" value="image" checked="checked"/>&nbsp; Image &nbsp;
+  <input type="radio" name="type" value="audio" />&nbsp; Audio &nbsp;
+  <input type="radio" name="type" value="video" />&nbsp; Video &nbsp;
+  </div>-->
+<input type="hidden" name="pin_id" value="{{pin_id}}"/>
+  <p>&nbsp;</p>
+  <div class="outr">
+  {{#ifCond pin.pin_type 'web_page'}}
+       <img style="text-align: center !important" src="{{imagepathSmall}}{{pin.image_name}}"/>
+    {{/ifCond}} 
+
+    {{#ifCond pin.pin_type 'video'}}
+     {{#ifCond pin.video_type 'youtube'}}
+     <div class="youtubeClass">
+        <img src="{{siteURL}}/default/images/youtube.png" border="0" class="youtube_play">
+        <img class="youtube" src="{{imagepathOriginal}}{{pin.image_name.[0]}}" data-src="http://www.youtube.com/embed/{{pin.video_id}}?wmode=transparent&autoplay=1" height="{{getVideoHeight}}" width="100%" border="0"/>
+                    <iframe width="100%" height="{{getVideoHeight}}" src="" frameborder="0" style="display: none;"></iframe>	
+     </div>
+                    {{/ifCond}}
+        {{#ifCond pin.video_type 'local_video'}}
+       
+        <video  id="pin_video_{{pin._id}}{{#if pin.currentTime}}_{{pin.currentTime}}{{/if}}"  height="{{getVideoHeight}}" class="video-js vjs-default-skin" controls
+            preload="auto"  width="100%" data-setup="{}">
+            <source src="{{videoPath}}{{pin.video_id}}"  type="{{pin.video_version}}" />
+        </video>
+        <script type="text/javascript">
+            
+                videojs("pin_video_{{pin._id}}{{#if pin.currentTime}}_{{pin.currentTime}}{{/if}}").ready(function() {});
+        </script>
+        {{/ifCond}}
+    {{/ifCond}}
+
+    {{#ifCond pin.pin_type 'image'}}
+        <img class="repn" src="{{imagepathSmall}}{{pin.tmb_image_name.[0]}}"> 
+    {{/ifCond}}  
+
+    {{#ifCond pin.pin_type 'url_image'}}
+      <div id="main" role="main">
+                                    <section class="slider">
+                                        <div id="slider" class="flexslider">
+                                            <ul class="slides">
+                                                {{#each pin.image_name}}
+                                                <li>
+                                                    <img src="{{imagepathOriginal}}{{this}}"> 
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                        {{#arrlenGtOne pin.tmb_image_name}}
+                                        <div id="carousel" class="flexslider thumb">
+                                            <ul class="slides">
+                                                {{#each pin.tmb_image_name}}
+                                                <li>
+                                                    <img src="{{imagepathSmall}}{{this}}" > 
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                        {{/arrlenGtOne}}
+                                    </section>
+                                    <aside>
+                                        <div id="view-html" class="code"></div>
+                                    </aside>
+                                </div>
+   
+        {{/ifCond}}  
+
+    {{#ifCond pin.pin_type 'audio'}}
+    <audio id="player_" src="{{audioPath}}{{pin.audio_file}}" type="audio/mp3" controls="controls" style="width:100%;"></audio>	
+    {{/ifCond}}  
+
+    {{#ifCond pin.pin_type 'webaudio'}}
+         <div class="carousel-inner" style="height:80px; margin-bottom: 10px;">
+    <div class="scloudDiv"> 
+<!--        <img src="{{siteURL}}/default/images/soundcloud.png" 
+             data-src="http://player.soundcloud.com/player.swf?url={{audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false&auto_play=true" 
+             height="80" width="100%" border="0" />-->
+        <object  width="100%" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+            <embed class="scloud" height="100"
+                   src="http://player.soundcloud.com/player.swf?url={{pin.audio_link}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false&auto_play=false" 
+                   type="application/x-shockwave-flash" width="100%" wmode="transparent"/>
+        </object>
+    </div>
+  </div>
+    {{/ifCond}}  
+  
+  </div>
+  <input type="hidden" id="oldboard_id" value="{{pin.board_id}}"/>
+    <select name="board_id" id="board_id"   class="required inputText">
+        <option value="" >Select Board</option>
+        {{#each boards}}
+         <option value="{{this._id}}" {{#ifCond pin.board_id this._id}} selected="selected" {{/ifCond}}>{{this.board_name}}</option>
+        {{/each}}
+    </select>
+    
+     <p>&nbsp;</p>
+    
+   
+    <textarea  name="description" id="description" placeholder="Description"  class="inputText required">{{pin.description}}</textarea>
+
+     <p>&nbsp;</p>
+    
+   <input class="btn flag dropdown-toggle nav_pin_icon" style="float: right; margin-right: 15px" type="submit" name="repin" id="upload_audio" value="PinIt" />
+
+</form>
+</div>
+                             <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<style type="text/css">
+    .FlagContent{
+        padding-left: 15px;
+    }
+    
+    .FlagContent h2{
+        padding-left: 10px;
+        color: #333;
+    }
+    .flag.nav_pin_icon {
+        background:#FBB53B;
+        
+    }
+    
+    .flag.nav_pin_icon:hover {
+        background:#333;
+            color:#FBB53B;
+    }
+</style>
+<script type="text/javascript">
+    $("#repinform").validate();  
+    
+    $(function() {
+        $("#board_id").val($("#oldboard_id").val());
+             $('audio').mediaelementplayer();    
+         $(".youtubeClass").unbind('click').bind('click', function() {
+        var vUrl = $(this).children('img.youtube').attr('data-src');       
+        $(this).children('iframe').attr('src', vUrl).show();
+        $(this).children('img').hide();
+    });
+    
+    $('#carousel').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 100,
+                itemMargin: 5,
+                asNavFor: '#slider'
+            });
+    
+    
+    
+    $('#slider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+    
+    });
+ 
+</script>

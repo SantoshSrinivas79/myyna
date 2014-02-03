@@ -1,0 +1,42 @@
+{{#each data}} 
+    {{#ifCond pin_type 'image'}}
+        <li>
+            <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm"> 
+                <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}"  >
+            </a> 
+        </li>
+    {{/ifCond}}
+    {{#ifCond pin_type 'url_image'}}
+        <li>
+            <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm"> 
+                <img src="{{imagepathSmall}}{{tmb_image_name.[0]}}"  >
+            </a> 
+        </li>
+    {{/ifCond}}
+    {{#ifCond pin_type 'web_page'}}
+        <li>
+            <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm"> 
+                <img src="{{imagepathSmall}}{{image_name}}"  >
+            </a> 
+        </li>
+    {{/ifCond}}
+    {{#ifCond pin_type 'webaudio'}}
+        <li>
+            <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm"> 
+                <img src="/default/images/soundcloud.jpg"  >
+            </a> 
+        </li>
+    {{/ifCond}}
+    {{#ifCond pin_type 'video'}}
+    <li>
+    <a href="/pin/{{_id}}" {{#ifCond popStatus '1'}} data-extend="1" data-toggle="modal" data-target="#myModal" {{/ifCond}} class="brd_itm"> 
+      {{#ifCond video_type 'youtube'}}
+      <img src="/pins/images/{{image_name.[0]}}"  >
+      {{/ifCond}}
+      {{#ifCond video_type 'local_video'}} 
+      <img src="/pins/videos/thumb/{{thumb}}"  >
+      {{/ifCond}}  
+    </a> 
+    </li>
+    {{/ifCond}}
+{{/each}}

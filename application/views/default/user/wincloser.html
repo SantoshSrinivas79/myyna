@@ -1,0 +1,16 @@
+<script type="text/javascript">
+   
+    window.opener.localStorage.setItem('cubet_user_id', '{{user_id}}');
+    
+    if( window.localStorage.getItem('cubetSharepinId'))
+    {
+        var id = window.localStorage.getItem('cubetSharepinId');
+        window.localStorage.removeItem('cubetSharepinId');
+        window.opener.location.href = "/loadPins/"+ id;  
+    }
+    else{
+        window.opener.location.href = '/login';
+    }
+    window.close();
+</script>
+

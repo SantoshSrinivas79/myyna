@@ -1,0 +1,15 @@
+{
+  "css": [
+      "profile_setting"
+],
+   
+    "js": [
+        "jquery-1.8.2.min",
+        "video",
+        "pincreation",
+        "pinShare",
+        "jquery-validation",
+        "showplayer"
+        
+    ]
+}

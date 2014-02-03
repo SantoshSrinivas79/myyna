@@ -1,0 +1,100 @@
+
+                 
+         <div class="rmng_popup">
+        	<div class="conts_popup">
+            	
+                
+                <ul class="multi-imgs">
+                    {{#if home}}
+                        {{#each home}}
+                        
+                        <li class="elem hiddenElem">
+                                <span class="image-checkbox-container">
+                                    <input type="checkbox" name="img_chkbox" class="img_chkbox" id="c{{@index}}" value="{{this}}"/>
+                                    <img src="{{this}}"  />
+                                </span>
+                        </li>
+                        
+                        {{/each}}
+                    {{else}}
+                        No images found.
+                    {{/if}}
+                </ul>
+
+            </div>
+        </div> 
+          
+<style type="text/css">
+.image-checkbox-container input[type="checkbox"]{
+    display: none;
+
+}
+
+.image-checkbox-container img{
+    border: 0;
+    margin: 4px;
+   max-width: 200px;
+}
+
+.hiddenElem {
+    visibility: hidden;
+}
+</style>
+<script>
+
+var mOpts = {
+                itemSelector : '.elem',
+                isFitWidth: true,
+                isResizable: true,
+                gutterWidth: 15,
+                isAnimated: false,
+                animationOptions: {
+                    duration: 300,
+                    easing: 'linear',
+                    queue: false
+                }
+            }
+
+$('.multi-imgs').masonry(mOpts);
+$('.image-checkbox-container img').on('click', function(){
+    if(!$(this).prev('input[type="checkbox"]').prop('checked')){
+        $(this).prev('input[type="checkbox"]').prop('checked', true).attr('checked','checked');
+        this.style.border = '4px solid #38A';
+        this.style.margin = '4px';
+    }else{
+        $(this).prev('input[type="checkbox"]').prop('checked', false).removeAttr('checked');
+        this.style.border = '0';
+        this.style.margin = '4px';
+    }
+});
+
+//remove images of width < 200 px
+//alert($('.image-checkbox-container').width());
+ //$(function(){
+      $('.image-checkbox-container img').load(function(){
+          
+        // alert($(this.id));
+           $('#loading_web').show();
+           var w =  $(this).width();
+          // alert(w);
+           if(w < 200){
+               $(this).parents('li').remove();
+               $('.multi-imgs').masonry('reload');
+           } else {
+               
+               $(this).parents('li').removeClass('hiddenElem');
+               $(this).css('width', '120px');
+               $('.multi-imgs').masonry('reload');
+           }
+       }).error(function(){
+           $(this).parents('li').remove();
+       });
+       
+       if ($(".multi-imgs").length !== 0) {
+            imagesLoaded( document.querySelector('.multi-imgs'), function( instance ) {
+                $('.multi-imgs').masonry('reload');
+                $('#loading_web').hide();
+            });
+        }
+
+</script>

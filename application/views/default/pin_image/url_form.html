@@ -1,0 +1,35 @@
+<h1>Pin image from website</h1>
+
+    <p>&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Pin From : &nbsp;
+    <input type="radio" name="sub" value="local"/>&nbsp; Local &nbsp;
+    <input type="radio" name="sub" value="web" checked/>&nbsp; Web &nbsp;
+    <p>&nbsp;</p> 
+
+ <!-- messages here -->    
+<div class="msg"></div>
+<div class="errmsg"></div>
+<form id="imgUploadFromURL"> 
+<input type="text" name="urltitle" id="urltitle" class="inputText" placeholder="Website" required />
+<img src="/default/images/ajax-loader.gif" id="loading1" style="display:none; float: right;"/>
+</form>
+
+<script>
+$(function(){
+    $("input[type=radio][name=sub]").unbind('click').bind('click',function(){
+        var sub = $("input[type=radio][name=sub]:checked").val();
+            if(sub=='local'){//alert(1);
+                $("#image_dv").load('/image_upload',function(){
+                    $('#get_img').html('Upload');
+                    $('#get_img').unbind('click').bind('click',function(){
+                       $("#uploadFromComputer").validate();
+                       
+                       $('#uploadFromComputer').submit(); 
+                    });
+                });
+            }
+    });
+});
+
+</script>

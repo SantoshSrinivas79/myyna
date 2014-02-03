@@ -1,0 +1,89 @@
+<div id="log_in_container" class="log_in_container">
+  <div class="error_message" {{#if msg}} style="display:block"{{/if}}>{{#if msg}} {{msg}} {{/if}}</div>
+  
+    <header>
+        <div class="row">
+            
+            <div class="col-xs-4 col-xs-offset-3">
+                <a href="/pins">  <img src="/site-logo.png"></a></div>
+            <div class="col-xs-4 form">
+
+                <form name="loginform" id="loginform" method="post" action="/logincheck"> 
+                    <input name="username" id="loginusername" type="text" placeholder="User Name" tabindex="0" class="loginInput" required />
+                    <input name="userpass" id="loginpass" type="password" placeholder="Password" tabindex="0" class="loginInput" required />
+                    <button class="btn btn-default submit" type="button" id="loginButton" tabindex="0"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                </form>
+                <input type="hidden" name="referer_url" id="referer_url"/>
+
+
+            </div>
+            <div class="col-md-1 social">
+                 {{#loginbtn 'FB_LOGIN'}}<a href="#"  class="socialSignUps"  data-link="/socialsignup" tabindex="0"><span class="fb"></span></a> {{/loginbtn}}
+                {{#loginbtn 'TW_LOGIN'}}<a href="#"  class="socialSignUps"  data-link="/twittersignup" tabindex="0"><span class="tw"></span></a> {{/loginbtn}}
+            </div>
+        </div>
+    </header>
+
+
+    <div class="bb-custom-wrapper">
+        <div id="bb-bookblock" class="bb-bookblock">
+            {{#if result}}
+            {{#each result}}
+            <div class="bb-item" id="item{{@index}}">
+                <div class="content">
+                    {{#ifCond @index 0}}
+                    <div class="scrollert" id="nothing">
+                    {{/ifCond}}    
+                        <img src="{{siteURL}}/loginpage/{{bgimage}}" class="image1">
+                        <div class="row image ipad">
+                            <div class="col-sm-3 col-xs-offset-1">
+                                <div class="pin1"><img src="/default/images/login/pin_1.png" ></div>
+                            </div>
+                            <!--    <div class="col-sm-4 image1_quote">-->
+                            {{{title}}}
+                            <!--    </div>-->
+                            <div class="col-sm-3 col-xs-offset-1">
+                                <div class="pin2"><img src="/default/images/login/pin_2.png" ></div>
+                            </div>
+                        </div>
+                    {{#ifCond @index 0}}    
+                    </div>
+                    {{/ifCond}}
+                </div>
+            </div>
+            {{/each}}    
+            {{else}}
+            Sorry no items available.
+            {{/if}}    
+
+        </div>
+
+        <nav>
+            <span id="bb-nav-prev">&larr;</span>
+            <span id="bb-nav-next">&rarr;</span>
+        </nav>
+
+    </div>
+    <footer>
+
+        <h1><strong><a href="#" data-toggle="modal" data-target="#myModal">Sign up</a></strong> {{#logbuttonCheck 'FB_LOGIN' 'TW_LOGIN'}} with {{/logbuttonCheck}}</h1>
+        {{#loginbtn 'FB_LOGIN'}}       
+        <a href="#" class="socialSignUps" data-link="/socialsignup">
+            <span class="fb"></span>
+        </a>
+        {{/loginbtn}}
+
+        {{#loginbtn 'TW_LOGIN'}}
+        <a href="#" class="socialSignUps"  data-link="/twittersignup">
+            <span class="tw"></span>
+        </a>
+        {{/loginbtn}}
+
+        <h2><a href="#" data-toggle="modal" data-target="#Forgot">Forgot password</a></h2>
+    </footer>
+</div><!-- /container -->
+
+{{> signupform this}}
+
+{{> forgotform this}}
+

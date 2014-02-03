@@ -1,0 +1,87 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>Social Sign-up Settings</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="box-content">
+                        <form action="/admin/update-social-settings" method="post" class='validate form-horizontal' >
+                            <div class="control-group fblogins">
+                                <label for="FB_LOGIN" class="control-label">Facebook login</label>
+                                <div class="controls">
+                                    <select name="FB_LOGIN" id="layout" >
+                                        <option value="true" {{#ifCond data.FB_LOGIN 'true'}}selected{{/ifCond}}>Enabled</option>
+                                        <option value="false" {{#ifCond data.FB_LOGIN 'false'}}selected{{/ifCond}}>Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group fblogins">
+                                <label for="FB_APP_ID" class="control-label">Facebook APP ID</label>
+                                <div class="controls">
+                                    <input {{#ifCond data.FB_LOGIN 'false'}}disabled{{/ifCond}} type="text" name="FB_APP_ID" id="FB_APP_ID" value="{{#if data.FB_APP_ID}}{{data.FB_APP_ID}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group fblogins">
+                                <label for="FB_APP_SECRET" class="control-label">Facebook Secret</label>
+                                <div class="controls">
+                                    <input {{#ifCond data.FB_LOGIN 'false'}}disabled{{/ifCond}} type="text" name="FB_APP_SECRET" id="FB_APP_SECRET" value="{{#if data.FB_APP_SECRET}}{{data.FB_APP_SECRET}}{{/if}}">
+                                </div>
+                            </div>
+                            
+                            <div class="control-group twlogins">
+                                <label for="TW_LOGIN" class="control-label" >Twitter login</label>
+                                <div class="controls">
+                                    <select name="TW_LOGIN" id="layout">
+                                        <option value=true {{#ifCond data.TW_LOGIN 'true'}}selected{{/ifCond}}>Enabled</option>
+                                        <option value=false {{#ifCond data.TW_LOGIN 'false'}}selected{{/ifCond}}>Disabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group twlogins">
+                                <label for="TW_CONS_KEY" class="control-label">Twitter Consumer key</label>
+                                <div class="controls">
+                                    <input {{#ifCond data.TW_LOGIN 'false'}}disabled{{/ifCond}} type="text" name="TW_CONS_KEY" id="TW_CONS_KEY" value="{{#if data.TW_CONS_KEY}}{{data.TW_CONS_KEY}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group twlogins">
+                                <label for="TW_CONS_SECRET" class="control-label">Twitter Secret</label>
+                                <div class="controls">
+                                    <input {{#ifCond data.TW_LOGIN 'false'}}disabled{{/ifCond}} type="text" name="TW_CONS_SECRET" id="TW_CONS_SECRET" value="{{#if data.TW_CONS_SECRET}}{{data.TW_CONS_SECRET}}{{/if}}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <input type="submit" class='btn btn-primary addAdminBtn' value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.fblogins select').change(function(){
+        if($(this).find(':selected').val() == 'false'){
+            $('.fblogins input').prop('disabled', 'disabled');
+        } else {
+            $('.fblogins input').prop('disabled', false);
+        }
+    });
+    $('.twlogins select').change(function(){
+       if($(this).find(':selected').val() == 'false'){
+            $('.twlogins input').prop('disabled', 'disabled');
+        } else {
+            $('.twlogins input').prop('disabled', false);
+        }
+    });
+</script>

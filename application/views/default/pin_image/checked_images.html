@@ -1,0 +1,84 @@
+<!--<div class="modal_pou_up add_pin_top_ab">-->
+  <div class="modal-dialog custom-model add_pin_top_ab">
+  	 <div class="modal-content">
+     	<div class="modal-header">
+        	<button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">&times;</button>
+      	</div>
+        
+        <div class="add_pin">
+       		<div class="row">
+        		<div class="col-md-12">
+                	<div class="add_pin_select_pin">
+                   <div class="padding">      
+                       
+                   <h1>Pin it</h1>
+   	
+                        <form name="pin_form" method="post" action="/pin_action">
+                            <input type="hidden" name="full_url" value="{{full_url}}" />   
+                          <div class="btn-group nav_pin_image">
+                            <select name="board_id" id="board_id" class="inputText">
+                            <option value="" selected="selected">Select Board</option>
+                            {{#each boards}}
+                            <option value="{{this._id}}">{{this.board_name}}</option>
+                            {{/each}}
+                            </select>     
+			  </div>
+                        
+                      <div class="padding">
+                       {{#each checkedbox}}
+                        <div class="list">
+                            <input type="hidden" name="urls[]" value="{{this}}" />
+                            <div class="list_image">
+                                <img src="{{this}}" border="0" class="imglist"/>
+                            </div>
+                        </div>
+                       {{/each}}   
+                       <textarea name="description" id="description" class="coment" cols="" rows="" required placeholder="Descriptions goes here"></textarea>
+                       
+                        <input class="pin_it"  name="pin_sub" id="pin_sub" type="Submit" value="Pin">
+                        <button id="cancel" class="pin_it">Cancel</button> 
+                     <div class="clear"></div>
+                      </div>
+                   </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+                 
+        
+        
+     </div>
+  </div>
+<!--</div>-->
+
+<script>
+$(function(){
+    $("#pin_sub").click(function(){
+        if( $("#board_id").val()==''){
+            $("#board_id").css({'border':'1px solid red'});
+            return false;
+        } else {
+            $("#board_id").css({'border':'none'});
+        }
+        if($("#upload").val()==''){
+            $("#upload").css({'border':'1px solid red'});
+            return false;
+        } else {
+            $("#upload").css({'border':'none'});
+        }
+        if($("#description").val()=='') {
+            $("#description").css({'border':'1px solid red'});
+            return false;
+        } else {
+            $("#description").css({'border':'none'});
+        }
+    });
+    $('#cancel').click(function() {
+        $("#myModal2").load('/addpin');
+        return false;
+    });
+    
+});    
+</script>

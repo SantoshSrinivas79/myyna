@@ -1,0 +1,64 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>General Settings</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="box-content">
+                        <form action="/admin/update-general-settings" method="post" class='validate form-horizontal' enctype="multipart/form-data">
+                            <div class="control-group">
+                                <label for="req" class="control-label">Title</label>
+                                <div class="controls">
+                                    <input type="text" name="title" id="title" class='required' value="{{#if data.title}}{{data.title}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="meta-desc" class="control-label">Meta Description</label>
+                                <div class="controls">
+                                    <textarea name="meta_desc" id="meta_desc">{{data.meta_desc}}</textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="meta-keys" class="control-label">Meta Keywords</label>
+                                <div class="controls">
+                                    <textarea name="meta_keys" id="meta_keys">{{data.meta_keys}}</textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="logo" class="control-label">Site Logo</label>
+                                <div class="controls">
+                                    <input type="file" name="logo" id="logo" >
+                                    366 x 50 prefered
+                                    <br><br>
+                                    <img src="{{data.logo}}" width="200"/>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="layout" class="control-label">Site Layout</label>
+                                <div class="controls">
+                                    <select name="layout" id="layout">
+                                        <option value="fixed" {{#ifCond data.layout 'fixed'}}selected{{/ifCond}}>Fixed</option>
+                                        <option value="liquid" {{#ifCond data.layout 'liquid'}}selected{{/ifCond}}>Liquid</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="sid" value="{{data._id}}">
+                            <div class="form-actions">
+                                <input type="submit" class='btn btn-primary addAdminBtn' value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

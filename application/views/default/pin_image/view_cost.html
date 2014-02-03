@@ -1,0 +1,26 @@
+<a href="/add_cost">Add Cost</a>
+
+<br /><br />
+
+<table border="0" cellpadding="7" cellspacing="2" width="50%">
+    <tr style="font-weight: bold;">
+        <td>Cost</td>
+<!--        <td>Edit</td>-->
+        <td>Delete</td>
+    </tr>
+    {{#each cost}}
+    <tr>
+        <td>{{this.cost}}</td>
+<!--        <td><a href="#" class="b_edit">Edit</a></td>-->
+        <td><a href="/delete_cost/{{this._id}}" id="b_delete" onclick="return confirm('Are you sure?');">Delete</a></td>
+    </tr>
+    {{/each}}
+    
+</table>
+
+
+<div id="update_form_div">
+    
+
+    
+</div>

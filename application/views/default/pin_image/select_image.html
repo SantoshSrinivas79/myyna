@@ -1,0 +1,86 @@
+
+<div id="select_form" style="width:96%; max-height: 300px; margin:0 0 20px 3%; overflow-y: auto;overflow-x: hidden;">
+    <input type="hidden" name="full_url" id="full_url" value="{{full_url}}" />
+    <div class="select_form_msnry" style="min-height:20px;">
+        {{#each home}}
+        <span class="image-checkbox-container">
+            <input type="checkbox" name="img_chkbox" class="img_chkbox" id="c{{@index}}" value="{{this}}" />
+            <img src="{{this}}" border="0" />
+        </span>
+        {{else}}
+        No images found.
+        {{/each}}
+    </div>
+    <img src="/default/images/ajax-loader.gif" id="loading_img" style="display:none;"/>
+
+
+</div>
+
+<!--<input type="submit" value="Select" name="sel_img" id="sel_img2" class="pin_it"/>    -->
+<!--<button id="back" class="pin_it">Back</button>-->
+
+<!--<a  href="pin_it.html" data-toggle="modal" class="pin_it" data-target="#myModal"><input name="" class="pin_it" type="button" value="Pin it"> </a>-->
+<div class="clear"></div>
+
+
+
+<script>
+    $(function(){
+        // adding masonry to select_form_msnry class
+        var mOptsPop = {
+            itemSelector : '.image-checkbox-container',
+            isFitWidth: true,
+            isResizable: true,
+            //gutterWidth: 15,
+            isAnimated: false,
+            animationOptions: {
+                duration: 300,
+                easing: 'linear',
+                queue: false
+            }
+        }
+        //$(".select_form_msnry").hide();
+        $('.select_form_msnry').masonry(mOptsPop);
+        $("#loading_img").show();
+        //remove images of width < 200 px
+        $('#select_form img').load(function(){
+            var w =  $(this).width();
+            if(w < 200){
+                $(this).parent('span.image-checkbox-container').remove();
+            }
+            $('.select_form_msnry').masonry('reload');
+        });
+        $('#select_form img').on('error',function(){
+            $(this).parent('span.image-checkbox-container').remove();
+            $('.select_form_msnry').masonry('reload');
+        });
+        imagesLoaded(document.querySelector('.select_form_msnry'), function( instance ) {
+            $("#loading_img").hide();
+            $(".select_form_msnry").show();
+            $('.select_form_msnry').masonry('reload');
+            if($('.image-checkbox-container img').length==0){
+                $(".select_form_msnry").text('No images found.');
+            }
+            //alert($('.image-checkbox-container img').length);
+        });
+    });
+
+    /*if(location.search)
+   alert(location.search);
+     */
+    $('.image-checkbox-container img').on('click', function(){
+        //alert(3);
+        if(!$(this).prev('input[type="checkbox"]').prop('checked')){
+            $(this).prev('input[type="checkbox"]').prop('checked', true).attr('checked','checked');
+            this.style.border = '4px solid #38A';
+            this.style.margin = '4px';
+        }else{
+            $(this).prev('input[type="checkbox"]').prop('checked', false).removeAttr('checked');
+            this.style.border = '0';
+            this.style.margin = '4px';
+        }
+    });
+</script>
+
+
+

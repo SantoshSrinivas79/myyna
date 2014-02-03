@@ -1,0 +1,36 @@
+<!--<form name="userform" id="userform" method="post" enctype="multipart/form-data" action="/twitteruser">  
+
+    UserEmail : <input type="text" name="useremail" value="" required/>
+
+  <input type="submit" name="submit" value="Submit"/>
+</form>-->
+
+
+<div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="Forgot" class="modal fade in" style="display: block;">
+<div class="modal-dialog login">
+<div class="modal-content">
+<form name="userform" id="userform" method="post" enctype="multipart/form-data" action="/twitteruser"> 
+    <div class="modal-header">
+    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+    <h4 id="myModalLabel">Enter Email</h4>
+    </div>
+    <div class="modal-body signup">
+    <div class="row">
+    <div class="col-sm-8 col-xs-offset-2">
+    <div class="search-new">
+    <!-- messages here -->    
+    <div id="message"></div>
+   
+    <input type="text" required="" placeholder="E-mail" class="form-control sign_up" name="useremail">
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn submit" name="submit" value="Submit"/>
+    </div>
+</form>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div>
+   

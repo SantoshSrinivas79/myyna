@@ -1,0 +1,64 @@
+<!-- signup pop up -->
+<div class="modal fade" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog login">
+
+        <form name="signupform" id="signupform" method="post" action="/usersignup">      
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 id="myModalLabel">Sign Up</h4>
+                </div>
+                <div class="modal-body signup">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <!--<div class="search-new form-error_msg">
+                            ljljljl
+                            </div>-->
+                            <!-- messages here -->  
+                            <div class="msg"></div>
+                            
+                            <div class="search-new">
+                                <input type="text" name="name" id="signupname" tabindex="6" class="form-control sign_up" placeholder="Name" required />
+                            </div>
+                            <!--<div class="search-new form-error_msg">
+                            ljljljl
+                            </div>-->
+                            
+                            
+                            <div class="search-new">
+
+                                <input type="text" name="email" id="signup_email" tabindex="7" class="form-control sign_up" placeholder="E-mail Address"  required/>
+                                <div id="email_valid" style="color:red">Already Registered Email</div>
+                            </div>
+                            <div class="search-new">
+                                <input type="text" name="username" id="signup_username" tabindex="8" class="form-control sign_up" placeholder="Username" required />
+                                <div id="user_valid" style="color:red">User name not available</div>
+                            </div>
+                            <div class="input-group search-new">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default cursor"><span class="glyphicon glyphicon-lock"></span></button>
+                                </span>
+                                <input type="password" tabindex="9" name="userpass" id="userpass" class="form-control" placeholder="Password" required />
+                            </div>
+                            <div class="input-group search-new">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default cursor"><span class="glyphicon glyphicon-lock"></span></button>
+                                </span>
+                                <input type="password" tabindex="10" name="cuserpass" class="form-control" placeholder="Confirm Password" required equalTo="#userpass"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="signupButton" tabindex="11" class="btn submit" >Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+
+        </form> 
+
+
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- end signup pop up -->

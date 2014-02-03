@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="/default/css/ie8-and-down.css" />
+<![endif]-->
+<html class="no-js">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{getDefine 'site_title'}}</title>
+
+        <meta property="og:type" content="og:product" />
+        <meta property="og:title" content="CubetboardV2" />
+        {{#if ogImage}}<meta property="og:image"                  content="{{ogImage}}" />{{/if}}
+        {{#if ogDesc}}<meta property="og:description"            content="{{ogDesc}}" />{{/if}}
+        {{#if ogLink}}<meta property="og:url"                    content="{{ogLink}}" />{{/if}}
+
+        <meta name="description" content="{{getDefine 'meta_desc'}}">
+        <meta name="keywords" content="{{getDefine 'meta_keys'}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!--[if lt IE 9]>
+               <link rel="stylesheet" type="text/css" href="/default/css/ie8-and-down.css" />
+        <![endif]-->
+        <!--<link rel="stylesheet" href="/mplayer/css/style1.css" media="screen" />-->
+        {{> getSleekScripts}}
+        <link rel="stylesheet" href="/default/css/loader.css" />
+        <link rel="stylesheet" href="/default/css/fontello.css" />
+        <script type="text/javascript" src="/default/js/jquery.masonry.min.js"></script>	
+        <script src="/default/js/jquery.nicescroll.min.js"></script>
+        <script src="/default/js/jquery-validation.js"></script>
+
+        <script>
+            videojs.options.flash.swf = "/default/js/video-js.swf"
+        </script>
+        <script type="text/javascript" src="/default/js/imagesloaded.pkgd.min.js"></script>	
+    </head>
+    <body>
+        {{{body}}}
+        <div class="loader">
+            <div class="demo-3 demo-dark">
+                <ul class="bokeh">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </body>	
+
+    <script type="text/javascript">  
+        $(document).ready(function(){
+            modalInit();
+
+            $('audio').mediaelementplayer();    
+
+            var mOpts = {
+                itemSelector : '.element',
+                isFitWidth: true,
+                isResizable: true,
+                gutterWidth: 15,
+                isAnimated: false,
+                animationOptions: {
+                    duration: 300,
+                    easing: 'linear',
+                    queue: false
+                }
+            }
+            
+            {{#ifCond siteLayout 'fixed'}}
+                mOpts['columnWidth'] = 300; 
+            {{/ifCond}}
+
+            $('#container').masonry(mOpts);
+            
+            if ($("#container").length !== 0) {
+                imagesLoaded( document.querySelector('#container'), function( instance ) {
+                    $('#container').masonry('reload');
+                });
+            }
+            if ($("#pop_up_container").length !== 0) {
+                popup_functions();
+            }
+            var tempScrollTop;
+ 
+            $('#myModal').on('show.bs.modal', function (e) {
+                $('.loader').show();
+                tempScrollTop = $(window).scrollTop();
+                $('html').addClass('modal-open');
+                var url =  window.localStorage.getItem('cbt_parenturl') ; 
+                if(typeof(url)=='undefined' || url==null) {
+                    url = document.URL;
+                }
+                expression =/.*\/(?!$)/;
+                var str = expression.exec($(e.relatedTarget).attr('href'));
+                window.localStorage.setItem('cbt_parenturl', url);
+                window.history.pushState({},"", str);
+                popup_functions();
+            });
+
+            $('#myModal').on('hide.bs.modal', function () {
+                $('html').removeClass('modal-open');
+                $(window).scrollTop(tempScrollTop);
+                url =  window.localStorage.getItem('cbt_parenturl') ; 
+                window.history.pushState({},"", url); 
+                window.localStorage.removeItem('cbt_parenturl');
+            });
+            
+            if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $('body').niceScroll({
+                    zindex: 1030,
+                    horizrailenabled:false
+                });
+                $('.nav_scoll').niceScroll();
+                $('.dropdown-menu.cubet_comment_sub').niceScroll();
+            }
+            
+            if ($("#board_container").length !== 0) {
+                $('#board_container .row:first').hide().css('visibility', 'visible');
+
+                $(window).scroll(function(){
+                    var top = 280;
+
+                    if ( $(window).width() < 480 ) {
+                        top = 600;
+                    }
+
+                    var mtop = '480px';
+                    if($(this).scrollTop() > top) {
+                        $('#board_container .row:last').css('visibility', 'hidden');
+                        $('#board_container .row:first').slideDown();
+
+                    }  else {
+                        // $('#container').css('margin-top', '0px');
+                        $('#board_container .row:first').hide();
+                        $('#board_container .row:last').css('visibility', 'visible');
+                    }
+                });
+            }
+        });
+
+        
+
+        $(window).load(function(){
+            $('.dropdown-toggle').dropdown();
+            $('#carousel').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 100,
+                itemMargin: 5,
+                asNavFor: '#slider'
+            });
+
+            $('#slider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+
+        });
+
+        function modalInit(){
+            $('body').on('click', '*[data-toggle="modal"]',function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                var id = $(this).attr('data-target');
+                var link = $(this).attr('href');
+                //to handle popups
+                if($(this).attr('data-extend')){
+                    link += '/'+ $(this).attr('data-extend');
+                }
+                
+                $(id).modal('show')
+                $(id).load(link);
+                
+
+                if(id == '#myModal') {
+                    var url =  window.localStorage.getItem('cbt_parenturl') ; 
+                    if(typeof(url)=='undefined' || url==null) {
+                        url = document.URL;
+                    }
+                    expression =/.*\/(?!$)/;
+                    var str = expression.exec(link);
+                    window.localStorage.setItem('cbt_parenturl', url);
+                    window.history.pushState({},"", str);
+                }
+            });
+        }
+        
+        function popup_functions() {
+            var next_scroll = true
+            var scr = $("#myModal");
+
+            if($("#container").length == 0)
+            {
+                var scr = $(document) ;
+            }  
+            scr.scroll(function() {
+                var wintop    = scr.scrollTop(), 
+                docheight = $(document).height(), 
+                winheight = $('#pop_up_container').height();
+        
+                if ( (wintop + $(".modal_pou_up .row").height()) + parseInt(1000) > winheight ) {
+
+                    if (next_scroll) {
+                        // alert(2);
+                        next_scroll = false;
+                        //$('div#loadmoreajaxloader').show();
+                        var start = $('#endlimit2').val();
+                        var end = parseInt(start) + parseInt(6);
+                        $('#endlimit2').val(end);
+                        //alert($("#cur_pin_id").val());
+
+                        $.ajax({
+                            url: "/upin_nxtpg",
+                            data: {
+                                "startlimit": start,
+                                "endlimit"  : "3",
+                                //"user_id"   : $("#user_id").val(),
+                                "cur_pin_id": $("#cur_pin_id").val(),
+                                "popup"     : $("#popup").val()
+                            },
+                            type: 'post',
+                            success: function(html)
+                            {
+                                //alert(html);
+                                if (html){
+                                    var mOptsPop = {
+                                        itemSelector : '.element',
+                                        isFitWidth: true,
+                                        isResizable: true,
+                                        gutterWidth: 15,
+                                        isAnimated: false,
+                                        animationOptions: {
+                                            duration: 300,
+                                            easing: 'linear',
+                                            queue: false
+                                        }
+                                    };
+                                    
+                                    {{#ifCond siteLayout 'fixed'}}
+                                        mOptsPop['columnWidth'] = 300; 
+                                     {{/ifCond}}
+                                    
+                                    $("#pop_up_container").masonry(mOptsPop);
+                                    $("#pop_up_container").append(html);
+                                    
+                                    $('audio').mediaelementplayer();
+                                    $(".youtubeClass").unbind('click').bind('click',function(){
+                                        //alert(2);
+                                        var vUrl = $(this).children('img.youtube').attr('data-src');        
+                                        $(this).children('iframe').attr('src', vUrl).show();
+                                        $(this).children('img').hide();
+                                    });
+                                    
+                                    imagesLoaded(document.querySelector('#pop_up_container'), function( instance ) {
+                                        $('#pop_up_container').masonry('reload');
+                                        next_scroll = true;
+                                    });
+                                    //$('div#loadmoreajaxloader').hide();
+
+                            
+                                } else {
+                                    //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                                }
+                            },
+                            error: function(jqxhr, status, error) {
+                                //                            alert('e' + error);
+                                //$('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
+                            }
+                        });
+                    }
+                }
+            });
+                        
+            $('#carousel').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                itemWidth: 210,
+                itemMargin: 5,
+                asNavFor: '#slider'
+            });
+            $('#slider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                animationLoop: false,
+                slideshow: false,
+                sync: "#carousel",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+            
+            $(".youtubeClass").unbind('click').bind('click',function(){
+                //alert(2);
+                var vUrl = $(this).children('img.youtube').attr('data-src');        
+                $(this).children('iframe').attr('src', vUrl).show();
+                $(this).children('img').hide();
+            });
+
+            setTimeout(function(){
+                
+                $('#myModal').niceScroll();
+                
+                imagesLoaded(document.querySelector('.boardMasonry'), function( instance ) {
+                    $('.boardMasonry').masonry('reload');
+                });   
+                if($('.domainContainer').length > 0) {
+                    imagesLoaded(document.querySelector('.domainContainer'), function( instance ) {
+                        $('.domainContainer').masonry('reload');
+                    });
+                }
+                                    
+                $('.sharegr').hover(function() {
+                    $('.share_popup').hide();
+                    $('.popup_share').show();
+                }, function() {
+                    $('.popup_share').hide();
+                    $('.share_popup').show();
+                });
+                
+                $('.overflw_sectn').niceScroll({
+                    horizrailenabled: false
+                });
+            },500);
+            $('.loader').hide();
+        }
+        
+    </script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/default/js/socket_p1.js"></script>	
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="/default/js/jquery.placeholder.js"></script>	
+    <![endif]-->
+</html>

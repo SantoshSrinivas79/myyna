@@ -1,0 +1,25 @@
+{
+    "css": [
+        "bootstrap",
+        "bootstrap-theme",
+        "stylesheet",
+        "flexslider",
+        "style",
+        "main",
+        "video-js",
+        "boaard",
+        "mediaelementplayer.min",
+        "profile_setting",
+        "add_pin"
+    ],
+    "js": [
+        "jquery-1.8.2.min",
+        "vendor/modernizr-2.6.2.min",
+        "bootstrap.min",
+        "jquery.flexslider",
+        "plugins",
+        "video",
+        "pincreation",
+        "mediaelement-and-player.min"
+    ]
+}

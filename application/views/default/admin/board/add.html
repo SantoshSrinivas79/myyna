@@ -1,0 +1,72 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-head tabs">
+                {{#ifCond edit 1}}
+                <h3>Edit Board</h3>
+                {{else}}
+                <h3>Add New Board</h3>
+                {{/ifCond}}
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="box-content">
+                        <form action="/admin/addboardpost" method="post" class='validate form-horizontal' enctype="multipart/form-data">
+                            <div class="control-group">
+                                <label for="name" class="control-label">Board Name</label>
+                                <div class="controls">
+                                    <input type="text" name="name" id="name" class='required' value="{{#if values.board_name}}{{values.board_name}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="desc" class="control-label">About Board</label>
+                                <div class="controls">
+                                    <textarea name="desc" id="desc" >{{#if values.description}}{{values.description}}{{/if}}</textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="image" class="control-label">Board Image</label>
+                                <div class="controls">
+                                    <input type="file" name="image" id="image" class='' onchange="readURL(this)">
+                                    <br><br>
+                                    <img class="prw_img" width="120px" {{#if values.image}}src="/boards/{{values.image}}"{{/if}}>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="category" class="control-label">Category</label>
+                                <div class="controls">
+                                    <select name="category" id="category" class="required">
+                                        <option value >Select Category</option>
+                                        {{#each cats}}
+                                            <option value="{{_id}}" {{#ObjIfCond _id ../values.category_id}}selected{{/ObjIfCond}}>{{category_name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            {{#ifCond edit 1}}
+                                <input type="hidden" value="{{values._id}}" name="bid" id="bid">
+                            {{/ifCond}}
+                            <div class="form-actions">
+                                <input type="submit" class='btn btn-primary' value="{{#ifCond edit 1}}Update Board{{else}}Add Board{{/ifCond}}">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function readURL(input) {
+     if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+                $('.prw_img').attr('src', e.target.result);
+           };
+           reader.readAsDataURL(input.files[0]);
+     }
+}
+
+</script>

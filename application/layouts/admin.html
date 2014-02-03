@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{#if pagetitle}}{{pagetitle}}{{/if}}Cubetboard Admin</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="/default/css/admin/bootstrap.css">
+<link rel="stylesheet" href="/default/css/admin/bootstrap-responsive.css">
+<link rel="stylesheet" href="/default/css/admin/jquery.fancybox.css">
+<link rel="stylesheet" href="/default/css/admin/style.css">
+<script src="/default/js/admin/jquery.js"></script>
+<script src="/default/js/admin/less.js"></script>
+<script src="/default/js/admin/bootstrap.min.js"></script>
+{{> getSleekScripts}}
+<script>
+            videojs.options.flash.swf = "/default/js/video-js.swf"
+        </script>
+
+</head>
+<body>
+    {{> adminTopBar}}
+    <div class="main">
+        <div class="container-fluid">
+            {{> adminSideBar}}
+            <div class="content">
+                {{{body}}}
+            </div>	
+	</div>
+    </div>	
+<script src="/default/js/admin/jquery.peity.js"></script>
+<script src="/default/js/admin/jquery.fancybox.js"></script>
+<script src="/default/js/admin/jquery.flot.js"></script>
+<script src="/default/js/admin/jquery.color.js"></script>
+<script src="/default/js/admin/jquery.flot.resize.js"></script>
+<script src="/default/js/admin/jquery.cookie.js"></script>
+<script src="/default/js/admin/jquery.cookie.js"></script>
+<script src="/default/js/admin/custom.js"></script>
+<script src="/default/js/admin/demo.js"></script>
+
+</body>
+</html>

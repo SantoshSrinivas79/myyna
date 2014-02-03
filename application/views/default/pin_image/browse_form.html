@@ -1,0 +1,89 @@
+<div id="image_dv">
+<h1>Pin image from your computer</h1>
+
+<form id="uploadFromComputer" name="browse_form" method="post" action="/upload_action" enctype="multipart/form-data">
+    <p>&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    Pin From : &nbsp;
+    <input type="radio" name="sub" value="local" checked/>&nbsp; Local &nbsp;
+    <input type="radio" name="sub" value="web" />&nbsp; Web &nbsp;
+    <p>&nbsp;</p> 
+  
+  <select name="board_id" id="board_id" required class="inputText" >
+  <option value="" selected="selected">Select Board</option>
+  {{#each boards}}
+  <option value="{{this._id}}">{{this.board_name}}</option>
+  {{/each}}
+  </select>
+
+  <p>&nbsp;</p>
+  <input type="file" name="upload" id="upload" required class="inputText" accept="image/*"/>
+
+  <p>&nbsp;</p>
+
+  <textarea name="description" id="description" required class="inputText" placeholder="Description"></textarea>
+
+  <p>&nbsp;</p>
+
+<!--  <input type="submit" name="upload_img" id="upload_img" value="Upload" />-->
+
+</form>
+</div>
+
+<script>
+$(function(){
+    $("input[type=radio][name=sub]").unbind('click').bind('click',function(){
+        var sub = $("input[type=radio][name=sub]:checked").val();
+            if(sub=='web'){
+            //alert(2);
+                $("#image_dv").load('/urlfetch',function(){
+                    $('#get_img').html('Find Images');
+                    $('#get_img').unbind('click').bind('click', function(){
+                       actionFunction();
+                    });
+                    $(document).keypress(function(e) {
+                        if(e.keyCode == 13) {
+                          actionFunction();
+                          return false; // set default event to false
+                        }
+                    });
+
+                });
+            }
+    });
+
+});
+
+function actionFunction(){
+    var str = $("#urltitle").val(); 
+    if($("#urltitle").val()==''){
+        $("#urltitle").css({'border':'1px solid red'});
+        return false;
+    } else  if(str.substr(0,4)!='http') {
+        $("#urltitle").css({'border':'1px solid red'});
+        //alert('Enter a valid URL.');
+        $(".errmsg").text("Enter a valid URL.(eg: http://www.example.com)");
+        return false;
+    } else {
+       // alert($("#urltitle").val());
+        $("#loading1").css({'display':'block'});
+        $.post('/post_url',
+                {'urltitle' : $("#urltitle").val() },
+                function(data){
+                    $("#loading1").css({'display':'none'});
+                    $(".modal_pou_up").html(data);
+                    //alert(data);
+                }
+        );
+    }
+}
+</script>
+
+            
+            
+            
+  
+
+
+
+

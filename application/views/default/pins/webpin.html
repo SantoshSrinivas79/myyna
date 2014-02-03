@@ -1,0 +1,31 @@
+
+    <form name="pinform" id="pinform" method="post" enctype="multipart/form-data" action="/pinpage">  
+            
+       <input type="button" name="video_select" id="video_select" value="Video Upload"/>
+       <input type="url" id="url" name="url" value="" required/>
+       <input type="file" name="video_upld" id="video_upld"/>
+        <select name="pin_cat" id="pin_cat">
+            <option value="1">Web Page</option>
+            <option value="2">Video</option>
+        </select>
+        
+            <iframe id="preview_id" src="" width="430" height="340" frameborder="0">
+            
+            </iframe>
+            
+	<!--<img id="webpage" width="430" height="340" src=""/>-->
+        <img id="webpage" src=""/>
+			
+					
+    <select name="board" id="board">
+           {{#each boards}} 
+            
+            <option value="{{_id}}">{{board_name}}</option>
+           
+            {{/each}}
+    </select>
+        <textarea id="description" name="description"></textarea>
+<!--        <input type="submit" name="pin" value="Pin"/>-->
+    </form>
+
+   

@@ -1,0 +1,221 @@
+@charset "utf-8";
+/* CSS Document */
+.add_pin{padding:0 3%; margin:0 auto; position:relative;}
+.add_pin_web_site{padding-bottom:20px; margin:0 0 40px;}
+.add_pin_web_site h1, .add_pin_select_pin h1{
+   background: none repeat scroll 0 0 rgb(253, 253, 253);
+   border-bottom: 1px solid rgb(220, 220, 220);
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.094);
+   color: rgb(51, 59, 59);
+   font-size: 26px;
+   margin: 0;
+   padding: 10px 15px;}
+.add_pin_web_site h3{margin:0; padding:10px 15px; font-size:15px; color:#333;}
+.add_pin_web_site .inputText:focus{outline:none;}
+.add_pin_select_pin{border:1px solid #ccc; margin:50px 0 50px;}
+.add_pin_select_pin .list{width:180px; height:208px; float:left; margin:10px; /*background:#000;*/}
+.add_pin_select_pin .list_image{width:100px; height:100px; float:left; margin:10px; }
+.add_pin_select_pin .check_bx{position:relative; width:20px; height:20px; top:-20px; left:186px;}
+.add_pin_select_pin em{position:absolute; height:208px; width:208px; left:-180px; top:20px; cursor:pointer;}
+.add_pin_select_pin .pin_it{float:right; clear:left; border:0; margin:0 20px 0 0; padding:10px 20px; background:#333; color:rgb(251,181,59); font-weight:bold;}
+.add_pin_select_pin .pin_it:active{color:#FFF;}
+.add_pin_select_pin h3{text-align:center;}
+.add_pin_select_pin .padding{padding:20px;}
+.add_pin_select_pin .coment{width:100%; padding:1%; margin:10px 0; clear:both; border:1px solid #ccc; height:150px;}
+.add_pin_top{padding:100px 0 0;}
+.add_pin_top_ab{z-index:2500;}
+.add_pin_top_ab1{z-index:1000;  position: relative;
+  width: 80%;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;top:50px;}
+  
+.add_pin_top_ab3{z-index:1000;  position: relative;
+  width: 60%;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;top:80px;}
+  
+  
+.cd-dropdown{margin:5px auto; width:96%; }
+.nav_pin_image{width:98%; float:right; margin:15px 0 10px;}
+.nav_pin{width:35%; float:right;}
+.nav_pin_icon{background:#666;}
+.nav_pin_drop{width:80%; background:#f2b33d; color:#333 !important; font-weight:bold;}
+.nav_pin_icon:hover{background:#edae39; }
+.nav_pin_drop:hover {background:#333; color:#f2b33d !important;  }
+/*.nav_pin_drop:active{top:1px;}*/
+.nav_pin_drop_d{width:86.5%;padding:5px 0; background:#fffcf7;}
+.nav_pin_drop_d li a{ padding:8px 20px; margin:0;}
+.nav_pin_drop_d li a:hover{background:#fff8eb; color:#333;}
+
+.add_pin_select_pin input[type="checkbox"] {
+    display:none;
+}
+
+.add_pin_select_pin input[type="checkbox"] + label {
+    color:#f2f2f2;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+.add_pin_select_pin input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../images/check_radio_sheet1.png) left top no-repeat;
+    cursor:pointer; position:absolute; left:-181px; top:201px; z-index:999;
+}
+
+.add_pin_select_pin input[type="checkbox"]:checked + label span {
+    background:url(../images/check_radio_sheet1.png) -19px top no-repeat;
+}
+
+
+
+/*.add_pin_web_site .inputText{width:97%; border:1px solid #ccc; padding:8px 1%; margin:0 0 15px 15px;}*/
+.inputText{width:97%; border:1px solid #ccc; padding:8px 1%; margin:0 0 15px 15px;}
+
+@media only screen and (min-width : 905px) and (max-width : 1024px) {
+.inputText{width:97%; border:1px solid #ccc; padding:8px 1%; margin:0 0 15px 2%;}
+	
+}
+
+@media only screen and (min-width : 480px) and (max-width : 904px) {
+	 .inputText{width:96%; border:1px solid #ccc; padding:8px 1%; margin:0 0 15px 2%;}
+	.nav_pin{width:80%; margin:10px 0 10px 6%;  float:left;}
+	.nav_pin_icon{background:#333; margin:10px auto}
+        .add_pin_top_ab3{ width: 80% !important;}	
+	
+
+}
+
+
+@media only screen and (max-width : 479px) {
+	.inputText{width:96%; border:1px solid #ccc; padding:8px 1%; margin:0 2%;}
+	.add_pin_select_pin em{position:absolute; height:150px; width:150px; left:-180px; top:20px; cursor:pointer;}
+	.add_pin_select_pin .list{width:150px; height:150px; float:left; margin:10px; background:#000;}
+	.add_pin_select_pin input[type="checkbox"] + label span {
+ left:-181px; top:140px;
+}
+
+	.nav_pin{width:75%; margin:10px 0 10px 3%;  float:left;}
+	.nav_pin_icon{background:#333; margin:10px auto}
+	.add_pin_top_ab3{top:20px; width: 80% !important;}
+        
+}
+@media only screen and (max-width : 810px) {
+    .nav_pin_drop_d{margin-top:-7px !important;}
+}
+.inputText.error
+{
+    border: 1px solid red !important;
+}
+
+label.error {
+    display:none !important;
+}
+
+.msg{
+    color:green;
+    margin-left: 16px;
+}
+
+.errmsg{
+    color:red;
+    margin-left: 16px;
+}
+
+.gap{
+    margin-bottom: 15px !important;
+}
+
+#back{
+    float:right;
+}
+
+.imglist{
+    max-width:140px;
+    max-height:200px;
+    border:none;
+}
+
+.youtubeContainer{
+    position: relative; width: 100%; height: 0px; padding-bottom: 60%;
+}
+.youtubeContainer iframe{
+    position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;
+}
+
+ /* by Rahul P R <rahul.pr@cubettech.com> */
+ 
+.overflw_sectn{  overflow-x: hidden;   /*height:357px;*/
+    overflow-y: auto; border:solid 1px #ddd; padding:2px !important; margin-top:15px; 
+    width: 100% !important;
+    height:250px !important;
+}
+
+.overflw_sectn img{
+    margin: 3px;
+}
+
+.other_pns{
+    height:100px !important; 
+    overflow-y: auto;
+}
+.other_pns img{
+    margin:3px;
+}
+
+#slider img {
+    /*width:auto !important;*/
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.image-checkbox-container input[type="checkbox"]{
+    display: none;
+}
+
+.image-checkbox-container img{
+    border: 0;
+    margin: 4px;
+    /*width:200px;*/
+    max-width: 200px;
+}
+ /* by Rahul P R */
+ 
+ .image-checkbox-container input[type="checkbox"]{
+    display: none;
+}
+
+.image-checkbox-container img{
+    border: 0;
+    margin: 4px;
+    /*width:200px;*/
+    max-width: 200px;
+}
+.pinmargin{
+    margin-top: 20px !important;
+}
+.outr{
+    margin:0 auto 20px auto; width: 80%; text-align: center;
+}
+
+.outr img.repn{
+    text-align: center !important;
+    width: 100%;
+}
+
+.cubt_folw,.cubt_un_folw{color: #ffffff !important;} 
+
+.add_pin_btn a {
+    border-radius: 4px !important;
+    float: right !important;
+}
+
+.add_pin_btn button {
+    display: none;
+}

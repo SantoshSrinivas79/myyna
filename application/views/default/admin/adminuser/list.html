@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>Admin Users</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic">
+                        <table class='table table-striped dataTable table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Last login</th>
+                                    <th class="sorting_disabled">Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                    <tr>
+                                        <td>{{name}}</td>
+                                        <td>{{email}}</td>
+                                        <td>{{toDate last_login}}</td>
+                                        <td class='actions'>
+                                            <div class="btn-group">
+                                                <a href="/admin/editadmin/{{_id}}" class='btn btn-mini tip editCustomer' title="Edit">
+                                                    <img src="/default/images/admin/icons/fugue/edit.png" alt="">
+                                                </a>
+                                                <a href="/admin/deleteadmin/{{_id}}" onclick="return confirm('Are you sure?')" class='btn btn-mini tip deleteAdmin' title="Delete">
+                                                    <img src="/default/images/admin/icons/fugue/cross.png" alt="">
+                                                </a>
+                                                <a href="/admin/resetpwdadminuser/{{_id}}" class='btn btn-mini tip pwdReset' title="Reset Password">
+                                                    <img src="/default/images/admin/icons/fugue/lock-unlock.png" alt="">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

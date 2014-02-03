@@ -1,0 +1,20 @@
+{
+    "css": [
+        "login/jquery.jscrollpane.custom",
+        "login/bookblock",
+        "login/custom",        
+        "login/login",
+        "bootstrap",
+        "bootstrap-theme"
+    ],
+    "js": [
+        "jquery-1.8.2.min",      
+        "login/modernizr.custom.79639",
+        "bootstrap.min",
+        "jquery-validation",
+        "pincreation"
+    ]
+}
+
+
+      

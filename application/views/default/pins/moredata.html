@@ -1,0 +1,27 @@
+{{#each data}} 
+   
+    {{#ifCond pin_type 'web_page'}}
+        {{> pinvieweb this }}
+    {{/ifCond}} 
+
+    {{#ifCond pin_type 'video'}}
+        {{> pinviewvideo this}}
+    {{/ifCond}}
+
+    {{#ifCond pin_type 'image'}}
+        {{> pinviewimage this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'url_image'}}
+        {{> pinviewimage this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'audio'}}
+        {{> pinviewaudio this}}
+    {{/ifCond}}  
+
+    {{#ifCond pin_type 'webaudio'}}
+        {{> pinviewwebaudio this}}
+    {{/ifCond}}  
+
+{{/each}}

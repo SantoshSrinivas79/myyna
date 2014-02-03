@@ -1,0 +1,62 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>{{title}}</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic">
+                        <table class='table table-striped dataTable table-bordered' >
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">Board</th>
+                                    <th style="width: 20%">Created by</th>
+                                    <th style="width: 20%">Board Name</th>
+                                    <th style="width: 25%">Description</th>
+                                    <th style="width: 12%" class="sorting_disabled">Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                    <tr>
+                                        <td><img {{#if image}} src="/boards/{{image}}" {{else}} src="/default/images/board.jpg" {{/if}} width="100%"/></td>
+                                        <td>{{#if created_by.name}}{{created_by.name}}{{else}}Admin User{{/if}}</td>
+                                        <td>{{board_name}}</td>
+                                        <td>{{description}}</td>
+                                        <td class='actions'>
+                                            <div class="btn-group">
+                                                <a href="/admin/editboard/{{_id}}" class='btn btn-mini tip editCustomer' title="Edit">
+                                                    <img src="/default/images/admin/icons/fugue/edit.png" alt="">
+                                                </a>
+                                                <a href="/admin/deleteboard/{{_id}}" onclick="return confirm('Deleting a board will remove all pins on the board. Are you sure?')" class='btn btn-mini tip deleteAdmin' title="Delete">
+                                                    <img src="/default/images/admin/icons/fugue/cross.png" alt="">
+                                                </a>
+                                                {{#ifCond locked 1}}
+                                                    <a href="/admin/lockboard/0/{{_id}}" class='btn btn-mini tip blockAdmin' title="Unlock">
+                                                        <img src="/default/images/admin/icons/fugue/lock-unlock.png" alt="">
+                                                    </a>
+                                                {{else}}
+                                                    <a href="/admin/lockboard/1/{{_id}}" class='btn btn-mini tip blockAdmin' title="Lock">
+                                                        <img src="/default/images/admin/icons/fugue/lock.png" alt="">
+                                                    </a>
+                                                {{/ifCond}}
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

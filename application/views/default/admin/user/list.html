@@ -1,0 +1,63 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block {{$ 'getFlashMessageStatus'}}">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{$ 'getFlashMessageHead'}}!</h4>
+            {{$ 'getFlashMessage'}}
+        </div>
+        <div class="box">
+            <div class="box-head tabs">
+                <h3>{{title}}</h3>
+            </div>
+            <div class="box-content box-nomargin">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic">
+                        <table class='table table-striped dataTable table-bordered' >
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">Name</th>
+                                    <th style="width: 25%">Email</th>
+                                    <th style="width: 25%">Member since</th>
+                                    <th style="width: 10%" class="sorting_disabled">Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                    <tr>
+                                        <td>{{name}}</td>
+                                        <td>{{email}}</td>
+                                        <td>{{toDate time_created}}</td>
+                                        <td class='actions'>
+                                            <div class="btn-group">
+                                                <a href="/admin/edituser/{{_id}}" class='btn btn-mini tip editCustomer' title="Edit">
+                                                    <img src="/default/images/admin/icons/fugue/edit.png" alt="">
+                                                </a>
+                                                <a href="/admin/deleteuser/{{_id}}" onclick="return confirm('Deleting user will remove all boards, & pins created by the user. Are you sure?')"  class='btn btn-mini tip deleteAdmin' title="Delete">
+                                                    <img src="/default/images/admin/icons/fugue/cross.png" alt="">
+                                                </a>
+                                                {{#ifCond blocked 1}}
+                                                    <a href="/admin/blockuser/0/{{_id}}" class='btn btn-mini tip blockAdmin' title="UnBlock">
+                                                        <img src="/default/images/admin/icons/fugue/flag-green.png" alt="">
+                                                    </a>
+                                                {{else}}
+                                                    <a href="/admin/blockuser/1/{{_id}}" class='btn btn-mini tip blockAdmin' title="Block">
+                                                        <img src="/default/images/admin/icons/fugue/flag-black.png" alt="">
+                                                    </a>
+                                                {{/ifCond}}
+                                                <a href="/admin/resetpwduser/{{_id}}" class='btn btn-mini tip pwdReset' title="Reset Password">
+                                                    <img src="/default/images/admin/icons/fugue/lock-unlock.png" alt="">
+                                                </a>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

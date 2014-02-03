@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+#log_in_container .pin1{margin:0; float:left;}
+#log_in_container .pin2{ margin-left:70%; }
+#log_in_container .pin2 img{width:45%;}
+#log_in_container footer h1{width:30%;}
+#log_in_container footer .tw{background-position:-55px 0; margin-left:10px;}
+#log_in_container header .form .submit{margin-top:-6px;}
+.image1_quote,.image2_quote,.image3_quote,.image4_quote,.image5_quote{width:40%;float:left; margin-left:20%;}

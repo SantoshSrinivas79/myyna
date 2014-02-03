@@ -1,0 +1,80 @@
+<!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]--> 
+
+<!-- HEADER BEGIN-->
+
+<header class="navbar navbar-default navbar-fixed-top nav_mob{{#if loggeduser_id}} {{else}} header-logout{{/if}}">
+<div class="row">
+        <div class="col-md-4 cubet_search_main"> <a href="javascript:;" class="menu_btn"></a>
+    
+        <!-- 
+        <div class="col-md-6 col-md-offset-1 cubet_search">   <div class="input-group search-new">
+            <input type="text" class="form-control">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+          </div></div>-->
+
+    
+
+        </div>
+        <div class="col-md-4 cubet_board"><a href="/pins" class="logo"><img src="{{getDefine 'site_logo'}}" ></a></div>
+      {{#if loggeduser_id}}  <div class="col-mb-4 cubet_pin_main"><ul class="nav navbar-nav navbar-right right-dropd"> 
+        <li class="dropdown right-drop-down cubet_plus">
+         <a href="#" class="dropdown-toggle right-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="/addpin" data-toggle="modal" data-target="#myModal2" id="addpin">Add Pin</a></li>
+            <li><a href="/mostrepin" >Most Repinned</a></li>
+            <li><a href="/mostlike"  >Most Liked</a></li>
+            <li><a href="/addboard" data-toggle="modal" data-target="#myModal4" >Create Board</a></li>
+            <li><a href="/boards"   >List Boards</a></li>
+            
+          </ul>
+        </li>
+        
+        <li class="dropdown right-drop-down cubet_name"> <a href="javascript:;" class="dropdown-toggle profile-toggle-list" data-toggle="dropdown">
+        {{#if loiginuser}}
+        <span><img width="30" height="30" {{#if user_image}} src="/user_images/thumb/{{user_image}}" {{else}} src="/default/images/profile-pic.png" {{/if}}></span>
+        <span class="user-info">{{loiginuser}}</span>
+        </a>
+          <ul class="dropdown-menu user_add_drop">
+              <li><a   href="/user/{{loggeduser_id}}">Profile</a></li>
+            <li><a  data-target="#myModal3" data-toggle="modal" href="/settings">Settings</a></li>           
+            <li><a id="logoutButton" href="/logout">Logout</a></li>
+          </ul>
+        {{/if}} 
+        </li>
+        <li class="dropdown right-drop-down cubet_commment"> <a id="comment_display"  href="#" class="dropdown-toggle notify" data-toggle="dropdown">
+      <span id="comment_section"  class="glyphicon  {{#unless notification_count}} glyphicon-comment {{/unless}}">{{#if notification_count}} {{notification_count}}{{/if}}</span></a>
+          <ul class="dropdown-menu cubet_comment_sub">
+         {{#if notification_count}} {{else}}<li><a id="new_notify" href="#"> No new notifications</a></li>{{/if}}
+            {{#each notifications}}
+            <li><a class="notifi_li" href="javascript:;">{{{notification}}}</a></li>
+            {{/each}}
+          
+          </ul>
+        </li>
+      </ul></div>
+      {{else}}
+      <a href="/login"> <span class="glyphicon glyphicon-log-in cubetlogin"></span></a>
+      {{/if}}
+  </div>
+      
+</header>
+
+<div id="menu">
+
+<a href="javascript:;" class="close"></a>
+<ul>
+<li class="active"><a href="/pins">Home</a></li>
+</ul>
+<ul class="nav_scoll">
+{{#each category}}
+<li><a href="/category/{{_id}}">{{category_name}}</a></li>
+{{/each}}
+<li></li>
+</ul>
+</div>
+
+<!-- HEADER END --> 

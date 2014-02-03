@@ -1,0 +1,125 @@
+<div class="modal_pou_up ">
+    <div class="add_pin_top_ab3 custom-model add_pin_top">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+
+            <!--  Head  -->
+            <div class="add_pin">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="add_pin_web_site pinmargin">
+                            <div id="pop_cont">  
+                                <h1>Report</h1>
+
+                                <form id="reportform" name="reportform" method="post" action="/report" >
+                                    <!--  <p>&nbsp;</p>
+                                      <div style="margin-left:20px;">
+                                      <input type="radio" name="type" value="image" checked="checked"/>&nbsp; Image &nbsp;
+                                      <input type="radio" name="type" value="audio" />&nbsp; Audio &nbsp;
+                                      <input type="radio" name="type" value="video" />&nbsp; Video &nbsp;
+                                      </div>-->
+                                    <input type="hidden" name="pin_id" value="{{pin_id}}"/>
+
+
+                                    <!--<p>&nbsp;</p>
+                                   
+                                  
+                                   <textarea name="rept_message" id="rept_message" placeholder="Message"  class="inputText"></textarea>
+                               
+                                    <p>&nbsp;</p>-->
+                                    <div class="FlagContent ajax Module">
+
+                                        <h2>Why are you reporting this pin?</h2>
+
+                                        <div>
+                                            <input type="radio" id="spam" name="reason" value="spam" required>
+                                            <label for="spam">Spam</label>
+                                        </div>
+
+                                        <div class="FlagUserPinReasons ajax Module"><div>
+                                                <input type="radio" id="nudity" name="reason" value="nudity">
+                                                <label for="nudity">Nudity or Pornography</label>
+                                            </div>
+
+                                            <div>
+                                                <input type="radio" id="graphic-violence" name="reason" value="graphic-violence">
+                                                <label for="graphic-violence">Graphic Violence</label>
+                                            </div>
+
+                                            <div>
+                                                <input type="radio" id="self-harm" name="reason" value="self-harm">
+                                                <label for="self-harm">Actively promotes self-harm</label>
+                                            </div></div>
+
+                                        <div class="FlagCommentReasons ajax Module"><div>
+                                                <input type="radio" id="attacks" name="reason" value="attacks">
+                                                <label for="attacks">Attacks a group or individual</label>
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="hate-speech" name="reason" value="hate-speech">
+                                                <label for="hate-speech">Hateful Speech or Symbols</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="otherWrapper">
+                                            <input type="radio" id="other" name="reason" value="other">
+                                            <label for="other">Other</label>
+                                        </div>
+
+                                        <div id="rept_explanation" class="explanation hidden">
+                                            <textarea placeholder="Explanation" id="rept_message"  class="inputText" name="rept_message"></textarea>
+                                        </div></div>
+                                    
+                                    <input class="btn flag dropdown-toggle nav_pin_icon" style="float: right; margin-right: 15px" type="submit" name="report" id="report" value="Report" />
+
+                                </form>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .FlagContent{
+        padding-left: 15px;
+    }
+    
+    .FlagContent h2{
+        padding-left: 10px;
+        color: #333;
+    }
+    .flag.nav_pin_icon {
+        background:#FBB53B;
+        
+    }
+    
+    .flag.nav_pin_icon:hover {
+        background:#333;
+            color:#FBB53B;
+    }
+</style>
+<script>
+    
+    $("#reportform").validate();   
+            
+
+    $(function() {
+
+        $('input[name="reason"]').click(function() {
+
+            if ($(this).val() == 'other')
+            {
+                $('#rept_explanation').removeClass('hidden');
+            }
+            else {
+                $('#rept_explanation').addClass('hidden');
+            }
+        });
+    });
+
+</script>

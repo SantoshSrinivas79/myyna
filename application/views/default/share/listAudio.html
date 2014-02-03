@@ -1,0 +1,14 @@
+{{#if is_valid}}
+    <div id="show_song" style="width:65%; margin:15px auto 0 15px;">
+        <object height="100" width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+            <embed allowscriptaccess="always" 
+                   src="http://player.soundcloud.com/player.swf?url={{full_url}}&enable_api=true&sharing=false&show_comments=false&show_user=false&buying=false&download=false&show_artwork=false&liking=false"
+                   type="application/x-shockwave-flash" height="100" width="100%" name="scloud_id"></embed>
+         </object>
+    </div>
+{{else}}
+    <p>Not a valid soundcloud url!</p>
+    <script>
+        $('.common-share').hide();
+        </script>
+{{/if}}

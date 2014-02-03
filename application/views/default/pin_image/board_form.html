@@ -1,0 +1,90 @@
+<div class="modal_pou_up">
+  <div class="add_pin_top_ab3 custom-model add_pin_top">
+  	<div class="modal-content">
+     	<div class="modal-header gap">
+        	<button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">&times;</button>
+      	</div>
+        
+        <!--  Head  -->
+      	<div class="add_pin">
+       		<div class="row">
+        		<div class="col-md-12">
+                	<div class="add_pin_web_site">
+                        <div id="pop_cont">   
+                            
+<h1>Add Board</h1>
+
+
+<p>&nbsp;</p>
+<span style="color:red;" class="brderrmsg">{{msg}}</span>
+
+
+<form name="board_form" id="board_form" method="post" action="/board_action" enctype="multipart/form-data">
+    
+    <br /><br />
+    <select name="category_id" required class="inputText">
+        <option value="">Select category</option>
+        {{#each categories}}
+        <option value="{{this._id}}" {{sel this._id ../posted_data.category_id}} >{{this.category_name}}</option>
+        {{/each}}
+    </select>
+    
+    <br /><br />
+
+<!--    <select name="cost" required  class="inputText">
+        <option value="">Select cost</option>
+        {{#each cost}}
+        <option value="{{this.cost}}" {{sel this.cost ../posted_data.cost}} >{{this.cost}}</option>
+        {{/each}}
+    </select>
+    
+    <br /><br />-->
+    
+
+    <input placeholder="Board Name" type="text" name="board_name"  class="inputText" value="{{posted_data.board_name}}" required/>
+    
+    <br /><br />
+    
+    <textarea  placeholder="Description" name="description" required  class="inputText">{{posted_data.description}}</textarea>
+
+    <br /><br />
+    
+
+    <input type="file" name="board_img" id="board_img" required  class="inputText" accept="image/*"/>
+    
+    <br /><br />
+    
+    <input type="submit" name="add_board" value="Add" class="submit"/>
+
+</form>
+
+</div>
+                       
+                        <!--</form>-->
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<script>
+   // ajax form to validate files
+   $('#board_form').ajaxForm({
+        success:function(data) { 
+            if(data.error==1){
+                $(".brderrmsg").html(data.msg);
+            } else {
+                $('#myModal4').modal('hide');
+            }
+        },
+        error: function(e){
+            $(".brderrmsg").html(e);
+        }
+    }); 
+    $("#board_form").click(function(){
+        $("#board_form").validate();
+    });
+</script>
