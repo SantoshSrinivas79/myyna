@@ -78,7 +78,7 @@ module.exports = {
         }
         
         res.locals.siteLayout = DEFINES.site_layout;
-        
+        res.locals.siteUrl = sleekConfig.siteUrl;
         if(req.route.path.indexOf(':') != -1){
             var paths = req.route.path.split('/:');
             res.locals.sideMenu = paths[0];

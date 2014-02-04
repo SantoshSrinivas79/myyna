@@ -16,11 +16,12 @@ module.exports = {
           
     socketNotification:function(socketid,fun_id,message,userdata,mail) {
         if(mail){
+            userdata.mailcontent.logo = sleekConfig.siteUrl + '/' + DEFINES.site_logo;
             var template = system.getCompiledView('email/mail', userdata.mailcontent)
             var mailOptions = {
-                from: "CubetboardV2 <info@cubettech.com>", // sender address
+                from: DEFINES.site_title+"<no-reply@myyna.com>", // sender address
                 to: userdata.tomail, // list of receivers
-                subject: userdata.subject?  userdata.subject:"Cubetboard Pin Notification", // Subject line
+                subject: userdata.subject?  userdata.subject:DEFINES.site_title+" Pin Notification", // Subject line
                 html: template // html content
             }
             //send mail

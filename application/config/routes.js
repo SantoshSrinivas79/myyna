@@ -20,7 +20,7 @@ exports.routes  = [
     {route: '/twitterauth', controller: 'user', action: 'twitterauth'},
     {route: '/usersignup', controller: 'user', action: 'usersignup', type: 'POST'},
     {route: '/twitteruser', controller: 'user', action: 'twitteruser', type: 'POST'},
-    {route: '/mailverify', controller: 'user', action: 'mailVerification'},
+    {route: '/verify', controller: 'user', action: 'mailVerification', params:[':mail', ':id']},
     {route: '/closeSignup', controller: 'user', action: 'closeSignup'},
     {route: '/settings', controller: 'user', action: 'Settings', fn: 'login_validate'},
     {route: '/changesettings', controller: 'user', action: 'changeSettings', type: 'POST', fn: 'login_validate'},

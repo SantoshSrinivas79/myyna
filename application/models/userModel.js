@@ -568,28 +568,41 @@ updateuser:function(form_data,user_id, callback){
      * @param:email
      * 
      */ 
-UserMailVerification: function(email, callback)
+UserMailVerification: function(id,email,callback)
 
 {
-
+    var crypto = require('crypto');      
     var collection = mongodb.collection('user');
-    collection.update(
-    {
-        'email': email
-    },
+    collection.findOne({_id:mongo.ObjectID(id)}, function(err, reslts){
+       
+        var bef_email = reslts.email+pass_salt;
+       var cryptedEmail = crypto.createHash('md5').update(bef_email).digest("hex");
+       console.log(email);
+       console.log('hi');
+       console.log(cryptedEmail);
+        if(email == cryptedEmail){
+            collection.update(
+            {
+                '_id': mongo.ObjectID(id)
+            },
 
-    {
-        $set: {
-            'verified': 1
+            {
+                $set: {
+                    'verified': 1
+                }
+            },
+            function(err, data) {
+                if (err)
+                    return handleError(err);
+
+                callback(data);
+            }
+            );
+        } else {
+            callback(false);
         }
-    },
-    function(err, data) {
-        if (err)
-            return handleError(err);
-
-        callback(data);
-    }
-    );
+        
+   });
 },
 /**
      * @author Rahul P R <rahul.pr@cubettech.com >

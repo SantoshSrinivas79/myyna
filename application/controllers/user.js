@@ -216,9 +216,10 @@ var userController = {
                                 {
 
 
-
+                                        var bef_email = email+pass_salt;
+                                     var cryptedEmail = crypto.createHash('md5').update(bef_email).digest("hex");
                                     var html = '<b>Hi ' + name + ', </b><br/>' + 'Please use the below link for your account activation.<br/>\n\
-                                     <a href="' + sleekConfig.siteUrl + '/mailverify?mail=' + email + '">' + sleekConfig.siteUrl + '/mailverify?mail=' + email + '</a>                                  ';
+                                     <a href="' + sleekConfig.siteUrl + '/verify/' + cryptedEmail + '/'+ress[0]._id +'">' + sleekConfig.siteUrl + '/verify/' + cryptedEmail + '/'+ress[0]._id +'</a>                                  ';
                                    
                                     //                                 
                                     var maildata = {
@@ -700,9 +701,10 @@ var userController = {
 //                            req.session.login_user_id = ress[0]._id.toHexString();
 
                             UserModel.InitialSettings(ress[0]._id, function(callback) {
-                          
+                                 var bef_email = useremail+pass_salt;
+                                     var cryptedEmail = crypto.createHash('md5').update(bef_email).digest("hex");
                                 var html = '<b>Hi ' + form_data.name + ', </b><br/>' + 'Please use the below link for your account activation.<br/>\n\
-                                     <a href="' + sleekConfig.siteUrl + '/mailverify?mail=' + useremail + '">' + sleekConfig.siteUrl + '/mailverify?mail=' + useremail + '</a>                                  ';
+                                     <a href="' + sleekConfig.siteUrl + '/verify/' + cryptedEmail + '/'+ress[0]._id+'">' + sleekConfig.siteUrl + '/verify/' + cryptedEmail + '/'+ress[0]._id+'</a>                                  ';
                                    
                                 //                                 
                                 var maildata = {
@@ -973,9 +975,14 @@ var userController = {
      * @Date 8-11-2013
      */
     mailVerification: function(req, res) {
-        var email = req.query.mail;      
-        UserModel.UserMailVerification(email, function(callback) {
-             req.session.mailverifymsg = 'Now you can login with your credentials';
+        var email = req.params.mail;
+        var id = req.params.id;
+        UserModel.UserMailVerification(id,email, function(callback) {
+            if(callback){
+                req.session.mailverifymsg = 'Now you can login with your credentials';
+            } else {
+                req.session.mailverifymsg = 'Sorry!';
+            }
             //HELPER.setFlashMessage('Now you can Login with Your credentials', 'danger', 'success');
             res.redirect('/login');
         })
@@ -1170,22 +1177,34 @@ var userController = {
                         UserModel.updateuser2(user[0]._id, data, function(updated) {
                             if (updated == 1) {
                                 var html = '<b>Hi ' + user[0].name + ', </b><br/> \
-                              Your cubetboard password has been reset successfully.<br/>\
+                              Your  password has been reset successfully.<br/>\
                               New password is :<b>' + pwd + '</b>';
                                 // setup e-mail data with unicode symbols
-                                var mailOptions = {
-                                    from: "CubetboardV2 <info@cubettech.com>", // sender address
-                                    to: usermail, // list of receivers
-                                    subject: "Cubetboard Password Reset", // Subject line
-                                    html: html // html body
-                                }
-                                sendMail(mailOptions, function(error, response) {
-                                    if (error) {
-                                        console.log(error);
-                                    } else {
-                                        console.log("Message sent: " + response.message);
+//                                var mailOptions = {
+//                                    from: "MYYNA <info@cubettech.com>", // sender address
+//                                    to: usermail, // list of receivers
+//                                    subject: "Password Reset", // Subject line
+//                                    html: html // html body
+//                                }
+                                
+                                var maildata = {
+                                        mailcontent:{
+                                            "subject": "Password Reset",
+                                            "body":html
+                                        },
+                                        "tomail": usermail,
+                                        from: "MYYNA <info@cubettech.com>",
+                                        "html"  : html,
+                                        "subject": "Password Reset"
                                     }
-                                });
+//                                sendMail(mailOptions, function(error, response) {
+//                                    if (error) {
+//                                        console.log(error);
+//                                    } else {
+//                                        console.log("Message sent: " + response.message);
+//                                    }
+//                                });
+                                 HELPER.socketNotification('', 'notification', html, maildata, true);
                                 var data = {
                                     status: '1',
                                     msg: 'Password reset successful. Check your mailbox.'
