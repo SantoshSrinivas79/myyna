@@ -56,8 +56,8 @@ module.exports = function(app, sFolderPath, directory) {
             };
 
             var settings = {
-                "title": adm_title ? adm_title : 'CubetboardV2',
-                "meta_desc": 'cubetboardv2 pinterest clone',
+                "title": adm_title ? adm_title : 'Myyna',
+                "meta_desc": 'Myyna pinterest clone',
                 "meta_keys": adm_keyword ? adm_keyword : '',
                 "layout": 'fixed',
                 "timestamp": new Date().getTime()

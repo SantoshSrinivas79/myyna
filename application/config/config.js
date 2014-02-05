@@ -9,6 +9,8 @@
 //port number
 global.sleekConfig.appPort = 3000;
 
+global.sleekConfig.appHost = 'localhost';
+
 global.sleekConfig.siteUrl = 'http://localhost:3000';
 global.sleekConfig.env = 'development';
 
@@ -25,4 +27,4 @@ global.webpagepath = "public/webpages";
 global.videopath = "public/videos";
 global.user_images = "public/user_images";
 global.loggedUser = new Array();//array to save socket id of logged user
-global.pass_salt = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';//salt append with password
+global.pass_salt = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';//salt append with passwordower123

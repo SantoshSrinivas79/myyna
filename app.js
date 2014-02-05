@@ -6,19 +6,19 @@
  * @version 1.0
  * 
  * The MIT License (MIT)
- 
+
  * Copyright Cubet Techno Labs, Cochin (c) <2013> <info@cubettech.com>
- 
+
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- 
+
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- 
+
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,31 +35,31 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var exphbs  = require('express3-handlebars');
+var helmet  = require('helmet');
 var fs = require('fs');
 var hbs = require('handlebars');
 var engines = require('consolidate');
-var exphbs = require('express3-handlebars');
-var helmet = require('helmet');
 var io = require('socket.io');
 global.app = express();
 
 global.sleekConfig = {};
-require(path.join(__dirname, 'application/config/config.js'));
-app.configure(function() {
+require(path.join(__dirname,'application/config/config.js'));
+app.configure(function(){
     app.set('env', sleekConfig.env);
     // all environments
     app.set('port', process.env.PORT || sleekConfig.appPort);
+    app.set('host', sleekConfig.appHost ? sleekConfig.appHost : 'localhost');
     app.set('views', path.join(__dirname, 'application/views'));
     app.set('view engine', 'handlebars');
-    //app.set("view options", {layout: path.join(__dirname, 'application/views/mylayout.html')});
-    app.engine('html', exphbs({defaultLayout: 'default',
-        layoutsDir: path.join(__dirname, 'application/layouts/'), extname: ".html"})
-            );
-    app.use(express.favicon(path.join(__dirname, 'public/favicon.ico')));
+    app.engine('html',  exphbs({defaultLayout: 'default',
+                                layoutsDir: path.join(__dirname, 'application/layouts/'), extname:".html"})
+                ); 
+    app.use(express.favicon(path.join(__dirname, 'public/favicon.ico'))); 
     app.use(express.logger('dev'));
     app.use(express.json());
-    app.use(express.urlencoded());
-    app.use(helmet.xframe('sameorigin'));
+    app.use(express.urlencoded());  
+    app.use(helmet.xframe());
     app.use(helmet.iexss());
     app.use(helmet.contentTypeOptions());
     app.use(helmet.cacheControl());
@@ -69,11 +69,13 @@ app.configure(function() {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'uploads')));
     app.set('strict routing');
-    helmet.xframe('sameorigin');
+
+    
 });
 
-
-//require('./system/core/sleek.js')(app);
+//set Site url
+//global.sleekConfig.siteUrl = app.get('host')+':'+app.get('port');
+//get configs
 var sFolderPath = path.join(__dirname, 'install');
 var cur_directory = path.join(__dirname, '');
 fs.exists(sFolderPath, function(exists) {
@@ -84,23 +86,21 @@ fs.exists(sFolderPath, function(exists) {
         require('./system/install/route.js')(app,sFolderPath,cur_directory);
     }
 });
-
-
-
-//get configs
-app.set('port', process.env.PORT || sleekConfig.appPort);
-
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
+} else {
+    //prevent crash
+    process.on('uncaughtException', function (exception) {
+        console.log(exception);
+    });
 }
-//get controller routes
+
 var server = http.createServer(app);
 try {
     global.sio = io.listen(server, {log: false});
-
-    server.listen(app.get('port'), function() {
-        console.log('Cubetboard is now running at port ' + app.get('port'));
+    server.listen(app.get('port'), function(){
+      console.log('server listening on port ' + sleekConfig.siteUrl);
     });
 } catch (e) {
     system.log(e);

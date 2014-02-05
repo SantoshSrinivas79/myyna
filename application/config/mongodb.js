@@ -8,9 +8,9 @@
 
 module.exports = {
     //dbHost: '123.63.124.181',
-    dbHost: '192.168.1.65',
+    dbHost: 'localhost',
     dbPort: '',
-    dbName: 'cubetBoard',
+    dbName: 'myyna',
     dbUser: '',
     dbPass: ''  
 }
