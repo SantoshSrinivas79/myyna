@@ -364,7 +364,7 @@ var userController = {
 
                             UserModel.InitialSettings(ress[0]._id, function(callback) {
                             
-                                var html = '<b>Hi ' + form_data.name + ', </b><br/>Your CubetBoard User name and password.<br/>\n\
+                                var html = '<b>Hi ' + form_data.name + ', </b><br/>Your Myyna User name and password.<br/>\n\
                                      UserName: '+form_data.email+' <br/>\
                                      Password: '+pwd+' <br/>   ';
         
@@ -719,7 +719,7 @@ var userController = {
 
                                 HELPER.socketNotification('', 'notification', html, maildata, true);
                           
-                                var html = '<b>Hi ' + form_data.name + ', </b><br/>Your CubetBoard User name and password.<br/>\n\
+                                var html = '<b>Hi ' + form_data.name + ', </b><br/>Your Myyna User name and password.<br/>\n\
                                      UserName: '+useremail+' <br/>\
                                      Password: '+pwd+' <br/>   ';
         
