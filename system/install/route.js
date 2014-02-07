@@ -17,6 +17,7 @@ var hbs = require('handlebars');
 var io = require('socket.io');
 var http = require('http');
 var ncp = require('ncp').ncp;
+
 module.exports = function(app, sFolderPath, directory) {
 
     app.post('/installApp', function(req, res) {

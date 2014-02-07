@@ -1,4 +1,42 @@
 
+3.8.6 / 2014-01-30
+==================
+
+ * fixed; setting readPreferences #1895
+
+3.8.5 / 2014-01-23
+==================
+
+ * fixed; ssl setting when using URI #1882
+ * fixed; findByIdAndUpdate now respects the overwrite option #1809 [owenallenaz](https://github.com/owenallenaz)
+
+3.8.4 / 2014-01-07
+==================
+
+ * updated; mongodb driver to 1.3.23
+ * updated; mquery to 0.4.1
+ * updated; mpromise to 0.4.3
+ * fixed; discriminators now work when selecting fields #1820 [daemon1981](https://github.com/daemon1981)
+ * fixed; geoSearch with no results timeout #1846 [ghartnett](https://github.com/ghartnett)
+ * fixed; infitite recursion in ValidationError #1834 [chetverikov](https://github.com/chetverikov)
+
+3.8.3 / 2013-12-17
+==================
+
+ * fixed; setting empty array with model.update #1838
+ * docs; fix url
+
+3.8.2 / 2013-12-14
+==================
+
+ * fixed; enum validation of multiple values #1778 [heroicyang](https://github.com/heroicyang)
+ * fixed; global var leak #1803
+ * fixed; post remove now fires on subdocs #1810
+ * fixed; no longer set default empty array for geospatial-indexed fields #1668 [shirish87](https://github.com/shirish87)
+ * fixed; model.stream() not hydrating discriminators correctly #1792 [j](https://github.com/j)
+ * docs: Stablility -> Stability [nikmartin](https://github.com/nikmartin)
+ * tests; improve shard error handling
+
 3.8.1 / 2013-11-19
 ==================
 
