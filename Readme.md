@@ -30,7 +30,7 @@ Run the following commands:
 NB: node version can be checked from terminal by $ node -v
 
 use this link for further information: 
-```http://howtonode.org/how-to-install-nodejs```
+http://howtonode.org/how-to-install-nodejs
 
 
 ## Install Mongodb 
@@ -42,7 +42,7 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 `sudo apt-get update`
 `sudo apt-get install mongodb-10gen`
 use this link for further information:  
-```http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/```
+http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
 
 ## Install ImageMagick
@@ -68,7 +68,7 @@ For example,
 
 3.Please fill all the details like port you want to run the application, database credentials, database name, admin username, admin  password etc.
 
-4.Be sure to provide the correct site url. If you are running on a local system, site url will be ```http://localhost:3000``` or ```http://192.168.1.1:3000``` , assuming your port is 3000 & local ip is 192.168.1.1. Or if you’ve configured a domain for your application, just give that url, for example, ```http://www.example.com```
+4.Be sure to provide the correct site url. If you are running on a local system, site url will be http://localhost:3000 or http://192.168.1.1:3000 , assuming your port is 3000 & local ip is 192.168.1.1. Or if you’ve configured a domain for your application, just give that url, for example, http://www.example.com
 
 5.If you need support to host application on a domain, please feel free to contact our support team.
 
@@ -81,13 +81,13 @@ sudo node app.js
 nohup node app &
 
   9. Visit your site url to see it in action 
-eg:-``` http://localhost:3000 or http://example.com```
+eg:-http://localhost:3000 or http://example.com
 
 ##See your admin section
 
 Myyna application includes an admin panel, to control your site.  Here you can manage users, admin users, site name & logo, meta descriptions, social connects and all. Admin section can be accessed by navigating to your siteurl/admin, with  username and password selected at the installation time.
 
-eg: ```http://example.com/admin```
+eg: http://example.com/admin
 
 
 
