@@ -9,9 +9,9 @@
 //port number
 global.sleekConfig.appPort = 3000;
 
-global.sleekConfig.appHost = '192.168.1.65:3000';
+global.sleekConfig.appHost = 'localhost';
 
-global.sleekConfig.siteUrl = 'http://192.168.1.65:3000';
+global.sleekConfig.siteUrl = 'http://localhost:3000';
 global.sleekConfig.env = 'development';
 
 //global.sleekConfig.configLibs = [];
