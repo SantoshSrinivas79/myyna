@@ -154,7 +154,7 @@ module.exports = function(app, sFolderPath, directory) {
                                     db.authenticate(config.dbUser, config.dbPass, function(err, ress) {
                                         insertdta(db_sample,db_name,dta,res,db, function(){
                                             sio.sockets.emit('status_data', {
-                                                msg: 'New site Url Is '+base_url+":"+port, 
+                                                msg: 'New site Url Is '+base_url, 
                                                 last:true
                                             });
                                         });
