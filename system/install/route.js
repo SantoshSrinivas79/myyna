@@ -103,8 +103,8 @@ module.exports = function(app, sFolderPath, directory) {
                 var new_base_url = base_url.replace('http://', '');
                 base_url = "http://"+new_base_url;
                 var result = data.replace(sleekConfig.appPort, port);
-                var result = result.replace(sleekConfig.appHost, old_baseurl);
-                var result = result.replace(sleekConfig.siteUrl, base_url + ":" + port);
+               // var result = result.replace(sleekConfig.appHost, old_baseurl);
+                var result = result.replace(sleekConfig.siteUrl, base_url);
 
                 fs.writeFile(config_path, result, 'utf8', function(err) {
                     if (err)
@@ -164,7 +164,7 @@ module.exports = function(app, sFolderPath, directory) {
                                    
                                     insertdta(db_sample,db_name,dta,res,db, function(){
                                         sio.sockets.emit('status_data', {
-                                            msg: 'New site Url Is '+base_url+":"+port, 
+                                            msg: 'New site Url Is '+base_url, 
                                             last:true
                                         });
                                     });

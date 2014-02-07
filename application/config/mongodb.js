@@ -10,7 +10,7 @@ module.exports = {
     //dbHost: '123.63.124.181',
     dbHost: 'localhost',
     dbPort: '',
-    dbName: 'myyna',
+    dbName: 'rfgtfrgr',
     dbUser: '',
     dbPass: ''  
 }

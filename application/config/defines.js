@@ -8,17 +8,17 @@
  */
 
 global.DEFINES = {
-    IMAGE_PATH: sleekConfig.siteUrl + '/pins/images/',
+    IMAGE_PATH: '/pins/images/',
     IMAGE_PATH_REL: appPath + '/uploads/pins/images/',
-    IMAGE_PATH_ORIGINAL: sleekConfig.siteUrl + '/pins/images/',
+    IMAGE_PATH_ORIGINAL: '/pins/images/',
     IMAGE_PATH_ORIGINAL_REL: appPath + '/uploads/pins/images/',
-    IMAGE_PATH_SMALL: sleekConfig.siteUrl + '/pins/images/small/',
+    IMAGE_PATH_SMALL:  '/pins/images/small/',
     IMAGE_PATH_SMALL_REL: appPath + '/uploads/pins/images/small/',
-    IMAGE_PATH_THUMB: sleekConfig.siteUrl + '/pins/images/thumb/',
+    IMAGE_PATH_THUMB: '/pins/images/thumb/',
     IMAGE_PATH_THUMB_REL: appPath + '/uploads/pins/images/thumb/',
-    AUDIO_PATH: sleekConfig.siteUrl + '/pins/audio/',
+    AUDIO_PATH: '/pins/audio/',
     AUDIO_PATH_REL: appPath + '/uploads/pins/audio/',
-    VIDEO_PATH: sleekConfig.siteUrl + '/pins/videos/',
+    VIDEO_PATH:  '/pins/videos/',
     VIDEO_PATH_REL: appPath + '/uploads/pins/videos/',
     USER_IMAGE_PATH: appPath + '/uploads/user_images/',
     USER_IMAGE_WIDTH:'140',
