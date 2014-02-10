@@ -647,3 +647,6 @@ a.desc:hover{
 .cubt_folw:hover{color: rgb(50,50,50); text-decoration: none;}
 .cubt_folw:active, .cubt_folw:focus{color: rgb(255,255,255); text-decoration: none;}
 .cubt_un_folw{color: rgb(50,50,50) !important;}
+.disable-like{
+    pointer-events:none;
+}

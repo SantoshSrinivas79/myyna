@@ -137,7 +137,8 @@
 
                                     <!-- Tab panes -->
                                     <div class="tab-content tab_ul">
-
+                                      
+                                         <img src="/install-loader.GIF" id="install-loader" style="width:5.5%; text-align: center;"/>
 
                                         <div class="tab-pane active" id="Agreement">
                                             <h3>License Agreement</h3>
@@ -263,7 +264,7 @@
                                                 <div class="col-md-10 ">
                                                     <div class="input-group margin form install-label">
 
-                                                        <input class="form-control" placeholder="Name" type="text" required  name="db_name" id="db_name" value="cubetBoard"/>                                   
+                                                        <input class="form-control" placeholder="Name" type="text" required  name="db_name" id="db_name" value="myyna"/>                                   
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,7 +361,7 @@
                                             <input type="submit" id="extract" class="submit nextbutton" value="Next">
                                             <input type="button" id="back2" class="submit" value="Back">  
                                         </div>
-                                        <div class="tab-pane " id="final_state">
+                                        <div class="tab-pane " id="final_state">                                         
                                             <div class="fstate">
                                                 <ul class="status-head">                                                                                           
                                                 </ul>
@@ -430,6 +431,7 @@
 
             $(function() {
                 
+                $('#install-loader').hide();
                 $('#site_logo').change(function() {
                     $('.file_label').html($('input[type=file]').val());
                 });
@@ -468,6 +470,7 @@
                         $('.fstate ul').append(htm);
                         
                         if(data.last){
+                            //$('#install-loader').hide();
                             socket.emit('die');
 				
                         }
@@ -483,6 +486,7 @@
    
                     if(data.res==1){
                         // $('.fstate').hide();
+                        $('#install-loader').hide();
                         $('h2').text('CONGRATULATIONS');
                         $('#finish').show();
                         socket.emit('die');
@@ -563,6 +567,7 @@
                     {
                         e.preventDefault();
                         $('#Settings').hide();
+                        $('#install-loader').show();
                    
                         if($("#notify").is(':checked')){
                             $.ajax({

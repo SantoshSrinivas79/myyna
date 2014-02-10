@@ -553,6 +553,7 @@ function pinlike(pin_id, elem, pop)
 
                 $(elem).attr("onClick", clickFunction);
                 $(elem).addClass("active");
+              //  $(elem).addClass("disable-like");
                 // $("#like_" + pop + pin_id).attr('id', "unlike_" + pop + pin_id);
                 if(pop){
                     var count_elem = $(elem).children('span');
@@ -590,7 +591,8 @@ function pinUnlike(pin_id, elem, pop) {
         success: function(data) {
             $(elem).attr("onClick", clickFunction);
             $(elem).removeClass("active");
-            
+
+     //$(elem).addClass("disable-like");
             if(pop){
                 var count_elem = $(elem).children('span');
             } else {

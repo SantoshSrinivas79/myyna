@@ -15,18 +15,6 @@ Run the following commands:<br>
 `make`<br>
 `sudo make install`
 
-###Install MongoDB with Homebrew
-
-Homebrew [1] installs binary packages based on published “formulae”. The following commands will update brew to the latest packages and install MongoDB.
-
-In a terminal shell, use the following sequence of commands to update``brew`` to the latest packages and install MongoDB:<br>
-
-`brew update`<br>
-`brew install mongodb`<br>
-
-use this link for further information: 
-http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
-
 ###Ubuntu
 
 1.Install the dependencies:<br>
@@ -56,6 +44,19 @@ http://howtonode.org/how-to-install-nodejs
 `sudo apt-get install mongodb-10gen`
 use this link for further information:  
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+
+###Install MongoDB with Homebrew
+
+Homebrew [1] installs binary packages based on published “formulae”. The following commands will update brew to the latest packages and install MongoDB.
+
+In a terminal shell, use the following sequence of commands to update``brew`` to the latest packages and install MongoDB:<br>
+
+`brew update`<br>
+`brew install mongodb`<br>
+
+use this link for further information: 
+http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
+
 
 
 ### Install ImageMagick
