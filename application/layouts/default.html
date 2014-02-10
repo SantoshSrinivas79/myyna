@@ -28,6 +28,8 @@
         <![endif]-->
         <!--<link rel="stylesheet" href="/mplayer/css/style1.css" media="screen" />-->
         {{> getSleekScripts}}
+<!--        <link rel="chrome-webstore-item"
+    href="https://chrome.google.com/webstore/detail/iocdfiikhpcdejdpbkpnfnchjdmcianf">-->
         <link rel="stylesheet" href="/default/css/loader.css" />
         <link rel="stylesheet" href="/default/css/fontello.css" />
         <script type="text/javascript" src="/default/js/jquery.masonry.min.js"></script>	
@@ -60,6 +62,9 @@
 //          }
 //          
 //           if($.browser.chrome){
+//               if (chrome.app.isInstalled) {
+//  document.getElementById('chrome_extention').style.display = 'none';
+//}
 //             $("a#firefox_extention").attr("href", "javascript:;");    
 //          }
             modalInit();

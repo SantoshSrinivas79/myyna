@@ -9,10 +9,10 @@ Otherwise, follow the below steps:
 Install Xcode.
 Install git.
 Run the following commands:
-`git clone git://github.com/ry/node.git`
-`cd node`
-`./configure`
-`make`
+`git clone git://github.com/ry/node.git`<br>
+`cd node`<br>
+`./configure`<br>
+`make`<br>
 `sudo make install`
 
 ##Ubuntu
@@ -21,10 +21,10 @@ Run the following commands:
 *sudo apt-get install g++ curl libssl-dev apache2-utils
 *sudo apt-get install git-core
 2.Run the following commands:
-`git clone git://github.com/ry/node.git`
-`cd node`
-`./configure`
-`make`
+`git clone git://github.com/ry/node.git`<br>
+`cd node`<br>
+`./configure`<br>
+`make`<br>
 `sudo make install`
 
 NB: node version can be checked from terminal by $ node -v
@@ -39,7 +39,7 @@ http://howtonode.org/how-to-install-nodejs
 
 echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 
-`sudo apt-get update`
+`sudo apt-get update`<br>
 `sudo apt-get install mongodb-10gen`
 use this link for further information:  
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
@@ -57,7 +57,7 @@ http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 It is mandatory, since we need to rewrite the config files & uploads directory.
 ##Open terminal, and navigate to project directory & Run
 For example,
-`cd Projects/myyna`
+`cd Projects/myyna`<br>
 `node app`
 
 ##Install Myyna
@@ -80,7 +80,7 @@ sudo node app.js
 8.Then, go back to terminal and run the project again as we stopped it to change the configurations. You can either start normally using node app or, use nohup to avoid process exit on closing terminal.
 nohup node app &
 
-  9. Visit your site url to see it in action 
+9. Visit your site url to see it in action 
 eg:-http://localhost:3000 or http://example.com
 
 ##See your admin section
