@@ -3,7 +3,7 @@
 #log_in_container header{text-align:right; color:#000; top:0; width:100%; position:absolute; z-index:999;}
 #log_in_container header .form{opacity:.8; margin:20px 0 0;}
 #log_in_container header .form input{width:40%; margin-left:10px; padding:8px 10px; color:rgb(113,113,113); border:solid 1px #ccc; background:rgb(253, 253, 253); box-shadow:0 0 2px rgba(0, 0, 0, 0.07) inset;}
-#log_in_container header .form .submit{background:rgb(254,189,59) !important; border-radius:0; color:#FFF; margin:-2px 0 0; padding:9px 10px; border:0;}
+#log_in_container header .form .submit{background:rgb(254,189,59) !important; border-radius:0; color:#FFF; margin:-4px 0 0;padding: 8px 10px 9px; border:0;}
 #log_in_container footer{text-align:center; color:#000; bottom:0; width:100%; position:absolute; z-index:999;}
 #log_in_container footer h1{padding:10px 0;font-family: 'Open Sans', sans-serif !important; font-size:20px; width:50%; float:left;  margin:0 10px 0; text-align:right;}
 #log_in_container footer h2{padding:12px 0;font-family: 'Open Sans', sans-serif !important; font-size:16px; font-weight:600; width:30%; float:left;  margin:0 0 0 10px; text-align:left;}

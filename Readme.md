@@ -1,43 +1,56 @@
 ![Myyna, pintrest clone](http://www.myyna.com/wp-content/uploads/2014/02/band_logo11.png)
 
-##Install Node.js version 0.8 or above (stable version preferred)
+#Install Node.js version 0.8 or above (stable version preferred)
 
-##Mac
+###Mac
 
 If you're using the excellent homebrew package manager, you can install node with one command: brew install node.
 Otherwise, follow the below steps:
 Install Xcode.
 Install git.
-Run the following commands:
+Run the following commands:<br>
 `git clone git://github.com/ry/node.git`<br>
 `cd node`<br>
 `./configure`<br>
 `make`<br>
 `sudo make install`
 
-##Ubuntu
+###Install MongoDB with Homebrew
 
-1.Install the dependencies:
-*sudo apt-get install g++ curl libssl-dev apache2-utils
-*sudo apt-get install git-core
-2.Run the following commands:
+Homebrew [1] installs binary packages based on published “formulae”. The following commands will update brew to the latest packages and install MongoDB.
+
+In a terminal shell, use the following sequence of commands to update``brew`` to the latest packages and install MongoDB:<br>
+
+`brew update`<br>
+`brew install mongodb`<br>
+
+use this link for further information: 
+http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
+
+###Ubuntu
+
+1.Install the dependencies:<br>
+`sudo apt-get install g++ curl libssl-dev apache2-utils`<br>
+`sudo apt-get install git-core`<br>
+2.Run the following commands:<br>
 `git clone git://github.com/ry/node.git`<br>
 `cd node`<br>
 `./configure`<br>
 `make`<br>
 `sudo make install`
 
-NB: node version can be checked from terminal by $ node -v
+NB: node version can be checked from terminal by <br>
+`$ node -v`
 
 use this link for further information: 
 http://howtonode.org/how-to-install-nodejs
 
 
-## Install Mongodb 
+### Install Mongodb 
 
 `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10`
 
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+`echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'` | `sudo tee /etc/apt/sources.list.d/mongodb.list`
 
 `sudo apt-get update`<br>
 `sudo apt-get install mongodb-10gen`
@@ -45,20 +58,20 @@ use this link for further information:
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
 
-## Install ImageMagick
+### Install ImageMagick
 
 `sudo apt-get install imagemagick`
 
 
-## Download & extract myyna to your project folder.
+### Download & extract myyna to your project folder.
 
 
-##Provide read and write permission to config & uploads folder
+###Provide read and write permission to config & uploads folder
 It is mandatory, since we need to rewrite the config files & uploads directory.
-##Open terminal, and navigate to project directory & Run
-For example,
+###Open terminal, and navigate to project directory & Run
+For example,<br>
 `cd Projects/myyna`<br>
-`node app`
+`node app`<br>
 
 ##Install Myyna
 
@@ -83,7 +96,7 @@ nohup node app &
 9. Visit your site url to see it in action 
 eg:-http://localhost:3000 or http://example.com
 
-##See your admin section
+###See your admin section
 
 Myyna application includes an admin panel, to control your site.  Here you can manage users, admin users, site name & logo, meta descriptions, social connects and all. Admin section can be accessed by navigating to your siteurl/admin, with  username and password selected at the installation time.
 
