@@ -52,6 +52,12 @@ $(function() {
        }   
     });
     
+    $('#signupform').keyup(function(e){
+       if(e.which == 13) {
+           $('#signupButton').click();
+       }   
+    });
+    
     /* to clear pop up contents on each close */
     $("#myModal,#Forgot").on('hidden.bs.modal', function () {
         $("#signupform").get(0).reset();

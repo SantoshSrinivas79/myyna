@@ -137,9 +137,9 @@
 
                                     <!-- Tab panes -->
                                     <div class="tab-content tab_ul">
-                                      
-                                         <img src="/install-loader.GIF" id="install-loader" style="width:5.5%; text-align: center;"/>
-
+                                        <div id="install-loader" style="text-align: center;">
+                                         <img src="/install-loader.GIF"  style="width:5.5%; text-align: center;"/>
+                                        </div>
                                         <div class="tab-pane active" id="Agreement">
                                             <h3>License Agreement</h3>
                                             <div class="terms">
@@ -197,9 +197,7 @@
 
                                         <div class="tab-pane" id="Config">
                                             <h3>Configuration</h3>
-                                            <div id="permission" style="color:red">
-                                                Please provide read and write permission to your config and db files and refresh.
-                                            </div>
+                                            <div id="permission" style="color:red"> </div>
                                             <div class="row">
                                                 <div class="col-md-2 ">                                            
                                                     <label class="input-label">Application Port</label>
@@ -368,7 +366,7 @@
                                             </div>
                                             <div id="finish" class="final-msg">
                                                 <div class="restart-msg">Installed successfully</div>
-                                                <p class="restart-msg">Restart and feel the awesome.</p>
+                                                <p class="restart-msg">Restart your node application and feel the awesome.</p>
 
                                                 <div class="comm-data">
                                                    Please use this form to provide feedback ,
@@ -402,14 +400,7 @@
                                             </div>
                                         </div>
 
-
                                     </div>
-
-
-
-
-
-
 
 
                                 </div>
@@ -477,9 +468,6 @@
                     });
                 });
                 
-                $('#permission').hide();
-
-
                 //form submit
                 $('#installform').ajaxForm(function(data) { 
                     $('#final_state').show();
@@ -502,30 +490,6 @@
                         $('#Agreement').hide();
                         $('#Settings').hide();
                         $('#Config').show();
-                               
-                        $.ajax({
-                            url: '/permissioncheck',
-                            type: 'post',
-                            dataType: 'json',
-                            success: function(response) {
-
-                                if (response.res == 0)
-                                {
-                                                              
-                                    $('#permission').show();
-                                    $('#second_step').hide();
-                                }
-                                if (response.res == 1)
-                                {
-                                    $('#permission').hide();
-                                    $('#second_step').show();
-                                }
-
-                            },
-                            error: function(jqxhr, status, error) {
-                                //                        alert('e' + error);
-                            }
-                        });
                     }
                     else {
                         return false;
@@ -534,13 +498,41 @@
 
 
                 $('#second_step').click(function() {
-                    if ($('#installform').valid())
-                    {
-                        window.localStorage.removeItem('cubet_install_id');
-                        var port = $('#app_port').val();
-                        $('#Agreement').hide();
-                        $('#Settings').show();
-                        $('#Config').hide();
+                    if ($('#installform').valid()) {
+                      
+                        $.ajax({
+                            url: '/permissioncheck',
+                            type: 'post',
+                            dataType: 'json',
+                             data: {
+                                    "port": $('#app_port').val(), 
+                                    "dbhost": $('#db_host').val(), 
+                                    "dbuser": $('#db_user').val(), 
+                                    "dbpass": $('#db_password').val(),
+                                    "dbname": $('#db_name').val()
+                                },
+                            success: function(response) {
+
+                                if (response.res == 3)
+                                {
+                                    window.localStorage.removeItem('cubet_install_id');
+                                    var port = $('#app_port').val();
+                                    $('#Agreement').hide();
+                                    $('#Settings').show();
+                                    $('#Config').hide();      
+                                }
+                                if (response.res == 0) {
+                                    $('#permission').html("Please provide read and write permission to config.js, defines.js, mongodb.js in your '/application/config' folder & '/uploads' folder.");
+                                } else if (response.res == 2) {
+                                    $('#permission').html('Please check your database settings!');
+                                }
+
+                            },
+                            error: function(jqxhr, status, error) {
+                                //                        alert('e' + error);
+                            }
+                        });
+                        
                       
                     }
                     else {

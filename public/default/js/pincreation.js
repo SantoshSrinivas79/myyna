@@ -1,13 +1,4 @@
 $(document).ready(function() {
-// var tpe =  window.location.pathname;
-//     arr =  tpe.split('/');
-//     alert(arr[0]);
-//     alert(arr[1]);
-//     alert(arr[2]);
-    /* to clear pop up contents */    
-    $('body').on('hidden.bs.modal', '.modal', function () {
-        //$(this).html('');
-    });
     
     //$('.social_image').hide();
     $('.sharegr').hover(function() {
@@ -534,6 +525,7 @@ function boardUnfollow(board_id, user_id)
 
 function pinlike(pin_id, elem, pop)
 {
+     $(elem).addClass("disable-like");
     if(pop){
         var clickFunction = "pinUnlike('" + pin_id + "', this, 'pop')";
     } else {
@@ -568,12 +560,16 @@ function pinlike(pin_id, elem, pop)
         },
         error: function(jqxhr, status, error) {
         //alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $(elem).removeClass("disable-like");
         }
     });
 }
 
 function pinUnlike(pin_id, elem, pop) {
     
+    $(elem).addClass("disable-like");
     if(pop){
         var clickFunction = "pinlike('" + pin_id + "', this, 'pop')";
     } else {
@@ -590,9 +586,8 @@ function pinUnlike(pin_id, elem, pop) {
         dataType: 'json',
         success: function(data) {
             $(elem).attr("onClick", clickFunction);
-            $(elem).removeClass("active");
-
-     //$(elem).addClass("disable-like");
+            $(elem).removeClass("active");  
+            
             if(pop){
                 var count_elem = $(elem).children('span');
             } else {
@@ -604,6 +599,9 @@ function pinUnlike(pin_id, elem, pop) {
         },
         error: function(jqxhr, status, error) {
         // alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $(elem).removeClass("disable-like");
         }
     });
 

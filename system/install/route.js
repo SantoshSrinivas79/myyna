@@ -17,6 +17,7 @@ var hbs = require('handlebars');
 var io = require('socket.io');
 var http = require('http');
 var ncp = require('ncp').ncp;
+var async = require('async');
 
 module.exports = function(app, sFolderPath, directory) {
 
@@ -104,7 +105,7 @@ module.exports = function(app, sFolderPath, directory) {
                 var new_base_url = base_url.replace('http://', '');
                 base_url = "http://"+new_base_url;
                 var result = data.replace(sleekConfig.appPort, port);
-               // var result = result.replace(sleekConfig.appHost, old_baseurl);
+                // var result = result.replace(sleekConfig.appHost, old_baseurl);
                 var result = result.replace(sleekConfig.siteUrl, base_url);
 
                 fs.writeFile(config_path, result, 'utf8', function(err) {
@@ -151,7 +152,7 @@ module.exports = function(app, sFolderPath, directory) {
                                     'user_data':user_data,
                                     'settings':settings
                                 }
-                                if (!config.dbUser && !config.dbPass) {
+                                if (config.dbUser && config.dbPass) {
                                     db.authenticate(config.dbUser, config.dbPass, function(err, ress) {
                                         insertdta(db_sample,db_name,dta,res,db, function(){
                                             sio.sockets.emit('status_data', {
@@ -214,9 +215,9 @@ module.exports = function(app, sFolderPath, directory) {
             //child = exec('mongodump -d cbt -o petsbackup', 
             function(error, stdout, stderr) {      // one easy function to capture data/errors
 
-                console.log('stderr: ' + stderr);
+               // console.log('stderr: ' + stderr);
                 if (error !== null) {
-                    console.log('exec error: ' + error);
+                  //  console.log('exec error: ' + error);
                 }
                         
                 var collection = db.collection('adminuser');
@@ -239,7 +240,7 @@ module.exports = function(app, sFolderPath, directory) {
                 fs.rename(sFolderPath, directory + '/_install', function(err) {
                     if (err)
                         throw err;
-                    console.log('renamed complete');
+                    console.log('install directory rename to _install');
                     var send_data ={
                         "res":1
                     }
@@ -254,50 +255,69 @@ module.exports = function(app, sFolderPath, directory) {
 
     app.post('/permissioncheck', function(req, res) {
         var cur_pat = path.join(__dirname);
-        var config_path = cur_pat.replace('system/install', '') + 'application/config/config.js';
+        var app_path = cur_pat.replace('system/install', '');
         var check =0;
-        var db_path = cur_pat.replace('system/install', '') + 'application/config/mongodb.js';
-        fs.stat(config_path, function(error, stats) {
-            if (stats.mode != '33206')
-            {
-               
-                var data={
-                    "res":0
-                }
-                check =1;
-            }
-            else{
-                var data={
-                    "res":1
-                } 
-                check =0;
-            }
-            if(check==1)
-            {
-                res.send(data);
-            }
-        });
        
-        if(check==0)
-        {
-            fs.stat(db_path, function(error, stats) {
-                console.log(stats.mode);
-                if (stats.mode != '33206')
-                {
-                    var data={
-                        "res":0
+        var db_host = req.body.dbhost;
+        var dbPort = '';
+        var db_name = req.body.dbname;
+        var dbUser = req.body.dbuser;
+        var dbPass = req.body.dbpass;
+         var data = {
+            res:0
+        };
+         var mongo = require('mongodb');
+        async.eachSeries(
+            // Pass items to iterate over
+            ['application/config/config.js', 'application/config/mongodb.js',
+            'application/config/defines.js', 'uploads'],
+            // Pass iterator function that is called for each item
+            function(filename, cbk) {              
+                fs.stat(app_path + filename, function(error, stats) {
+                   
+                    if (stats.mode != '33206' && stats.mode != '16895') {
+
+                        data.res = 0;
+                        check = 1;
+                    } else{
+                        data.res = 1;
+                        check = 0;
                     }
+                    cbk();
+                    
+                });
+            },
+            // Final callback after each item has been iterated over.
+            function(err) {
+                
+                if(check == 0){
+                    mongo.connect('mongodb://' + (db_host ? db_host : 'localhost') + ':' + (dbPort ? dbPort : '27017') + '/' + db_name, function(err, db) {
+                       
+                       if (err) {
+                            data.res = 2;
+                        } else {
+                            data.res = 3;   
+                        }
+                        if (dbUser && dbPass) {
+                            db.authenticate(dbUser, dbPass, function(err2, ress) {
+                                if(err2){
+                                    data.res = 2;
+                                } else {
+                                    data.res = 3;
+                                }
+                                res.send(data);
+                            });
+                        } else {
+                            res.send(data);
+                        }
+
+                    });
+                } else {
+                    
+                    res.send(data);
                 }
-                else{
-                    var data={
-                        "res":1
-                    } 
-                }
-                console.log(data);
-                res.send(data);
             });
         
-        }
     
     });
     

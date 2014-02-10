@@ -44,14 +44,7 @@
     <body>
         {{{body}}}
         <div class="loader">
-            <div class="demo-3 demo-dark">
-                <ul class="bokeh">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
+            <img src="/default/images/ajax-loader.gif"/>
         </div>
     </body>	
 
@@ -101,7 +94,6 @@
             var tempScrollTop;
  
             $('#myModal').on('show.bs.modal', function (e) {
-                $('.loader').show();
                 tempScrollTop = $(window).scrollTop();
                 $('html').addClass('modal-open');
                 var url =  window.localStorage.getItem('cbt_parenturl') ; 
@@ -185,6 +177,7 @@
 
         function modalInit(){
             $('body').on('click', '*[data-toggle="modal"]',function(e){
+                $('.loader').show();
                 e.stopPropagation();
                 e.preventDefault();
                 var id = $(this).attr('data-target');
@@ -194,7 +187,12 @@
                     link += '/'+ $(this).attr('data-extend');
                 }
                 
-                $(id).modal('show')
+                $(id).modal('show').on('hide.bs.modal',function(){
+                    $(this).html('');
+                }).on('shown.bs.modal', function () {                       
+                    setTimeout("$('.loader').hide();",100);        
+                });
+                
                 $(id).load(link);
                 
 
@@ -208,7 +206,7 @@
                     window.localStorage.setItem('cbt_parenturl', url);
                     window.history.pushState({},"", str);
                 }
-            });
+            });            
         }
         
         function popup_functions() {
@@ -328,9 +326,11 @@
                 
                 $('#myModal').niceScroll();
                 
-                imagesLoaded(document.querySelector('.boardMasonry'), function( instance ) {
-                    $('.boardMasonry').masonry('reload');
-                });   
+                if($('.boardMasonry').length > 0) {
+                    imagesLoaded(document.querySelector('.boardMasonry'), function( instance ) {
+                        $('.boardMasonry').masonry('reload');
+                    });   
+                } 
                 if($('.domainContainer').length > 0) {
                     imagesLoaded(document.querySelector('.domainContainer'), function( instance ) {
                         $('.domainContainer').masonry('reload');
@@ -348,8 +348,9 @@
                 $('.overflw_sectn').niceScroll({
                     horizrailenabled: false
                 });
-            },500);
-            $('.loader').hide();
+                $('.loader').hide();
+            },800);
+            
         }
         
     </script>

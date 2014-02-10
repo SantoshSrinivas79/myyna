@@ -20,22 +20,25 @@ jQuery(function() {
                     msg.pin_type == 'video') && (tpe == 'pins' || (tpe == 'user' && id==msg.data.user_id) || (tpe == 'category' && id==msg.data.category_id) || (tpe == 'board' && id==msg.data.board_id)))
                 {
 
-                    $('#container')
-                            .prepend(msg.str)
-                            .masonry('reload');
-                    $('#pop_up_container')
-                            .prepend(msg.str)
-                            .masonry('reload');
-                    $('audio').mediaelementplayer();
+                    if($('#container').find('#myCarousel2_'+msg.data._id).length <= 0){
 
-                    setTimeout(function() {
-                        $('#container').masonry('reload');
-                    }, 500);
+                        $('#container')
+                                .prepend(msg.str)
+                                .masonry('reload');
+                        $('#pop_up_container')
+                                .prepend(msg.str)
+                                .masonry('reload');
+                        $('audio').mediaelementplayer();
 
-                    setTimeout(function() {
-                        $('#container').masonry('reload');
-                    }, 1000);
-                  
+                        setTimeout(function() {
+                            $('#container').masonry('reload');
+                        }, 500);
+
+                        setTimeout(function() {
+                            $('#container').masonry('reload');
+                        }, 1000);
+                    
+                    }
                 }
             });
         }
