@@ -30,12 +30,15 @@
 
 <!--<span class="glyphicon glyphicon-heart date"></span>-->
 {{#if loggeduser_id}}
+
+{{#notifCond loggeduser_id creator}}
 {{#ifCond boardfollow '0'}}
         <a href="javascript:void(0)" class="cubt_folw" id="follow_{{_id}}" onclick="boardFollow('{{_id}}','{{creator}}')">Follow</a>
        {{/ifCond}}
        {{#ifCond boardfollow '1'}}
         <a href="javascript:void(0)" class="cubt_folw cubt_un_folw" id="unfollow_{{_id}}" onclick="boardUnfollow('{{_id}}','{{creator}}')">Unfollow</a>
        {{/ifCond}}
+       {{/notifCond}}
 {{/if}}
 
 

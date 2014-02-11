@@ -465,7 +465,8 @@ function follow_user(user_id)
 
 function boardFollow(board_id, user_id)
 {
-
+$("#follow_" + board_id).addClass("disable-like"); 
+$("#unfollow_" + board_id).addClass("disable-like");  
     $.ajax({
         url: '/followboard',
         data: {
@@ -489,13 +490,18 @@ function boardFollow(board_id, user_id)
         },
         error: function(jqxhr, status, error) {
             alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $("#follow_" + board_id).removeClass("disable-like");
+            $("#unfollow_" + board_id).removeClass("disable-like");              
         }
     });
 }
 
 function boardUnfollow(board_id, user_id)
 {
-
+$("#unfollow_" + board_id).addClass("disable-like");
+$("#follow_" + board_id).addClass("disable-like");
     $.ajax({
         url: '/unFollowBoard',
         data: {
@@ -519,6 +525,10 @@ function boardUnfollow(board_id, user_id)
         },
         error: function(jqxhr, status, error) {
             alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $("#unfollow_" + board_id).removeClass("disable-like");
+            $("#follow_" + board_id).removeClass("disable-like");            
         }
     });
 }
@@ -764,7 +774,8 @@ function setCookie()
 
 function userFollow(user_id, logged_id)
 {
-
+    $("#user_follow_" + user_id).addClass("disable-like");
+    $("#user_unfollow_" + user_id).addClass("disable-like");
     $.ajax({
         url: '/followuser',
         data: {
@@ -787,6 +798,10 @@ function userFollow(user_id, logged_id)
         },
         error: function(jqxhr, status, error) {
             alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $("#user_follow_" + user_id).removeClass("disable-like");    
+            $("#user_unfollow_" + user_id).removeClass("disable-like");
         }
     });
 }
@@ -794,7 +809,8 @@ function userFollow(user_id, logged_id)
 function userUnfollow(user_id, logged_id)
 {
    
-
+$("#user_unfollow_" + user_id).addClass("disable-like");  
+$("#user_follow_" + user_id).addClass("disable-like");   
     $.ajax({
         url: '/unFollowuser',
         data: {
@@ -817,6 +833,10 @@ function userUnfollow(user_id, logged_id)
         },
         error: function(jqxhr, status, error) {
             alert('e' + error);
+        },
+        complete: function(jqxhr, status, error) {
+            $("#user_unfollow_" + user_id).removeClass("disable-like");  
+            $("#user_follow_" + user_id).removeClass("disable-like");   
         }
     });
 }

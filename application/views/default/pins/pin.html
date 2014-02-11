@@ -28,12 +28,14 @@
                     {{!display follow button only for logged users}} 
                     
                     {{#if loggeduser_id}}
+                    {{#notifCond loggeduser_id creator}}
 {{#ifCond boardfollow '0'}}
         <a href="javascript:void(0)" class="cubt_folw" id="follow_{{board_id}}" onclick="boardFollow('{{board_id}}','{{creator}}')">Follow</a>
        {{/ifCond}}
        {{#ifCond boardfollow '1'}}
         <a href="javascript:void(0)" class="cubt_folw cubt_un_folw" id="unfollow_{{board_id}}" onclick="boardUnfollow('{{board_id}}','{{creator}}')">Unfollow</a>
        {{/ifCond}}
+       {{/notifCond}}
 {{/if}}
             </div>
         </div>

@@ -94,7 +94,9 @@
             var tempScrollTop;
  
             $('#myModal').on('show.bs.modal', function (e) {
-                tempScrollTop = $(window).scrollTop();
+                if(!$('html').hasClass('modal-open')){
+                    tempScrollTop = $(window).scrollTop();
+                }
                 $('html').addClass('modal-open');
                 var url =  window.localStorage.getItem('cbt_parenturl') ; 
                 if(typeof(url)=='undefined' || url==null) {

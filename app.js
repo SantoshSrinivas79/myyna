@@ -100,7 +100,7 @@ var server = http.createServer(app);
 try {
     global.sio = io.listen(server, {log: false});
     server.listen(app.get('port'), function(){
-      console.log('server listening on port ' + sleekConfig.siteUrl);
+      console.log('Myyna running at ' + sleekConfig.siteUrl);
     });
 } catch (e) {
     system.log(e);

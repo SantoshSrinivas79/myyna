@@ -6,11 +6,8 @@
  * @Date 23-10-2013
  */
 
-module.exports = {
-    //dbHost: '123.63.124.181',
-    dbHost: 'localhost',
-    dbPort: '',
-    dbName: 'myynasdas',
-    dbUser: '',
-    dbPass: ''  
-}
+module.exports = {"dbHost":"localhost", 
+"dbPort":"", 
+"dbName":"myynahn", 
+"dbUser":"arya", 
+"dbPass":"123456"}

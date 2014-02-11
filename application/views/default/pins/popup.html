@@ -286,12 +286,14 @@
                                 <div class="wells">
 <!--                                       <button type="button" class="btn btn-inverse btn-large btn-block">Follow Board</button>-->
                                 {{#if loggeduser_id}}
+                                {{#notifCond loggeduser_id pin.board_creator}}
                                         {{#ifCond pin.boardfollow '0'}}
                                         <a href="javascript:void(0)" class="btn btn-inverse btn-large btn-block" id="follow_{{pin.board_id}}" onclick="boardFollow('{{pin.board_id}}','{{pin.board_creator}}')">Follow</a>
                                        {{/ifCond}}
                                        {{#ifCond pin.boardfollow '1'}}
                                         <a href="javascript:void(0)" class="btn btn-inverse btn-large btn-block" id="unfollow_{{pin.board_id}}" onclick="boardUnfollow('{{pin.board_id}}','{{pin.board_creator}}')">Unfollow</a>
                                        {{/ifCond}}
+                                       {{/notifCond}}
                                 {{/if}}
                                 </div>
                             </div>

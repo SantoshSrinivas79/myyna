@@ -214,6 +214,7 @@ var boardController = {
                         'loggeduser_id':req.session.login_user_id,
                         category: result,
                         'user_image': userdetail[0].image
+                        
                     };
                     system.loadView(res, 'pins/boardlist', data);
                     system.setPartial('pins/pinheader', 'pinheader');

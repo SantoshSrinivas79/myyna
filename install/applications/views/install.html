@@ -107,7 +107,7 @@
 
 
             </div>
-            <div class="col-md-4 cubet_board"><a href="javascript:;" class="logo"><img src="/site-logo.png" ></a></div>
+            <div class="col-md-4 cubet_board"><a href="javascript:;" class="logo"><img src="/default/images/install-logo.png" ></a></div>
 
         </div>
 
@@ -138,7 +138,7 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content tab_ul">
                                         <div id="install-loader" style="text-align: center;">
-                                         <img src="/install-loader.GIF"  style="width:5.5%; text-align: center;"/>
+                                         <img src="/default/images/install-loader.GIF"  style="width:5.5%; text-align: center;"/>
                                         </div>
                                         <div class="tab-pane active" id="Agreement">
                                             <h3>License Agreement</h3>
@@ -340,7 +340,7 @@
 
                                                         <label class="file_label"></label>
                                                         <input type="file" name="site_logo" id="site_logo" />
-                                                        <img id="img" height="25px" width="186px" src="../site-logo.png" alt=""/>
+                                                        <img id="img" height="25px" width="186px" src="/default/images/install-logo.png" alt=""/>
                                                     </div>
                                                 </div>
 
@@ -466,6 +466,18 @@
 				
                         }
                     });
+
+                    socket.on('except', function() {
+			$('h2').text('SORRY!');
+			$('.fstate').empty();
+			$('#finish').children(':not(div:first)').remove();
+                        $('.restart-msg').html('Something went wrong. Please try again.');
+                        $('#install-loader').hide();
+                    });
+                    socket.on('rename_err', function() {
+			alert('Error Renaming install directory\n Please Rename/delete "install" folder in the application root!');
+                    });
+
                 });
                 
                 //form submit

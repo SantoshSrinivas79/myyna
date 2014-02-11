@@ -18,13 +18,48 @@ var io = require('socket.io');
 var http = require('http');
 var ncp = require('ncp').ncp;
 var async = require('async');
+var installPath,installDir;
+
+
+var cur_pat = path.join(__dirname);
+var db_path = cur_pat.replace('system/install', '') + 'application/config/mongodb.js';
+
+var db_data = require(db_path);
+
+db_data.dbUser = 'arya';
+
+fs.readFile(db_path, 'utf8', function(err, Ddata) {
+	Ddata = Ddata.replace(/{([^}]+)}/,  JSON.stringify(db_data));
+	fs.writeFile(db_path, Ddata.replace(/,/g, ', \n') , 'utf8', function(err) {
+
+	});
+});
+//fs.writeFile(db_path, result, 'utf8', function(err) {
+
+
+process.on('uncaughtException', function (exception) {
+	sio.sockets.emit('except'); 
+	console.log(exception);
+	console.log('Sorry! Installation Failed!');
+	installPath.replace('install', '_install')
+	fs.rename(installPath, installDir + '/install', function(err) {
+		if (err) {
+			console.log(err);
+		}
+    		console.log('Reverting changes..');
+		process.exit(); 
+	});
+	   
+});
 
 module.exports = function(app, sFolderPath, directory) {
+	installPath = sFolderPath;
+	installDir = directory;
 
     app.post('/installApp', function(req, res) {
         
         sio.sockets.emit('status_data',{
-            msg:'starting...'
+            msg:'Starting...'
         }); 
      
      
@@ -64,20 +99,14 @@ module.exports = function(app, sFolderPath, directory) {
                 "layout": 'fixed',
                 "timestamp": new Date().getTime()
             };
+
             //console.loge(files.site_logo);
             if (files.site_logo && files.site_logo.name && files.site_logo.name != '') {
-                fs.readFile(files.site_logo.path, function(err, data) {
                     var image = files.site_logo.name;
                     var extension = image.split(".").pop();
                     var newimage = 'site-logo.' + extension;
                     var newPath = 'uploads/' + newimage;
-
-                    fs.writeFile(newPath, data, function(err) {
-                        settings.logo = '/' + newimage;
-
-                    });
-
-                });
+                    settings.logo = '/' + newimage;
             }
             else
             {
@@ -117,15 +146,23 @@ module.exports = function(app, sFolderPath, directory) {
             sio.sockets.emit('status_data', {
                 msg:'extract db...'
             });
-            fs.readFile(db_path, 'utf8', function(err, data) {
+            fs.readFile(db_path, 'utf8', function(err, Ddata) {
 
                 if (err) {
                     return console.log(err);
                 }
-                var result = data.replace(db_data.dbHost, db_host);
-                result = result.replace(db_data.dbName, db_name);
+		db_data.dbHost = db_host;
+		db_data.dbName = db_name;
+		if(db_user && db_user != '' && db_user != null) {
+			db_data.dbUser = db_user;
+		}
+		if(db_password && db_password != '' && db_password != null) {	
+			db_data.dbPass = db_password;
+		}
 
-                fs.writeFile(db_path, result, 'utf8', function(err) {
+		Ddata = Ddata.replace(/{([^}]+)}/,  JSON.stringify(db_data));
+		
+                fs.writeFile(db_path, Ddata.replace(/,/g, ', \n'), 'utf8', function(err) {
                     if (err)
                         return console.log(err);
 
@@ -154,7 +191,7 @@ module.exports = function(app, sFolderPath, directory) {
                                 }
                                 if (config.dbUser && config.dbPass) {
                                     db.authenticate(config.dbUser, config.dbPass, function(err, ress) {
-                                        insertdta(db_sample,db_name,dta,res,db, function(){
+                                        insertdta(db_sample,db_name,dta,res,db,files, function(){
                                             sio.sockets.emit('status_data', {
                                                 msg: 'New site Url Is '+base_url, 
                                                 last:true
@@ -164,7 +201,7 @@ module.exports = function(app, sFolderPath, directory) {
                                     });
                                 } else {
                                    
-                                    insertdta(db_sample,db_name,dta,res,db, function(){
+                                    insertdta(db_sample,db_name,dta,res,db,files, function(){
                                         sio.sockets.emit('status_data', {
                                             msg: 'New site Url Is '+base_url, 
                                             last:true
@@ -188,7 +225,7 @@ module.exports = function(app, sFolderPath, directory) {
 
     });
     
-    function insertdta(db_sample,db_name,user_data,res,db,callback){
+    function insertdta(db_sample,db_name,user_data,res,db,files,callback){
         var util = require('util'),
         exec = require('child_process').exec,
         child;
@@ -203,6 +240,19 @@ module.exports = function(app, sFolderPath, directory) {
                 if (err) {
                     return console.error(err);
                 }
+		if (files && files.site_logo && files.site_logo.name && files.site_logo.name != '') {
+		        fs.readFile(files.site_logo.path, function(err, data) {
+		            var image = files.site_logo.name;
+		            var extension = image.split(".").pop();
+		            var newimage = 'site-logo.' + extension;
+		            var newPath = 'uploads/' + newimage;
+
+		            fs.writeFile(newPath, data, function(err) {
+		                if(err) console.log(err);
+		            });
+
+		        });
+            	}
                 console.log('done!');
             });
         }
@@ -224,6 +274,7 @@ module.exports = function(app, sFolderPath, directory) {
                 collection.insert(user_data.user_data, function(err, inserted_data) {
                     if (err)
                         return console.error(err);
+
                     console.log('user inserted !! ');
 
                     var collection = db.collection('site_settings');
@@ -231,22 +282,29 @@ module.exports = function(app, sFolderPath, directory) {
                         console.log(user_data.settings);
                         if (err)
                             return console.error(err);
-                        console.log('settings inserted !! ');
+
+                        	console.log('settings inserted !! ');
+
+				fs.rename(sFolderPath, directory + '/_install', function(err) {
+				    if (err) {
+				        throw err;
+					sio.sockets.emit('rename_err'); 				
+					console.log('Please delete or rename your install directory to something else');
+				    } else {
+				    	console.log('install directory rename to _install');
+				    }
+				    var send_data ={
+				        "res":1
+				    }
+				    res.send(send_data);
+				    callback();
+				});
 
                     });
 
                 });
                
-                fs.rename(sFolderPath, directory + '/_install', function(err) {
-                    if (err)
-                        throw err;
-                    console.log('install directory rename to _install');
-                    var send_data ={
-                        "res":1
-                    }
-                    res.send(send_data);
-                    callback();
-                });
+                
 
                 
            
