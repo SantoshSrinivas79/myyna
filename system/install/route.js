@@ -264,7 +264,7 @@ module.exports = function(app, sFolderPath, directory) {
 
                     var collection = db.collection('site_settings');
                     collection.insert(user_data.settings, function(err, inserted_setting_data) {
-                        console.log(user_data.settings);
+                        
                         if (err)
                             return console.error(err);
 
