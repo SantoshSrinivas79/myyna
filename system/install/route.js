@@ -21,21 +21,6 @@ var async = require('async');
 var installPath,installDir;
 
 
-var cur_pat = path.join(__dirname);
-var db_path = cur_pat.replace('system/install', '') + 'application/config/mongodb.js';
-
-var db_data = require(db_path);
-
-db_data.dbUser = 'arya';
-
-fs.readFile(db_path, 'utf8', function(err, Ddata) {
-	Ddata = Ddata.replace(/{([^}]+)}/,  JSON.stringify(db_data));
-	fs.writeFile(db_path, Ddata.replace(/,/g, ', \n') , 'utf8', function(err) {
-
-	});
-});
-//fs.writeFile(db_path, result, 'utf8', function(err) {
-
 
 process.on('uncaughtException', function (exception) {
 	sio.sockets.emit('except'); 
