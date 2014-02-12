@@ -116,7 +116,7 @@
                 window.history.pushState({},"", url); 
                 window.localStorage.removeItem('cbt_parenturl');
             });
-            
+             
             if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                 $('body').niceScroll({
                     zindex: 1030,
@@ -210,6 +210,7 @@
                 }
             });            
         }
+               
         
         function popup_functions() {
             var next_scroll = true
@@ -325,7 +326,9 @@
             });
 
             setTimeout(function(){
-                
+                imagesLoaded(document.querySelector('.boardMasonry'), function( instance ) {
+                        $('.boardMasonry').masonry('reload');
+                    });
                 $('#myModal').niceScroll();
                 
                 if($('.boardMasonry').length > 0) {

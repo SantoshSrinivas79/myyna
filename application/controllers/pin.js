@@ -298,16 +298,19 @@ var pinController = {
             renderDelay:5000
         }
         // save and resize the webpage screenshot based on size requirement
+       
         webshot(url, DEFINES.IMAGE_PATH_REL + time + '.png', webshot_options, function(err) {
             if (err)
                 console.log(err)
-
+               
             im.identify(DEFINES.IMAGE_PATH_REL + time + '.png', function(err, features) {
 
                 if (err)
                     throw err
+               
                 if (features.width >= '415')
                 {
+                   
                     im.resize({
                         srcPath: DEFINES.IMAGE_PATH_REL + time + '.png',
                         dstPath: DEFINES.IMAGE_PATH_REL + 'small/' + time + '.png',

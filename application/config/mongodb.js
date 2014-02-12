@@ -8,6 +8,6 @@
 
 module.exports = {"dbHost":"localhost", 
 "dbPort":"", 
-"dbName":"myyna", 
+"dbName":"myynadswdeswdwa", 
 "dbUser":"", 
 "dbPass":""}

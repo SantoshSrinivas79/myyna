@@ -176,7 +176,7 @@ module.exports = function(app, sFolderPath, directory) {
                                 }
                                 if (config.dbUser && config.dbPass) {
                                     db.authenticate(config.dbUser, config.dbPass, function(err, ress) {
-                                        insertdta(db_sample,db_name,dta,res,db,files, function(){
+                                        insertdta(db_sample,db_name,dta,res,db,files,mongo, function(){
                                             sio.sockets.emit('status_data', {
                                                 msg: 'New site Url Is '+base_url, 
                                                 last:true
@@ -186,7 +186,7 @@ module.exports = function(app, sFolderPath, directory) {
                                     });
                                 } else {
                                    
-                                    insertdta(db_sample,db_name,dta,res,db,files, function(){
+                                    insertdta(db_sample,db_name,dta,res,db,files,mongo, function(){
                                         sio.sockets.emit('status_data', {
                                             msg: 'New site Url Is '+base_url, 
                                             last:true
@@ -210,7 +210,7 @@ module.exports = function(app, sFolderPath, directory) {
 
     });
     
-    function insertdta(db_sample,db_name,user_data,res,db,files,callback){
+    function insertdta(db_sample,db_name,user_data,res,db,files,mongo,callback){
         var util = require('util'),
         exec = require('child_process').exec,
         child;
@@ -260,7 +260,18 @@ module.exports = function(app, sFolderPath, directory) {
                     if (err)
                         return console.error(err);
 
-                    console.log('user inserted !! ');
+                    
+                    var collection = db.collection('board');  
+        collection.update(
+                            {   'creator' : mongo.ObjectID('528da071b35661711a000001')   },
+                            {'$set':{
+                                'creator' : inserted_data[0]._id
+                            }},
+                        { multi: true },
+                            function (errrr,data1) {
+                                if (errrr) return handleError(errrr);
+                              
+         });
 
                     var collection = db.collection('site_settings');
                     collection.insert(user_data.settings, function(err, inserted_setting_data) {

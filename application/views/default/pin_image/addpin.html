@@ -2,7 +2,7 @@
     <div class="add_pin_top_ab3 custom-model add_pin_top">
         <div class="modal-content">
             <div class="modal-header gap">
-                <button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close_yellow" data-dismiss="modal" aria-hidden="true">x</button>
             </div>
             
 
@@ -23,7 +23,7 @@
                                         <p>&nbsp;</p>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         Pin From : &nbsp;
-                                        <input type="radio" name="sub" value="local" checked="checked" />&nbsp; Local &nbsp;
+                                        <input type="radio" name="sub" value="local" checked="checked" />&nbsp; Computer &nbsp;
                                         <input type="radio" name="sub" value="web" />&nbsp; Web &nbsp;
                                         <p>&nbsp;</p> 
                                         <!-- messages here -->    
@@ -86,7 +86,7 @@
 
                             </div>
                             <div class="btn-group nav_pin">
-                                <a id="get_img" class="btn nav_pin nav_pin_drop"  data-toggle="modal" data-target="#myModal2">Upload<a/>
+                                <a id="get_img" class="btn nav_pin nav_pin_drop" >Upload<a/>
                                     <button type="button" class="btn dropdown-toggle nav_pin_icon" data-toggle="dropdown">
                                         <span class="caret"></span>
                                         <span class="sr-only">Toggle Dropdown</span>
@@ -113,6 +113,11 @@
 <script>
     // ajax form to validate files
    $('#localForm').ajaxForm({
+       beforeSend: function(){
+           
+         $('.loader').show();  
+          
+       },
         success:function(data) { 
             if(data.error==1){
                 $(".errmsg").html(data.msg);
@@ -125,8 +130,68 @@
         },
         error: function(e){
             $(".errmsg").html(e);
+        },
+        complete: function(jqxhr, status, error) {
+            $('.loader').hide();  
+            $('#localForm')[0].reset();
+            $('#get_img').removeClass('disable-like');  
         }
     }); 
+    
+    function webformsubmit(){
+       if($("#webForm").validate()) {
+        $.ajax({
+                    type: 'post',
+                    url: $('#webForm').attr('action'),
+                    data: $('#webForm').serialize(),
+                    beforeSend: function(){
+           
+         $('.loader').show();  
+          
+       },
+                    success: function(){
+                        $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
+                setTimeout(function(){
+                    $('#myModal2').modal('hide')
+                },1000);
+                    },
+                    error: function(){
+                       //  $('#loading2').hide();
+                       // alert(1);
+                    },
+        complete: function(jqxhr, status, error) {
+            $('.loader').hide();            
+            $('#get_img').removeClass('disable-like');  
+        }
+                });
+       }
+    }
+    
+//  $('#webForm').ajaxForm({
+//       beforeSend: function(){
+//           
+//        $('.loader').show();  
+//           
+//      },
+//       success:function(data) { 
+//           if(data.error==1){
+//               $(".errmsg").html(data.msg);
+//           } else {
+//               $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
+//              setTimeout(function(){
+//                   $('#myModal2').modal('hide')
+//               },1000);
+//           }
+//       },
+//       error: function(e){
+//           $(".errmsg").html(e);
+//      },
+//       complete: function(jqxhr, status, error) {
+//            $('.loader').hide(); 
+//            $('#webForm')[0].reset();
+//           $('#get_img').removeClass('disable-like');  
+//       }
+//   }); 
             
     var req ;
     /* to clear pop up contents on each close */
@@ -142,6 +207,7 @@
         $("#local").show();
         $(".btn-group.nav_pin").addClass('add_pin_btn');
         $('#get_img').unbind('click').bind('click',function(){
+            $('#get_img').addClass('disable-like');
             $("#localForm").validate();
             $('#localForm').submit(); 
         });
@@ -164,10 +230,12 @@
                 $('#get_img').html('Pin');
                 $("#web").show();
                 $('#get_img').unbind('click').bind('click',function(){
+                    $('#get_img').addClass('disable-like');
                         var url = $("#url").val();
                         //if(is_valid_url(url)) {
                             $("#webForm").validate();
-                            $('#webForm').submit(); 
+                            //$('#webForm').submit(); 
+                            webformsubmit();
                             return false;
                         //}
                 });
@@ -176,7 +244,9 @@
                         var url = $("#url").val();
                         //if(is_valid_url(url)) {
                             $("#webForm").validate();
-                            $('#webForm').submit(); 
+                            //$('#webForm').submit(); 
+                            webformsubmit();
+                            
                         //} else {
                         //    e.preventDefault(); // set default event to false
                         //}
@@ -190,6 +260,7 @@
                 $('#get_img').html('Upload');
                 $("#local").show();
                 $('#get_img').unbind('click').bind('click',function(){
+                    $('#get_img').addClass('disable-like');
                     $("#localForm").validate();
                     $('#localForm').submit(); 
                 });
@@ -282,6 +353,7 @@
             $("#show_song").html(str).show();
             $('form#webForm').attr('action','/webaudio_action');
             $('#get_img').unbind('click').bind('click',function(){
+                $('#get_img').addClass('disable-like');
                // var formData = $("#webForm").serialize();
                 //val(formData);
                 $("#webForm").validate(); 
@@ -312,6 +384,7 @@
                 $('form#webForm').attr('action','/pinpage');
                 $('#pin_cat').val('video');
                 $('#get_img').unbind('click').bind('click',function(){
+                    $('#get_img').addClass('disable-like');
                     $("#webForm").validate(); 
                     $('#webForm').submit(); 
                 });
@@ -334,6 +407,7 @@
                 $('form#webForm').attr('action','/pinpage');
                 $('#pin_cat').val('webpage');
                 $('#get_img').unbind('click').bind('click',function(){
+                    $('#get_img').addClass('disable-like');
                     $("#webForm").validate({rules: {url: "url"}}); 
                     $('#webForm').submit(); 
                 });
@@ -373,6 +447,7 @@
                 $("#selImages").html(data).show();
                 $('form#webForm').attr('action','/select_action');
                 $('#get_img').unbind('click').bind('click',function(){
+                    $('#get_img').addClass('disable-like');
                    //alert($("input.img_chkbox:checkbox:checked").length);
                     //if atleast one checkbox exist
                     if($("input.img_chkbox:checkbox:checked").length!=0){
@@ -390,14 +465,16 @@
                                         var url = $("#url").val();
                                        // if(is_valid_url(url)) {
                                             $("#webForm").validate();
-                                            $('#webForm').submit(); 
+                                            //$('#webForm').submit(); 
+                                            webformsubmit();
                                         //} else {
                                         //    e.preventDefault(); // set default event to false
                                         //}
                                     }
                                  });
                                 $("#webForm").validate(); 
-                                $('#webForm').submit(); 
+                               // $('#webForm').submit(); 
+                               webformsubmit();
                             }
                         }
                     } else {

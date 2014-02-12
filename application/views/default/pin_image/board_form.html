@@ -73,6 +73,9 @@
 <script>
    // ajax form to validate files
    $('#board_form').ajaxForm({
+        beforeSend: function(){
+         $('.loader').show();  
+       },
         success:function(data) { 
             if(data.error==1){
                 $(".brderrmsg").html(data.msg);
@@ -82,9 +85,15 @@
         },
         error: function(e){
             $(".brderrmsg").html(e);
+        },
+         complete: function(jqxhr, status, error) {
+            $('.loader').hide(); 
+//            $('#webForm')[0].reset();
+//            $('#board_form').removeClass('disable-like');  
         }
     }); 
     $("#board_form").click(function(){
         $("#board_form").validate();
+         //$('#board_form').addClass('disable-like');  
     });
 </script>

@@ -260,6 +260,55 @@ var collection = mongodb.collection('board');
          
        });
 
+},
+
+ getAdminUsers:function(callback){
+     var collection = mongodb.collection('adminuser');
+     var adminusers=[];
+        collection.find({},{_id:1},function (err,res) {
+            
+            res.toArray(function(er, data){
+                
+                if(data.length>0)
+                    {
+               var i = 0;
+                
+                data.forEach(function(id){
+                    adminusers.push(id._id);
+                i++;
+                if(data.length==i)
+                   {
+                        
+                    callback(adminusers);
+                    }
+                });
+                    }
+                    else{
+                        callback(data);
+                    }
+            });
+        });
+
+
+},
+
+getBoardPincreation:function(adminusers,callback){
+    
+    var collection = mongodb.collection('board');
+    collection.find({
+                    creator: {
+                        '$in':adminusers
+                    },
+                    'locked':0
+                },function(err, res) {
+                    
+                    res.toArray(function(er, data) {
+                        callback(data)
+                    });
+                   
+                });
+                
+             
 }
 }
 

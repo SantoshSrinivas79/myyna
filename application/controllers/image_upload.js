@@ -43,12 +43,16 @@ var imageController = {
      * @date 27-Dec-2013
      */
     addpin: function(req, res) {
-        boardModel.getBoardAll(function(result) {
+        boardModel.getAdminUsers(function(user) {
+           user.push(mongo.ObjectID(req.session.login_user_id));
+     
+            boardModel.getBoardPincreation(user,function(result) {                   
             var data = {
                 layout: 'urlfetch_layout',
                 boards: result
             }
             system.loadView(res, 'pin_image/addpin', data);
+            });
         });
     },
     /**
@@ -124,7 +128,7 @@ var imageController = {
                                     var rez_opt = {
                                         srcPath: DEFINES.IMAGE_PATH_ORIGINAL_REL + imagename,
                                         dstPath: DEFINES.IMAGE_PATH_SMALL_REL + imagename,
-                                        width: width
+                                        width: width,
                                     };
                                     im.resize(rez_opt, function(err, stdout, stderr) {
 
