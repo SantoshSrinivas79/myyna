@@ -23,7 +23,7 @@
                                         <p>&nbsp;</p>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         Pin From : &nbsp;
-                                        <input type="radio" name="sub" value="local" checked="checked" />&nbsp; Computer &nbsp;
+                                        <input type="radio" name="sub" value="local" checked="checked" />&nbsp; Local &nbsp;
                                         <input type="radio" name="sub" value="web" />&nbsp; Web &nbsp;
                                         <p>&nbsp;</p> 
                                         <!-- messages here -->    
@@ -138,60 +138,31 @@
         }
     }); 
     
-    function webformsubmit(){
-       if($("#webForm").validate()) {
-        $.ajax({
-                    type: 'post',
-                    url: $('#webForm').attr('action'),
-                    data: $('#webForm').serialize(),
-                    beforeSend: function(){
-           
-         $('.loader').show();  
-          
-       },
-                    success: function(){
-                        $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
-                setTimeout(function(){
-                    $('#myModal2').modal('hide')
-                },1000);
-                    },
-                    error: function(){
-                       //  $('#loading2').hide();
-                       // alert(1);
-                    },
-        complete: function(jqxhr, status, error) {
-            $('.loader').hide();            
-            $('#get_img').removeClass('disable-like');  
-        }
-                });
-       }
-    }
-    
-//  $('#webForm').ajaxForm({
-//       beforeSend: function(){
-//           
-//        $('.loader').show();  
-//           
-//      },
-//       success:function(data) { 
-//           if(data.error==1){
-//               $(".errmsg").html(data.msg);
-//           } else {
-//               $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
-//              setTimeout(function(){
-//                   $('#myModal2').modal('hide')
-//               },1000);
-//           }
+//    $('#webForm').ajaxForm({
+//        beforeSend: function(){
+//            
+//         $('.loader').show();  
+//            
 //       },
-//       error: function(e){
-//           $(".errmsg").html(e);
-//      },
-//       complete: function(jqxhr, status, error) {
+//        success:function(data) { 
+//            if(data.error==1){
+//                $(".errmsg").html(data.msg);
+//            } else {
+//                $(".errmsg").css({'color':'green'}).html('Pin inserted successfully');
+//               setTimeout(function(){
+//                    $('#myModal2').modal('hide')
+//                },1000);
+//            }
+//        },
+//        error: function(e){
+//            $(".errmsg").html(e);
+//        },
+//        complete: function(jqxhr, status, error) {
 //            $('.loader').hide(); 
 //            $('#webForm')[0].reset();
-//           $('#get_img').removeClass('disable-like');  
-//       }
-//   }); 
+//            $('#get_img').removeClass('disable-like');  
+//        }
+//    }); 
             
     var req ;
     /* to clear pop up contents on each close */
@@ -234,8 +205,7 @@
                         var url = $("#url").val();
                         //if(is_valid_url(url)) {
                             $("#webForm").validate();
-                            //$('#webForm').submit(); 
-                            webformsubmit();
+                            $('#webForm').submit(); 
                             return false;
                         //}
                 });
@@ -244,9 +214,7 @@
                         var url = $("#url").val();
                         //if(is_valid_url(url)) {
                             $("#webForm").validate();
-                            //$('#webForm').submit(); 
-                            webformsubmit();
-                            
+                            $('#webForm').submit(); 
                         //} else {
                         //    e.preventDefault(); // set default event to false
                         //}
@@ -465,16 +433,14 @@
                                         var url = $("#url").val();
                                        // if(is_valid_url(url)) {
                                             $("#webForm").validate();
-                                            //$('#webForm').submit(); 
-                                            webformsubmit();
+                                            $('#webForm').submit(); 
                                         //} else {
                                         //    e.preventDefault(); // set default event to false
                                         //}
                                     }
                                  });
                                 $("#webForm").validate(); 
-                               // $('#webForm').submit(); 
-                               webformsubmit();
+                                $('#webForm').submit(); 
                             }
                         }
                     } else {
